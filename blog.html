@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Tech4Village</title>
+  <style>
+    /* ─── Reset & Base ─── */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --primary-color: #2563eb;
+      --primary-hover: #1d4ed8;
+      --accent-color: #059669;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --background: #ffffff;
+      --surface: #f8fafc;
+      --border: #e2e8f0;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+      --border-radius: 12px;
+      --transition: all .3s cubic-bezier(.4,0,.2,1);
+    }
+    body {
+      font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      line-height:1.6;
+      color:var(--text-primary);
+      background:var(--background);
+    }
+    a { text-decoration:none; }
+    img { display:block; max-width:100%; }
+
+    /* ─── Navigation ─── */
+    nav {
+      position:sticky; top:0; width:100%; z-index:100;
+      background:rgba(255,255,255,0.95); backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-container {
+      max-width:1200px; margin:0 auto; padding:0 1rem;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .logo {
+      font-size:1.5rem; font-weight:700; color:var(--primary-color);
+      display:flex; align-items:center; gap:.5rem;
+    }
+    .nav-menu {
+      display:flex; list-style:none; gap:2rem;
+    }
+    .nav-menu.active { display:flex; flex-direction:column; padding:1rem; border-top:1px solid var(--border); background:var(--background); }
+    .nav-menu a {
+      color:var(--text-primary); font-weight:500;
+      position:relative; transition:var(--transition);
+    }
+    .nav-menu a:hover { color:var(--primary-color); }
+    .nav-menu a.active::after {
+      content:''; position:absolute; bottom:-.5rem; left:0; right:0;
+      height:2px; background:var(--primary-color); border-radius:1px;
+    }
+    .mobile-menu-toggle {
+      display:none; background:none; border:none;
+      font-size:1.5rem; cursor:pointer; color:var(--text-primary);
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      background:linear-gradient(135deg,var(--primary-color),var(--accent-color));
+      color:white; padding:4rem 0; text-align:center; position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
+      background:radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 70%);
+      animation:pulse 6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100%{transform:scale(1) rotate(0deg);opacity:.3}
+      50%{transform:scale(1.1) rotate(180deg);opacity:.1}
+    }
+    .hero-content {
+      max-width:800px; margin:0 auto; padding:0 1rem; position:relative; z-index:1;
+    }
+    .hero h1 { font-size:3rem; font-weight:700; margin-bottom:1rem; text-shadow:0 2px 4px rgba(0,0,0,0.1); }
+    .hero p { font-size:1.3rem; opacity:.9; margin-bottom:2rem; }
+    .hero-stats { display:flex; justify-content:center; gap:3rem; margin-top:2rem; }
+    .stat { text-align:center; }
+    .stat-number { font-size:2rem; font-weight:700; display:block; }
+    .stat-label { font-size:.9rem; opacity:.8; }
+
+    /* ─── Main Content ─── */
+    .main-content {
+      max-width:1200px; margin:0 auto; padding:4rem 1rem;
+    }
+    .blog-grid {
+      display:grid; grid-template-columns:2fr 1fr; gap:3rem;
+      margin-bottom:3rem;
+    }
+
+    /* Featured Post */
+    .featured-post {
+      background:var(--background); border-radius:var(--border-radius);
+      overflow:hidden; box-shadow:var(--shadow-lg);
+      transition:var(--transition);
+    }
+    .featured-post:hover {
+      transform:translateY(-5px);
+      box-shadow:0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04);
+    }
+    .featured-image {
+      width:100%; height:300px; object-fit:cover;
+      transition:var(--transition);
+    }
+    .featured-post:hover .featured-image {
+      transform:scale(1.05);
+    }
+    .featured-content { padding:2rem; }
+    .post-meta {
+      display:flex; align-items:center; gap:1rem;
+      margin-bottom:1rem; font-size:.9rem; color:var(--text-secondary);
+    }
+    .post-tag {
+      background:var(--primary-color); color:white;
+      padding:.2rem .6rem; border-radius:20px;
+      font-size:.8rem; font-weight:500;
+    }
+    .post-title {
+      font-size:1.8rem; font-weight:700; margin-bottom:1rem;
+      color:var(--text-primary); line-height:1.3;
+    }
+    .post-excerpt {
+      color:var(--text-secondary); margin-bottom:1.5rem; line-height:1.7;
+    }
+    .read-more {
+      color:var(--primary-color); font-weight:600;
+      display:inline-flex; align-items:center; gap:.5rem;
+      transition:var(--transition);
+    }
+    .read-more:hover {
+      color:var(--primary-hover); gap:.8rem;
+    }
+
+    /* Sidebar */
+    .sidebar { display:flex; flex-direction:column; gap:2rem; }
+    .sidebar-section {
+      background:var(--surface);
+      border-radius:var(--border-radius);
+      padding:1.5rem;
+      border:1px solid var(--border);
+    }
+    .sidebar-section h3 { margin-bottom:1rem; color:var(--text-primary); font-size:1.2rem; }
+    .recent-posts, .recent-posts li, .recent-posts a { list-style:none; }
+    .recent-posts li {
+      padding:.8rem 0; border-bottom:1px solid var(--border);
+    }
+    .recent-posts li:last-child { border-bottom:none; }
+    .recent-posts a {
+      color:var(--text-primary); font-weight:500; transition:var(--transition);
+    }
+    .recent-posts a:hover { color:var(--primary-color); }
+    .post-date {
+      font-size:.8rem; color:var(--text-secondary);
+      margin-top:.2rem;
+    }
+    .author-card { text-align:center; }
+    .author-avatar {
+      width:80px; height:80px; border-radius:50%;
+      margin:0 auto 1rem;
+      background:linear-gradient(135deg,var(--primary-color),var(--accent-color));
+      display:flex; align-items:center; justify-content:center;
+      font-size:2rem; color:white; font-weight:700;
+    }
+    .author-name { font-size:1.1rem; font-weight:600; margin-bottom:.5rem; }
+    .author-bio { color:var(--text-secondary); font-size:.9rem; margin-bottom:1rem; }
+    .social-links { display:flex; justify-content:center; gap:1rem; }
+    .social-links a {
+      color:var(--text-secondary); font-size:1.2rem;
+      transition:var(--transition);
+    }
+    .social-links a:hover { color:var(--primary-color); }
+
+    /* Newsletter */
+    .newsletter {
+      background:linear-gradient(135deg,var(--primary-color),var(--accent-color));
+      color:white; padding:3rem 2rem; border-radius:var(--border-radius);
+      text-align:center; margin-top:3rem;
+    }
+    .newsletter h3 { font-size:1.8rem; margin-bottom:1rem; }
+    .newsletter p { opacity:.9; margin-bottom:2rem; }
+    .newsletter-form {
+      display:flex; gap:1rem; max-width:400px; margin:0 auto;
+    }
+    .newsletter-input {
+      flex:1; padding:.8rem; border:none; border-radius:8px;
+      font-size:1rem;
+    }
+    .newsletter-btn {
+      padding:.8rem 1.5rem; background:white; color:var(--primary-color);
+      border:none; border-radius:8px; font-weight:600; cursor:pointer;
+      transition:var(--transition);
+    }
+    .newsletter-btn:hover { background:var(--surface); }
+
+    /* Footer */
+    footer {
+      background:var(--text-primary); color:white;
+      padding:3rem 0 1rem; text-align:center; margin-top:4rem;
+    }
+    .footer-content {
+      max-width:1200px; margin:0 auto; padding:0 1rem;
+    }
+
+    /* Full Post Modal */
+    .modal {
+      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.8); z-index:1000; overflow-y:auto;
+    }
+    .modal-content {
+      background:white; margin:2rem auto; padding:2rem;
+      max-width:800px; border-radius:12px; position:relative;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .mobile-menu-toggle { display:block; }
+      .nav-menu { display:none; }
+      .hero-content h1 { font-size:2rem; }
+      .hero p { font-size:1.1rem; }
+      .hero-stats { flex-direction:column; gap:1rem; }
+      .blog-grid { display:block; }
+      .newsletter-form { flex-direction:column; }
+      .newsletter-input, .newsletter-btn { width:100%; }
+    }
+    @media (max-width: 480px) {
+      .main-content { padding:2rem .5rem; }
+      .hero { padding:2rem 0; }
+      .newsletter { padding:2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span>🌍</span> Tech4Village
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="project.html">Project</a></li>
+        <li><a href="involved.html">Get Involved</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Stories of Change</h1>
+      <p>From tradition to technology, discover the journey of bridging the digital divide in rural communities</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">500+</span>
+          <span class="stat-label">Students Reached</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Devices Donated</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">12</span>
+          <span class="stat-label">Villages Connected</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="blog-grid">
+      <main>
+        <!-- Featured Post -->
+        <article class="featured-post">
+          <img src="images/young-leader-speaking.jpeg" alt="Young leader speaking" class="featured-image">
+          <div class="featured-content">
+            <div class="post-meta">
+              <span class="post-tag">Leadership</span>
+              <span>December 15, 2024</span>
+              <span>5 min read</span>
+            </div>
+            <h2 class="post-title">🎙️ From Tradition to Tech: Why This Moment Sparked My Mission</h2>
+            <p class="post-excerpt">
+              When I stood up to speak at my Kikuyu rite of passage, I wasn't just wearing tradition—I was stepping into it...
+            </p>
+            <a href="#" class="read-more" onclick="openFullPost('tradition-to-tech')">Read Full Story →</a>
+          </div>
+        </article>
+
+        <!-- Secondary Post -->
+        <article class="blog-post">
+          <img src="images/crawling-through-the-mud.jpeg" alt="Crawling through mud" class="blog-post-image">
+          <div class="blog-post-content">
+            <div class="post-meta">
+              <span class="post-tag">Resilience</span>
+              <span>December 10, 2024</span>
+              <span>4 min read</span>
+            </div>
+            <h3 class="blog-post-title">🥾 Crawl Forward Anyway: Lessons from the Mud</h3>
+            <p class="blog-post-excerpt">
+              This photo was taken during my rite of passage leadership training, deep in the forest. We had to crawl through narrow, muddy tunnels...
+            </p>
+            <a href="#" class="read-more" onclick="openFullPost('crawl-forward')">Read Full Story →</a>
+          </div>
+        </article>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-section author-card">
+          <div class="author-avatar">KK</div>
+          <div class="author-name">Kaggwa Karenge</div>
+          <div class="author-bio">
+            17‑year‑old founder of Tech4Village, bridging the digital divide in rural Kenya.
+          </div>
+          <div class="social-links">
+            <a href="#" title="Email">📧</a>
+            <a href="#" title="Twitter">X</a>
+            <a href="#" title="LinkedIn">💼</a>
+            <a href="#" title="Instagram">📸</a>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Recent Posts</h3>
+          <ul class="recent-posts">
+            <li>
+              <a href="#" onclick="openFullPost('tradition-to-tech')">
+                From Tradition to Tech: Why This Moment Sparked My Mission
+              </a>
+              <div class="post-date">December 15, 2024</div>
+            </li>
+            <li>
+              <a href="#" onclick="openFullPost('crawl-forward')">
+                Crawl Forward Anyway: Lessons from the Mud
+              </a>
+              <div class="post-date">December 10, 2024</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Categories</h3>
+          <ul class="recent-posts">
+            <li><a href="#">Leadership</a></li>
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">Cultural Heritage</a></li>
+            <li><a href="#">Education</a></li>
+            <li><a href="#">Community Impact</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="newsletter">
+      <h3>Stay Connected</h3>
+      <p>Get updates on Tech4Village’s mission and latest stories</p>
+      <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+        <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+        <button type="submit" class="newsletter-btn">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology accessible for all.</p>
+      <p>Contact: tech4village@gmail.com | CashApp: $karenge | M‑Pesa: 0722961906</p>
+    </div>
+  </footer>
+
+  <!-- Full Post Modal -->
+  <div id="fullPostModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button onclick="closeFullPost()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+      <div id="fullPostContent"></div>
+    </div>
+  </div>
+
+  <script>
+    // ─── Mobile Menu Toggle ───
+    const mobileToggle = document.getElementById('mobileMenuToggle');
+    const navMenu      = document.getElementById('navMenu');
+    mobileToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // ─── Newsletter Subscription ───
+    function subscribeNewsletter(e) {
+      e.preventDefault();
+      const email = e.target.querySelector('.newsletter-input').value;
+      alert(`Thank you for subscribing with ${email}!`);
+      e.target.reset();
+    }
+
+    // ─── Full-Post Modal Data ───
+    const fullPosts = {
+      'tradition-to-tech': {
+        content: `
+          <h1>🎙️ From Tradition to Tech: Why This Moment Sparked My Mission</h1>
+          <div style="margin:1rem 0; color:#6b7280; font-size:0.9rem;">
+            December 15, 2024 • 5 min read • Leadership
+          </div>
+          <p>When I stood up to speak at my Kikuyu rite of passage, I wasn't just wearing tradition—I was stepping into it.</p>
+          <p>At 14, I was chosen to lead my ríka (age group)…</p>
+          <ul style="margin:1rem 0; padding-left:2rem;">
+            <li>💻 No laptops.</li>
+            <li>📶 No Wi‑Fi.</li>
+            <li>📱 No smartphones.</li>
+          </ul>
+          <p>Now, at 17, I'm leading Tech4Village to collect and distribute refurbished devices…</p>
+          <p><strong>And I'm just getting started.</strong></p>
+          <hr style="margin:2rem 0; border:none; border-top:1px solid #e2e8f0;">
+          <p><em>— Kaggwa Karenge<br>Founder – Tech4Village<br>📧 tech4village@gmail.com<br>💸 Donate: CashApp $karenge | M‑Pesa 0722961906</em></p>
+        `
+      },
+      'crawl-forward': {
+        content: `
+          <h1>🥾 Crawl Forward Anyway: Lessons from the Mud</h1>
+          <div style="margin:1rem 0; color:#6b7280; font-size:0.9rem;">
+            December 10, 2024 • 4 min read • Resilience
+          </div>
+          <p>This photo was taken during my rite of passage leadership training deep in the forest. We had to crawl through narrow, muddy tunnels with no light…</p>
+          <p>We started at dawn, the forest floor damp from last night’s rain. My heart pounded as I pressed my body flat…</p>
+          <ul style="margin:1rem 0; padding-left:2rem;">
+            <li>Resilience: persistence is your greatest tool.</li>
+            <li>Trust: guiding each other through every turn.</li>
+            <li>Focus: distractions vanish when you live each moment.</li>
+          </ul>
+          <p>That same determination fuels Tech4Village. When resources are scarce, we crawl forward anyway—finding solutions one step at a time.</p>
+          <p><strong>Because progress often looks messy—but it starts with a single crawl.</strong></p>
+          <hr style="margin:2rem 0; border:none; border-top:1px solid #e2e8f0;">
+          <p><em>— Kaggwa Karenge<br>Founder – Tech4Village<br>📧 tech4village@gmail.com<br>💸 Donate: CashApp $karenge | M‑Pesa 0722961906</em></p>
+        `
+      }
+    };
+
+    // ─── Open & Close Modal ───
+    function openFullPost(key) {
+      const modal = document.getElementById('fullPostModal');
+      document.getElementById('fullPostContent').innerHTML = fullPosts[key].content;
+      modal.style.display = 'block';
+      modal.setAttribute('aria-hidden', 'false');
+    }
+    function closeFullPost() {
+      const modal = document.getElementById('fullPostModal');
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    // ─── Counter Animation ───
+    window.addEventListener('load', () => {
+      document.querySelectorAll('[id$="-counter"]').forEach(el => {
+        const target = +el.textContent;
+        el.textContent = '0';
+        let count = 0;
+        const step = Math.ceil(target / 100);
+        const timer = setInterval(() => {
+          count += step;
+          if (count >= target) {
+            el.textContent = target;
+            clearInterval(timer);
+          } else {
+            el.textContent = count;
+          }
+        }, 20);
+      });
+    });
+
+    // ─── Smooth Scroll ───
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior:'smooth' });
+      });
+    });
+
+    // ─── Scroll Effect on Nav ───
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        nav.style.background     = 'rgba(255,255,255,0.98)';
+        nav.style.backdropFilter = 'blur(20px)';
+      } else {
+        nav.style.background     = 'rgba(255,255,255,0.95)';
+        nav.style.backdropFilter = 'blur(10px)';
+      }
+    });
+
+    // ─── IntersectionObserver Animations ───
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeInUp .8s ease-out forwards';
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.featured-post, .blog-post, .sidebar-section, .newsletter').forEach(el => observer.observe(el));
+
+    // ─── Typing Effect for Hero Quote (if needed) ───
+    function typeWriter(el, txt, speed = 30) {
+      let i = 0;
+      el.textContent = '';
+      (function type() {
+        if (i < txt.length) {
+          el.textContent += txt[i++];
+          setTimeout(type, speed);
+        }
+      })();
+    }
+    window.addEventListener('load', () => {
+      const quoteEl = document.querySelector('.hero p');
+      if (quoteEl) {
+        const original = quoteEl.textContent;
+        setTimeout(() => typeWriter(quoteEl, original), 500);
+      }
+    });
+
+    // ─── Floating Particles in Hero ───
+    function createParticles() {
+      const hero = document.querySelector('.hero');
+      if (!hero) return;
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes float {
+          0%,100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+      `;
+      document.head.appendChild(style);
+      for (let i = 0; i < 50; i++) {
+        const p = document.createElement('div');
+        Object.assign(p.style, {
+          position:'absolute', width:'2px', height:'2px',
+          background:'rgba(255,255,255,0.3)', borderRadius:'50%',
+          left:`${Math.random()*100}%`, top:`${Math.random()*100}%`,
+          animation:`float ${3+Math.random()*4}s ease-in-out infinite`,
+          animationDelay:`${Math.random()*2}s`
+        });
+        hero.appendChild(p);
+      }
+    }
+    window.addEventListener('load', createParticles);
+  </script>
+</body>
+</html>

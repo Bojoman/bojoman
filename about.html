@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>About — Tech4Village</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: #2d3748;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-weight: 400;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      padding: 1rem 0;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #667eea;
+      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #4a5568;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: #667eea;
+    }
+
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #667eea;
+    }
+
+    .mobile-menu {
+      display: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    /* Main Content */
+    .main-content {
+      background: white;
+      margin-top: 80px;
+      border-radius: 20px 20px 0 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #1a202c;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #718096;
+      margin-bottom: 4rem;
+      font-weight: 300;
+    }
+
+    .section-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* About Section */
+    .about-hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4rem;
+    }
+
+    .profile-pic {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05);
+    }
+
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-bottom: 4rem;
+    }
+
+    .about-text {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    .about-text p {
+      margin-bottom: 1.8rem;
+      color: #4a5568;
+    }
+
+    .about-text p:first-child::first-letter {
+      font-size: 3.5rem;
+      font-weight: 600;
+      line-height: 1;
+      float: left;
+      margin: 0.1rem 0.5rem 0 0;
+      color: #667eea;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .about-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .gallery-item {
+      width: 100%;
+      height: 220px;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+      position: relative;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+      border-color: #667eea;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover::after {
+      opacity: 1;
+    }
+
+    .center-image {
+      grid-column: 1 / -1;
+      height: 280px;
+      margin-top: 1.5rem;
+      border-radius: 25px;
+    }
+
+    /* Timeline */
+    .timeline {
+      margin-top: 5rem;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding: 2.5rem;
+      background: #f8fafc;
+      border-radius: 20px;
+      border-left: 4px solid;
+      border-image: linear-gradient(135deg, #667eea, #764ba2) 1;
+      transition: all 0.4s ease;
+      position: relative;
+      width: 45%;
+      cursor: pointer;
+    }
+
+    .timeline-item:nth-child(odd) {
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    .timeline-item:nth-child(even) {
+      margin-left: auto;
+      margin-right: 0;
+      background: #e6f3ff;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: #667eea;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 4px solid white;
+      box-shadow: 0 0 0 4px #667eea;
+    }
+
+    .timeline-item:nth-child(odd)::before {
+      right: -39px;
+    }
+
+    .timeline-item:nth-child(even)::before {
+      left: -39px;
+    }
+
+    .timeline-year {
+      font-weight: 600;
+      color: #667eea;
+      min-width: 110px;
+      margin-right: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .timeline-content {
+      flex-grow: 1;
+    }
+
+    .timeline-content strong {
+      font-weight: 600;
+      color: #1a202c;
+      font-size: 1.1rem;
+    }
+
+    .timeline-icon {
+      margin-right: 0.8rem;
+      font-size: 1.3rem;
+    }
+
+    .timeline-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.25);
+    }
+
+    .timeline-item.expanded {
+      transform: translateY(-8px);
+      background: #fff;
+      box-shadow: 0 20px 50px rgba(102, 126, 234, 0.35);
+    }
+
+    .timeline-details {
+      display: none;
+      margin-top: 1.2rem;
+      padding: 1.2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      color: #4a5568;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      border: 1px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .timeline-item.expanded .timeline-details {
+      display: block;
+      animation: slideDown 0.4s ease-out;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 15px;
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-caption {
+      color: white;
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: 500;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 2rem;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.1);
+    }
+
+    /* Footer */
+    footer {
+      background: #1a202c;
+      color: white;
+      padding: 4rem 0 1.5rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1.2rem;
+      color: #667eea;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .footer-section p {
+      margin-bottom: 0.8rem;
+      color: #cbd5e0;
+      line-height: 1.6;
+    }
+
+    .footer-section a {
+      color: #e2e8f0;
+      text-decoration: none;
+      transition: color 0.3s;
+      font-weight: 400;
+    }
+
+    .footer-section a:hover {
+      color: #667eea;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      display: inline-block;
+      padding: 0.8rem;
+      background: rgba(102, 126, 234, 0.2);
+      border-radius: 50%;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-size: 1.2rem;
+    }
+
+    .social-links a:hover {
+      background: #667eea;
+      transform: translateY(-3px);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+
+      .section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .section-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+      }
+
+      .profile-pic {
+        width: 220px;
+        height: 220px;
+        margin-bottom: 2rem;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: left;
+      }
+
+      .about-text {
+        font-size: 1.1rem;
+        order: 2;
+      }
+
+      .about-text p:first-child::first-letter {
+        font-size: 3rem;
+        margin: 0.05rem 0.4rem 0 0;
+      }
+
+      .about-images {
+        order: 3;
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+        margin-top: 1.5rem;
+      }
+
+      .gallery-item {
+        height: 200px;
+        border-radius: 15px;
+      }
+
+      .center-image {
+        height: 220px;
+        margin-top: 0;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        margin-left: 40px;
+        margin-right: 0;
+        padding: 2rem;
+      }
+
+      .timeline-item::before {
+        left: -39px;
+      }
+
+      .timeline-year {
+        min-width: 90px;
+        font-size: 1rem;
+        margin-right: 1rem;
+      }
+
+      .timeline-content strong {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .section {
+        padding: 2.5rem 0;
+      }
+
+      .section h2 {
+        font-size: 2rem;
+      }
+
+      .profile-pic {
+        width: 180px;
+        height: 180px;
+        font-size: 1.2rem;
+      }
+
+      .about-text {
+        font-size: 1rem;
+      }
+
+      .about-text p:first-child::first-letter {
+        font-size: 2.5rem;
+        margin: 0.05rem 0.3rem 0 0;
+      }
+
+      .timeline-item {
+        padding: 1.5rem;
+        margin-left: 30px;
+      }
+
+      .timeline-item::before {
+        left: -29px;
+        width: 18px;
+        height: 18px;
+      }
+
+      .timeline::before {
+        left: 15px;
+      }
+
+      .timeline-year {
+        min-width: 80px;
+        font-size: 0.9rem;
+      }
+
+      .lightbox-close {
+        top: 20px;
+        right: 20px;
+        font-size: 1.5rem;
+        padding: 10px;
+      }
+    }
+    /* Responsive footer columns for mobile */
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-section {
+      flex: 1 1 200px;
+      min-width: 180px;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 700px) {
+      .footer-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+      }
+      .footer-section {
+        min-width: 0;
+        margin-bottom: 1.2rem;
+      }
+      .footer-section:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Tech4Village</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="project.html">Project</a></li>
+        <li><a href="involved.html">Get Involved</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="mobile-menu">☰</div>
+    </div>
+  </nav>
+
+  <div class="main-content">
+    <div class="container">
+      <section class="section">
+        <h2>About Kaggwa Karenge</h2>
+        <p class="section-subtitle">Social entrepreneur bridging the digital divide in rural Kenya</p>
+        <div class="section-content">
+          <div class="about-hero">
+            <div class="profile-pic">
+              <img src="images/kaggwa-potrait.jpeg" alt="Kaggwa Karenge">
+            </div>
+          </div>
+          
+          <div class="about-content">
+            <div class="about-text">
+              <p>At 17, I'm a social entrepreneur from rural Kenya, turning a rite of passage into a mission. I've launched a youth-led project called Tech4Village, where we collect and distribute recycled laptops and smartphones to underprivileged schools and rural centers. Our goal is to bridge the digital divide by giving young people access to tools to advance in this technologically advanced world.</p>
+              <p>As School Captain in 2023, I led my peers with vision, and as VP of Student Government in 2022 and Chess Club Leader in 2021, I honed my leadership skills. Now, preparing for Harvard, Virginia Tech, or similar institutions, I'm driven to expand Tech4Village's impact.</p>
+              <p>I'm reaching out to kindly ask if you would consider donating a used, working device, supporting our mission financially, or helping us spread the word. Every single donation—big or small—will help youth who are eager to learn but locked out by a lack of access. If you'd like to help or learn more, I'd be grateful to tell you more. Thank you for considering.</p>
+            </div>
+            <div class="about-images">
+              <div class="gallery-item">
+                <img src="images/kagwa-speaking.jpeg" alt="Kaggwa Speaking at Event">
+              </div>
+              <div class="gallery-item">
+                <img src="images/kagwwa-award.jpeg" alt="Award Ceremony 2024">
+              </div>
+              <div class="gallery-item center-image">
+                <img src="images/kaggwa-team.jpeg" alt="Kaggwa with Team">
+              </div>
+            </div>
+          </div>
+          
+          <div class="timeline">
+            <div class="timeline-item" data-year="2024" data-details="Founded Tech4Village with the first 50 devices donated, directly impacting 247 students across 12 rural villages in Kenya. Established partnerships with 5 local schools and set up 3 solar-powered internet hotspots.">
+              <div class="timeline-year">2024–Present</div>
+              <div class="timeline-content">
+                <span class="timeline-icon">🌱</span>
+                <strong>Founded Tech4Village</strong>
+                <div class="timeline-details">Founded Tech4Village with the first 50 devices donated, directly impacting 247 students across 12 rural villages in Kenya. Established partnerships with 5 local schools and set up 3 solar-powered internet hotspots.</div>
+              </div>
+            </div>
+            <div class="timeline-item" data-year="2023" data-details="Led over 200 students in various school initiatives including academic excellence programs, community service projects, and student welfare improvements. Organized the first-ever inter-school technology fair.">
+              <div class="timeline-year">2023</div>
+              <div class="timeline-content">
+                <span class="timeline-icon">🎓</span>
+                <strong>School Captain</strong>
+                <div class="timeline-details">Led over 200 students in various school initiatives including academic excellence programs, community service projects, and student welfare improvements. Organized the first-ever inter-school technology fair.</div>
+              </div>
+            </div>
+            <div class="timeline-item" data-year="2022" data-details="Oversaw student council projects affecting 150+ peers, including infrastructure improvements, academic support programs, and extracurricular activities. Implemented a peer tutoring system that improved overall school performance by 15%.">
+              <div class="timeline-year">2022</div>
+              <div class="timeline-content">
+                <span class="timeline-icon">🏛️</span>
+                <strong>VP Student Government</strong>
+                <div class="timeline-details">Oversaw student council projects affecting 150+ peers, including infrastructure improvements, academic support programs, and extracurricular activities. Implemented a peer tutoring system that improved overall school performance by 15%.</div>
+              </div>
+            </div>
+            <div class="timeline-item" data-year="2021" data-details="Organized more than 10 chess tournaments, winning 3 regional awards and mentoring 25+ junior players. Established the school's first chess club and represented the region in national competitions.">
+              <div class="timeline-year">2021</div>
+              <div class="timeline-content">
+                <span class="timeline-icon">♟️</span>
+                <strong>Chess Club Leader</strong>
+                <div class="timeline-details">Organized more than 10 chess tournaments, winning 3 regional awards and mentoring 25+ junior players. Established the school's first chess club and represented the region in national competitions.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>Tech4Village</h3>
+        <p>Bridging the digital divide in rural Kenya through technology, education, and community empowerment.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="X">X</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <p><a href="about.html">About Us</a></p>
+        <p><a href="project.html">Our Projects</a></p>
+        <p><a href="involved.html">Get Involved</a></p>
+        <p><a href="blog.html">Blog</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <p><a href="contact.html">Contact Us</a></p>
+        <p><a href="https://calendly.com/tech4village/15min">Book a Call</a></p>
+        <p><a href="#" onclick="showDonationOptions()">Donate</a></p>
+      </div>
+    </div>
+    <div style="border-top:1px solid #4a5568;padding-top:2rem;text-align:center;">
+      <p>&copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology accessible for all.</p>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close lightbox">✕</button>
+    <img class="lightbox-img" src="" alt="">
+    <div class="lightbox-caption"></div>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu').addEventListener('click', function() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+    });
+
+    // Timeline item click to expand details
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      item.addEventListener('click', function() {
+        this.classList.toggle('expanded');
+      });
+    });
+
+    // Photo gallery lightbox
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+      img.addEventListener('click', function() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('.lightbox-img');
+        const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+        
+        lightboxImg.src = this.src;
+        lightboxCaption.textContent = this.alt;
+        lightbox.classList.add('active');
+      });
+    });
+
+    // Close lightbox
+    document.querySelector('.lightbox-close').addEventListener('click', function() {
+      document.getElementById('lightbox').classList.remove('active');
+    });
+
+    // Close lightbox on background click
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+      }
+    });
+
+    // Show donation options
+    function showDonationOptions() {
+      alert('Thank you for your interest in donating! Please visit our donation page for options: [Insert Donation Link Here]');
+    }
+
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+      const navLinks = document.querySelector('.nav-links');
+      const mobileMenu = document.querySelector('.mobile-menu');
+      
+      if (!navLinks.contains(e.target) && !mobileMenu.contains(e.target)) {
+        navLinks.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
