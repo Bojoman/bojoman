@@ -5,6 +5,7 @@ languageCode = "en-us"
 
 [params]
   author = "Kaggwa Karenge"
+  avatar = "/images/kaggwa-potrait.jpeg"
   description = "Bridging the digital divide in rural Kenya."
   ShowReadingTime = true
   ShowShareButtons = true
@@ -13,6 +14,10 @@ languageCode = "en-us"
   ShowCodeCopyButtons = true
   ShowWordCount = true
   ShowToc = true
+  ShowAuthor = true
+  ShowTags = true
+  ShowCategories = true
+  mainSections = ["blog", "posts"]
   defaultTheme = "auto"
 
 [[menu.main]]
@@ -36,10 +41,14 @@ languageCode = "en-us"
   url = "/blog/"
   weight = 5
 [[menu.main]]
+  name = "Categories"
+  url = "/categories/"
+  weight = 6
+[[menu.main]]
   name = "Donate"
   url = "/donate/"
-  weight = 6
+  weight = 7
 [[menu.main]]
   name = "Contact"
   url = "/contact/"
-  weight = 7 
+  weight = 8 

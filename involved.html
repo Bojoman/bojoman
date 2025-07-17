@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Get Involved — Tech4Village</title>
+  <title>Get Involved – Tech4Village</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <style>
     * {
       margin: 0;
@@ -478,10 +479,7 @@
 <body>
   <nav>
     <div class="nav-container">
-      <a href="#" class="logo">
-        <span>🌍</span>
-        Tech4Village
-      </a>
+      <a href="#" class="logo"><span style="font-size:1.3em;vertical-align:middle;">🌍</span> Tech4Village</a>
       <ul class="nav-menu" id="navMenu">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
@@ -533,30 +531,59 @@
   </div>
 
   <footer>
-    <div class="footer-content">
-      <div class="footer-grid">
-        <div class="footer-section">
-          <h4>About Tech4Village</h4>
-          <p>Bridging the digital divide by connecting rural communities with technology and digital literacy programs.</p>
-        </div>
-        <div class="footer-section">
-          <h4>Quick Links</h4>
-          <p><a href="about.html">About Us</a></p>
-          <p><a href="programs.html">Our Programs</a></p>
-          <p><a href="get-involved.html">Get Involved</a></p>
-        </div>
-        <div class="footer-section">
-          <h4>Contact</h4>
-          <p>Email: info@tech4village.com</p>
-          <p>Phone: +1 (555) 123-4567</p>
-          <p>Address: 123 Tech Street, Digital City</p>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>Tech4Village</h3>
+        <p>Bridging the digital divide in rural Kenya through technology, education, and community empowerment.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="X">X</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology accessible for all.</p>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <p><a href="about.html">About Us</a></p>
+        <p><a href="project.html">Our Projects</a></p>
+        <p><a href="involved.html">Get Involved</a></p>
+        <p><a href="blog.html">Blog</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <p><a href="contact.html">Contact Us</a></p>
+        <p><a href="donate.html">Donate</a></p>
       </div>
     </div>
+    <div style="border-top:1px solid #666;padding:2rem 0;text-align:center;">
+      <p>&copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology accessible for all.</p>
+    </div>
   </footer>
+  <style>
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-section {
+      flex: 1 1 200px;
+      min-width: 180px;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 700px) {
+      .footer-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+      }
+      .footer-section {
+        min-width: 0;
+        margin-bottom: 1.2rem;
+      }
+      .footer-section:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
 
   <!-- Modals -->
   <div id="deviceModal" class="modal">

@@ -2,9 +2,12 @@
 title: "Crawl Forward Anyway: Lessons from the Mud"
 date: 2024-06-10T10:00:00+03:00
 author: "Kaggwa Karenge"
+authorimage: "/images/kaggwa-potrait.jpeg"
 tags: ["resilience", "leadership"]
+categories: ["Resilience"]
 image: "/images/crawling-through-the-mud.jpeg"
 description: "Lessons in resilience and leadership from a rite of passage in rural Kenya."
+summary: "Lessons in resilience and leadership from a rite of passage in rural Kenya."
 ---
 
 This photo was taken during my rite of passage leadership training, deep in the forest. We had to crawl through narrow, muddy tunnels with no light…

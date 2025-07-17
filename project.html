@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Project — Tech4Village</title>
+  <title>Project – Tech4Village</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <style>
     * {
       margin: 0;
@@ -657,7 +658,7 @@
 <body>
   <nav>
     <div class="nav-container">
-      <a href="index.html" class="logo"> <span>🌍</span>Tech4Village</a>
+      <a href="index.html" class="logo"><span style="font-size:1.3em;vertical-align:middle;">🌍</span> Tech4Village</a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
@@ -667,6 +668,7 @@
         <li><a href="donate.html">Donate</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
+      <div class="mobile-menu">☰</div>
     </div>
   </nav>
 
@@ -800,35 +802,59 @@
   </div>
 
   <footer>
-        <div class="container footer-content">
-            <div class="footer-section">
-                <h3>Tech4Village</h3>
-                <p>Bridging the digital divide in rural Kenya through technology, education, and community empowerment.</p>
-                <div class="social-links">
-                    <a href="#">📘</a>
-                    <a href="#">📷</a>
-                    <a href="#">X</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <p><a href="about.html">About Us</a></p>
-                <p><a href="project.html">Our Projects</a></p>
-                <p><a href="involved.html">Get Involved</a></p>
-                <p><a href="blog.html">Blog</a></p>
-            </div>
-            <div class="footer-section">
-                <h3>Support</h3>
-                <p><a href="contact.html">Contact Us</a></p>
-                <p><a href="#" onclick="bookCall()">Book a Call</a></p>
-                <p><a href="#" onclick="showDonationOptions()">Donate</a></p>
-            </div>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>Tech4Village</h3>
+        <p>Bridging the digital divide in rural Kenya through technology, education, and community empowerment.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="X">X</a>
         </div>
-        <div style="border-top:1px solid #666;padding:2rem 0;text-align:center;">
-            <p>&copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology accessible for all.</p>
-        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <p><a href="about.html">About Us</a></p>
+        <p><a href="project.html">Our Projects</a></p>
+        <p><a href="involved.html">Get Involved</a></p>
+        <p><a href="blog.html">Blog</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <p><a href="contact.html">Contact Us</a></p>
+        <p><a href="donate.html">Donate</a></p>
+      </div>
+    </div>
+    <div style="border-top:1px solid #666;padding:2rem 0;text-align:center;">
+      <p>&copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology accessible for all.</p>
+    </div>
   </footer>
-
+  <style>
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-section {
+      flex: 1 1 200px;
+      min-width: 180px;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 700px) {
+      .footer-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+      }
+      .footer-section {
+        min-width: 0;
+        margin-bottom: 1.2rem;
+      }
+      .footer-section:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
   <script>
     // Add smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

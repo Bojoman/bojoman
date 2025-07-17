@@ -1,3 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Support Tech4Village's mission to bridge the digital divide in rural Kenya through device donations and financial contributions.">
+    <meta name="keywords" content="donate, tech4village, rural kenya, digital divide, device donation">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Donate - Tech4Village</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        /* Donations Page Specific Styles */
+        .donation-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
+        .donation-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,192L48,208C96,224,192,256,288,245.3C384,235,480,181,576,181.3C672,181,768,235,864,245.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom;
+            background-size: cover;
+        }
+
+        .donation-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .donation-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .donation-options {
+            background: white;
+            margin-top: -50px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            z-index: 1;
+            padding: 4rem 0;
+        }
+
+        .donation-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid #f0f0f0;
+            flex-wrap: wrap;
+        }
+
+        .donation-tab {
+            background: none;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .donation-tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .donation-tab:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .donation-content {
+            display: none;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .donation-content.active {
+            display: block;
+        }
+
+        .donation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .donation-form-container {
+            background: #f8f9ff;
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .donation-info {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .amount-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .amount-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .amount-btn:hover,
+        .amount-btn.active {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .custom-amount {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .custom-amount:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .device-donation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .device-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .device-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .device-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .device-requirements {
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        .device-requirements ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .device-requirements li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .device-requirements li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .impact-showcase {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .impact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .impact-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+        }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .security-badge {
+            background: #f0f8ff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .payment-method {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+            color: #333;
+        }
+
+        .donation-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .donation-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .donation-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .testimonials {
+            background: #f8f9ff;
+            padding: 4rem 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .donation-motivation-grid {
+            display: flex;
+            gap: 2rem;
+            align-items: stretch;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        .donation-motivation, .donation-info-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.10);
+            padding: 2rem;
+            flex: 1 1 320px;
+            min-width: 260px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .donation-motivation h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        .donation-badge {
+            margin-top: 1.5rem;
+            background: #f8f9ff;
+            color: #764ba2;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 0.98rem;
+            display: inline-block;
+        }
+        .donation-info-card .donation-method {
+            margin: 1.2rem 0;
+            font-size: 1.1rem;
+        }
+        .donation-highlight {
+            color: #667eea;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        .copy-btn {
+            margin-left: 1rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            border: none;
+            background: #667eea;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        @media (max-width: 800px) {
+            .donation-motivation-grid {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .donation-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .donation-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .amount-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .donation-hero {
+                padding: 100px 0 60px;
+            }
+            
+            .donation-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .donation-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .donation-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .donation-tab {
+                margin: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .amount-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .device-donation-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .impact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .donation-options {
+                padding: 2rem 0;
+            }
+            
+            .donation-form-container,
+            .donation-info {
+                padding: 1.5rem;
+            }
+            
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .security-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><span style="font-size:1.3em;vertical-align:middle;">🌍</span> Tech4Village</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="project.html">Project</a></li>
+                <li><a href="involved.html">Get Involved</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">☰</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="donation-hero">
+        <div class="container">
+            <h1>Make a Lasting Impact</h1>
+            <p>Your donation helps bridge the digital divide in rural Kenya. Every device and dollar creates opportunities for students who need them most.</p>
+        </div>
+    </section>
+
+    <!-- Donation Options -->
+    <section class="donation-options">
+        <div class="container">
+            <div class="donation-tabs" style="flex-direction: row; justify-content: center; gap: 1rem;">
+                <button class="donation-tab active" onclick="showDonationTab('money')" style="font-size:1.1rem;padding:1rem 2rem;border-radius:12px;">💰 Money</button>
+                <button class="donation-tab" onclick="showDonationTab('device')" style="font-size:1.1rem;padding:1rem 2rem;border-radius:12px;">💻 Device</button>
+                <button class="donation-tab" onclick="showDonationTab('volunteer')" style="font-size:1.1rem;padding:1rem 2rem;border-radius:12px;">🤝 Volunteer</button>
+            </div>
+
+            <!-- Money Donation (No Form) -->
+            <div id="money-donation" class="donation-content active">
+                <div class="donation-motivation-grid">
+                    <div class="donation-motivation">
+                        <h2>Your gift changes a life.</h2>
+                        <p>Every device or shilling you give helps a real student in rural Kenya unlock their potential.<br>
+                        <em>“I never thought I’d use a computer. Now I dream of being an engineer.”</em></p>
+                        <div class="donation-badge">100% of your donation goes to students</div>
+                    </div>
+                    <div class="donation-info-card">
+                        <h3 style="color:#667eea;">Donate Money</h3>
+                        <div class="donation-method">
+                            <strong>CashApp:</strong> <span class="donation-highlight">$karenge</span>
+                            <button onclick="copyText('$karenge')" class="copy-btn">Copy</button>
+                        </div>
+                        <div class="donation-method">
+                            <strong>M-Pesa:</strong> <span class="donation-highlight">0722961906</span>
+                            <button onclick="copyText('0722961906')" class="copy-btn">Copy</button>
+                        </div>
+                        <p style="margin-top:1rem;">For bank transfer or international giving, <a href="contact.html">contact us</a>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Device Donation -->
+            <div id="device-donation" class="donation-content">
+                <div class="device-donation-grid">
+                    <div class="device-card">
+                        <div class="device-icon">💻</div>
+                        <h3>Laptops</h3>
+                        <p>Working laptops help students access educational resources and develop digital skills.</p>
+                        <div class="device-requirements">
+                            <strong>Requirements:</strong>
+                            <ul>
+                                <li>Windows 7 or newer / macOS 10.10+</li>
+                                <li>4GB RAM minimum</li>
+                                <li>Working battery (replaceable)</li>
+                                <li>No major physical damage</li>
+                                <li>Original charger included</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="device-card">
+                        <div class="device-icon">📱</div>
+                        <h3>Smartphones</h3>
+                        <p>Smartphones provide instant access to information and communication tools.</p>
+                        <div class="device-requirements">
+                            <strong>Requirements:</strong>
+                            <ul>
+                                <li>Android 6.0+ or iOS 10+</li>
+                                <li>Working screen and buttons</li>
+                                <li>Battery holds charge</li>
+                                <li>Unlocked or with reset instructions</li>
+                                <li>Charger included</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="device-card">
+                        <div class="device-icon">📟</div>
+                        <h3>Tablets</h3>
+                        <p>Tablets are perfect for reading, note-taking, and interactive learning.</p>
+                        <div class="device-requirements">
+                            <strong>Requirements:</strong>
+                            <ul>
+                                <li>Android 6.0+ or iOS 10+</li>
+                                <li>10+ inch screen preferred</li>
+                                <li>Touch screen fully functional</li>
+                                <li>No cracks or dead pixels</li>
+                                <li>Charger and case included</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="donation-form-container" style="margin-top: 3rem;">
+                    <h2>Device Donation Form</h2>
+                    <form id="device-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+                        <input type="hidden" name="_subject" value="New Device Donation">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="donor-name">Full Name *</label>
+                                <input type="text" id="donor-name" name="donor_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="donor-email">Email Address *</label>
+                                <input type="email" id="donor-email" name="donor_email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="donor-phone">Phone Number</label>
+                                <input type="tel" id="donor-phone" name="donor_phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="donor-location">Location *</label>
+                                <input type="text" id="donor-location" name="donor_location" placeholder="City, State/Country" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="device-type">Device Type *</label>
+                            <select id="device-type" name="device_type" required>
+                                <option value="">Select device type</option>
+                                <option value="laptop">Laptop</option>
+                                <option value="smartphone">Smartphone</option>
+                                <option value="tablet">Tablet</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="device-quantity">Quantity *</label>
+                                <input type="number" id="device-quantity" name="device_quantity" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-condition">Condition *</label>
+                                <select id="device-condition" name="device_condition" required>
+                                    <option value="">Select condition</option>
+                                    <option value="excellent">Excellent</option>
+                                    <option value="good">Good</option>
+                                    <option value="fair">Fair (needs minor repair)</option>
+                                    <option value="poor">Poor (needs major repair)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="device-details">Device Details</label>
+                            <textarea id="device-details" name="device_details" rows="4" placeholder="Brand, model, specifications, included accessories, any issues..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="shipping-preference">Shipping Preference *</label>
+                            <select id="shipping-preference" name="shipping_preference" required>
+                                <option value="">Select preference</option>
+                                <option value="self-ship">I'll ship the device(s)</option>
+                                <option value="pickup">Arrange local pickup</option>
+                                <option value="dropoff">I'll drop off locally</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="donation-btn">
+                            <span class="loading-spinner"></span>
+                            Submit Device Donation
+                        </button>
+                        
+                        <div class="success-message">
+                            Thank you! Your device donation has been submitted. We'll contact you with next steps.
+                        </div>
+                        
+                        <div class="error-message">
+                            Something went wrong. Please try again or contact us directly.
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Volunteer -->
+            <div id="volunteer-donation" class="donation-content">
+                <div class="donation-grid">
+                    <div class="donation-form-container">
+                        <h2>Volunteer Application</h2>
+                        <form id="volunteer-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+                            <input type="hidden" name="_subject" value="New Volunteer Application">
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="volunteer-name">Full Name *</label>
+                                    <input type="text" id="volunteer-name" name="volunteer_name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="volunteer-email">Email Address *</label>
+                                    <input type="email" id="volunteer-email" name="volunteer_email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="volunteer-phone">Phone Number</label>
+                                    <input type="tel" id="volunteer-phone" name="volunteer_phone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="volunteer-location">Location *</label>
+                                    <input type="text" id="volunteer-location" name="volunteer_location" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="volunteer-skills">Skills & Expertise *</label>
+                                <select id="volunteer-skills" name="volunteer_skills" required>
+                                    <option value="">Select your primary skill</option>
+                                    <option value="tech-repair">Technology Repair</option>
+                                    <option value="teaching">Teaching/Training</option>
+                                    <option value="logistics">Logistics & Operations</option>
+                                    <option value="fundraising">Fundraising</option>
+                                    <option value="marketing">Marketing/Social Media</option>
+                                    <option value="web-dev">Web Development</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="volunteer-availability">Availability *</label>
+                                <select id="volunteer-availability" name="volunteer_availability" required>
+                                    <option value="">Select availability</option>
+                                    <option value="full-time">Full-time</option>
+                                    <option value="part-time">Part-time</option>
+                                    <option value="weekends">Weekends only</option>
+                                    <option value="occasional">Occasional/As needed</option>
+                                    <option value="remote">Remote only</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="volunteer-experience">Relevant Experience</label>
+                                <textarea id="volunteer-experience" name="volunteer_experience" rows="4" placeholder="Tell us about your relevant experience and why you want to volunteer..."></textarea>
+                            </div>
+                            <button type="submit" class="donation-btn">
+                                <span class="loading-spinner"></span>
+                                Submit Volunteer Application
+                            </button>
+                            <div class="success-message">
+                                Thank you! Your volunteer application has been submitted. We'll contact you soon.
+                            </div>
+                            <div class="error-message">
+                                Something went wrong. Please try again or contact us directly.
+                            </div>
+                        </form>
+                    </div>
+                    <div class="donation-info">
+                        <h3>Why Volunteer?</h3>
+                        <p>Volunteers are the heart of Tech4Village. Whether you have technical skills, teaching experience, or just a passion for making a difference, we welcome your support!</p>
+                        <ul>
+                            <li>Help refurbish and distribute devices</li>
+                            <li>Mentor students in coding and digital skills</li>
+                            <li>Assist with logistics, outreach, or fundraising</li>
+                            <li>Spread the word about our mission</li>
+                        </ul>
+                        <p>Ready to join us? Fill out the form or <a href="contact.html">contact us</a> for more info.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Showcase -->
+    <section class="impact-showcase">
+        <div class="container">
+            <h2>Our Impact</h2>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <div class="impact-number">247</div>
+                    <div>Devices Distributed</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-number">50</div>
+                    <div>Students Reached</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-number">18</div>
+                    <div>Schools Connected</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-number">12</div>
+                    <div>Villages Impacted</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>Tech4Village</h3>
+                <p>Bridging the digital divide in rural Kenya through technology, education, and community empowerment.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="X">X</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="about.html">About Us</a></p>
+                <p><a href="project.html">Our Projects</a></p>
+                <p><a href="involved.html">Get Involved</a></p>
+                <p><a href="blog.html">Blog</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <p><a href="contact.html">Contact Us</a></p>
+                <p><a href="donate.html">Donate</a></p>
+            </div>
+        </div>
+        <div style="border-top:1px solid #666;padding:2rem 0;text-align:center;">
+            <p>&copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology accessible for all.</p>
+        </div>
+    </footer>
+    <script src="js/script.js" defer></script>
+    <script>
+        // Tab switching logic for donation tabs
+        function showDonationTab(tab) {
+            document.querySelectorAll('.donation-tab').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.donation-content').forEach(content => content.classList.remove('active'));
+            if (tab === 'money') {
+                document.querySelector('.donation-tab:nth-child(1)').classList.add('active');
+                document.getElementById('money-donation').classList.add('active');
+            } else if (tab === 'device') {
+                document.querySelector('.donation-tab:nth-child(2)').classList.add('active');
+                document.getElementById('device-donation').classList.add('active');
+            } else if (tab === 'volunteer') {
+                document.querySelector('.donation-tab:nth-child(3)').classList.add('active');
+                document.getElementById('volunteer-donation').classList.add('active');
+            }
+        }
+        // Copy to clipboard for donation info
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert('Copied: ' + text);
+        }
+        // Amount button logic for financial donation (no longer used)
+    </script>
+</body>
+</html>
 
 

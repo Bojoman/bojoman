@@ -2,9 +2,12 @@
 title: "From Tradition to Tech: Why This Moment Sparked My Mission"
 date: 2024-06-15T09:00:00+03:00
 author: "Kaggwa Karenge"
+authorimage: "/images/kaggwa-potrait.jpeg"
 tags: ["leadership", "technology"]
+categories: ["Leadership"]
 image: "/images/young-leader-speaking.jpeg"
 description: "How a Kikuyu rite of passage inspired the Tech4Village mission."
+summary: "How a Kikuyu rite of passage inspired the Tech4Village mission."
 ---
 
 When I stood up to speak at my Kikuyu rite of passage, I wasn't just wearing tradition—I was stepping into it.
