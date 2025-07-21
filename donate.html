@@ -54,12 +54,13 @@
             padding: 4rem 0;
         }
 
+        /* Update the donation tabs styles */
         .donation-tabs {
             display: flex;
             justify-content: center;
             margin-bottom: 3rem;
             border-bottom: 2px solid #f0f0f0;
-            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .donation-tab {
@@ -72,7 +73,7 @@
             color: #666;
             border-bottom: 3px solid transparent;
             transition: all 0.3s ease;
-            margin: 0 0.5rem;
+            border-radius: 12px;
         }
 
         .donation-tab.active {
@@ -464,44 +465,25 @@
             }
         }
 
+        /* Update mobile styles */
         @media (max-width: 768px) {
-            .donation-hero {
-                padding: 100px 0 60px;
-            }
-            
-            .donation-hero h1 {
-                font-size: 2rem;
-            }
-            
-            .donation-hero p {
-                font-size: 1.1rem;
-            }
-            
             .donation-tabs {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .donation-tab {
-                margin: 0.5rem 0;
+                flex-direction: row !important; /* Force row layout */
                 width: 100%;
-                text-align: center;
+                gap: 0.25rem;
+                padding: 0 0.5rem;
             }
-            
-            .form-row {
-                grid-template-columns: 1fr;
+
+            .donation-tab {
+                padding: 0.75rem 0.25rem !important;
+                font-size: 0.9rem !important;
             }
-            
-            .amount-options {
-                grid-template-columns: 1fr;
-            }
-            
-            .device-donation-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .impact-grid {
-                grid-template-columns: repeat(2, 1fr);
+
+            /* Remove the emoji on very small screens to save space */
+            @media (max-width: 360px) {
+                .donation-tab span.emoji {
+                    display: none;
+                }
             }
         }
 
@@ -536,6 +518,67 @@
                 transform: translateY(0);
             }
         }
+
+        .partnership-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 2rem auto;
+        }
+
+        .partnership-card h3 {
+            font-size: 1.8rem;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+        }
+
+        .partnership-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .partnership-section {
+            background: #f8fafc;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            border-radius: 12px;
+        }
+
+        .partnership-section h2 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+        }
+
+        .partnership-section p {
+            color: #6b7280;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .partnership-section .btn {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .partnership-section .btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -543,15 +586,15 @@
     <nav>
         <div class="container nav-container">
             <a href="index.html" class="logo"><span style="font-size:1.3em;vertical-align:middle;">🌍</span> Tech4Village</a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="project.html">Project</a></li>
-                <li><a href="involved.html">Get Involved</a></li>
                 <li><a href="blog.html">Blog</a></li>
+                <li><a href="donate.html" class="active">Donate</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <div class="mobile-menu">☰</div>
+            <div class="mobile-menu" id="mobileMenuBtn">☰</div>
         </div>
     </nav>
 
@@ -566,38 +609,16 @@
     <!-- Donation Options -->
     <section class="donation-options">
         <div class="container">
-            <div class="donation-tabs" style="flex-direction: row; justify-content: center; gap: 1rem;">
-                <button class="donation-tab active" onclick="showDonationTab('money')" style="font-size:1.1rem;padding:1rem 2rem;border-radius:12px;">💰 Money</button>
-                <button class="donation-tab" onclick="showDonationTab('device')" style="font-size:1.1rem;padding:1rem 2rem;border-radius:12px;">💻 Device</button>
-                <button class="donation-tab" onclick="showDonationTab('volunteer')" style="font-size:1.1rem;padding:1rem 2rem;border-radius:12px;">🤝 Volunteer</button>
+            <!-- Update the donation tabs order -->
+            <div class="donation-tabs">
+                <button class="donation-tab active" onclick="showDonationTab('device')">💻 Device</button>
+                <button class="donation-tab" onclick="showDonationTab('volunteer')">🤝 Volunteer</button>
+                <button class="donation-tab" onclick="showDonationTab('money')">💰 Money</button>
             </div>
 
-            <!-- Money Donation (No Form) -->
-            <div id="money-donation" class="donation-content active">
-                <div class="donation-motivation-grid">
-                    <div class="donation-motivation">
-                        <h2>Your gift changes a life.</h2>
-                        <p>Every device or shilling you give helps a real student in rural Kenya unlock their potential.<br>
-                        <em>“I never thought I’d use a computer. Now I dream of being an engineer.”</em></p>
-                        <div class="donation-badge">100% of your donation goes to students</div>
-                    </div>
-                    <div class="donation-info-card">
-                        <h3 style="color:#667eea;">Donate Money</h3>
-                        <div class="donation-method">
-                            <strong>CashApp:</strong> <span class="donation-highlight">$karenge</span>
-                            <button onclick="copyText('$karenge')" class="copy-btn">Copy</button>
-                        </div>
-                        <div class="donation-method">
-                            <strong>M-Pesa:</strong> <span class="donation-highlight">0722961906</span>
-                            <button onclick="copyText('0722961906')" class="copy-btn">Copy</button>
-                        </div>
-                        <p style="margin-top:1rem;">For bank transfer or international giving, <a href="contact.html">contact us</a>.</p>
-                    </div>
-                </div>
-            </div>
-
+            <!-- Reorder the content sections -->
             <!-- Device Donation -->
-            <div id="device-donation" class="donation-content">
+            <div id="device-donation" class="donation-content active">
                 <div class="device-donation-grid">
                     <div class="device-card">
                         <div class="device-icon">💻</div>
@@ -819,6 +840,39 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Money Donation -->
+            <div id="money-donation" class="donation-content">
+                <div class="donation-motivation-grid">
+                    <div class="donation-motivation">
+                        <h2>Your gift changes a life.</h2>
+                        <p>Every device or shilling you give helps a real student in rural Kenya unlock their potential.<br>
+                        <em>“I never thought I’d use a computer. Now I dream of being an engineer.”</em></p>
+                        <div class="donation-badge">100% of your donation goes to students</div>
+                    </div>
+                    <div class="donation-info-card">
+                        <h3 style="color:#667eea;">Donate Money</h3>
+                        <div class="donation-method">
+                            <strong>CashApp:</strong> <span class="donation-highlight">$karenge</span>
+                            <button onclick="copyText('$karenge')" class="copy-btn">Copy</button>
+                        </div>
+                        <div class="donation-method">
+                            <strong>M-Pesa:</strong> <span class="donation-highlight">0722961906</span>
+                            <button onclick="copyText('0722961906')" class="copy-btn">Copy</button>
+                        </div>
+                        <p style="margin-top:1rem;">For bank transfer or international giving, <a href="contact.html">contact us</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Corporate Partnership Section before Impact Showcase -->
+    <section class="partnership-section">
+        <div class="container">
+            <h2>Corporate Partnerships</h2>
+            <p>Partner with us to scale our impact and create lasting change in rural communities across the globe.</p>
+            <a href="contact.html" class="btn">Partner With Us</a>
         </div>
     </section>
 
@@ -863,8 +917,8 @@
                 <h3>Quick Links</h3>
                 <p><a href="about.html">About Us</a></p>
                 <p><a href="project.html">Our Projects</a></p>
-                <p><a href="involved.html">Get Involved</a></p>
                 <p><a href="blog.html">Blog</a></p>
+                <p><a href="donate.html">Donate</a></p>
             </div>
             <div class="footer-section">
                 <h3>Support</h3>
@@ -882,15 +936,15 @@
         function showDonationTab(tab) {
             document.querySelectorAll('.donation-tab').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.donation-content').forEach(content => content.classList.remove('active'));
-            if (tab === 'money') {
+            if (tab === 'device') {
                 document.querySelector('.donation-tab:nth-child(1)').classList.add('active');
-                document.getElementById('money-donation').classList.add('active');
-            } else if (tab === 'device') {
-                document.querySelector('.donation-tab:nth-child(2)').classList.add('active');
                 document.getElementById('device-donation').classList.add('active');
             } else if (tab === 'volunteer') {
-                document.querySelector('.donation-tab:nth-child(3)').classList.add('active');
+                document.querySelector('.donation-tab:nth-child(2)').classList.add('active');
                 document.getElementById('volunteer-donation').classList.add('active');
+            } else if (tab === 'money') {
+                document.querySelector('.donation-tab:nth-child(3)').classList.add('active');
+                document.getElementById('money-donation').classList.add('active');
             }
         }
         // Copy to clipboard for donation info

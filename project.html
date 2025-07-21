@@ -5,670 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Project – Tech4Village</title>
   <link rel="icon" type="image/png" href="favicon.png">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
-      color: #1a1a1a;
-      background: #ffffff;
-      overflow-x: hidden;
-    }
-
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      z-index: 100;
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #2563eb;
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #4b5563;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #2563eb;
-    }
-
-    /* Main Content */
-    .main-content {
-      margin-top: 80px;
-      min-height: 100vh;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* Hero Section */
-    .hero-section {
-      padding: 4rem 0;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-      animation: float 20s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-title {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      margin-bottom: 1rem;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1.1rem, 3vw, 1.4rem);
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .impact-stats {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .stat-item {
-      text-align: center;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      min-width: 120px;
-    }
-
-    .stat-number {
-      font-size: 2rem;
-      font-weight: 700;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-
-    /* Project Grid */
-    .project-section {
-      padding: 5rem 0;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #1f2937;
-    }
-
-    .section-description {
-      font-size: 1.2rem;
-      color: #6b7280;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 4rem;
-    }
-
-    .project-card {
-      background: #ffffff;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e5e7eb;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .project-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .project-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .project-card h3 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #1f2937;
-    }
-
-    .project-card p {
-      color: #6b7280;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    /* Impact Section */
-    .impact-section {
-      background: #f8fafc;
-      padding: 4rem 0;
-      border-radius: 20px;
-      margin: 3rem 0;
-    }
-
-    .impact-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .impact-text h3 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #1f2937;
-    }
-
-    .impact-text p {
-      font-size: 1.1rem;
-      color: #6b7280;
-      margin-bottom: 1.5rem;
-    }
-
-    .impact-metrics {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .metric-item {
-      text-align: center;
-      padding: 1.5rem;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    .metric-number {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #3b82f6;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    .metric-label {
-      font-size: 0.9rem;
-      color: #6b7280;
-    }
-
-    /* Success Story */
-    .success-story {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 3rem;
-      border-radius: 15px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .success-story::before {
-      content: '"';
-      position: absolute;
-      top: 10px;
-      left: 20px;
-      font-size: 6rem;
-      opacity: 0.2;
-      font-family: serif;
-    }
-
-    .success-story h4 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-
-    .testimonial-text {
-      font-size: 1.3rem;
-      font-style: italic;
-      margin-bottom: 1rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .testimonial-author {
-      font-size: 1rem;
-      opacity: 0.9;
-      font-weight: 500;
-    }
-
-    /* Map Section */
-    .map-section {
-      background: #ffffff;
-      padding: 5rem 0;
-      border-top: 1px solid #e5e7eb;
-    }
-
-    .map-container {
-      background: #f8fafc;
-      border-radius: 20px;
-      padding: 3rem;
-      margin-bottom: 3rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    .kenya-map {
-      max-width: 800px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .map-svg {
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-    }
-
-    .location-marker {
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .location-marker.active {
-      fill: #3b82f6;
-      stroke: #1e40af;
-      stroke-width: 2;
-    }
-
-    .location-marker.planned {
-      fill: #e5e7eb;
-      stroke: #9ca3af;
-      stroke-width: 1;
-      opacity: 0.7;
-    }
-
-    .location-marker:hover {
-      transform: scale(1.2);
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    }
-
-    .connection-line {
-      stroke: #3b82f6;
-      stroke-width: 1;
-      stroke-dasharray: 5,5;
-      opacity: 0.3;
-      animation: dash 3s linear infinite;
-    }
-
-    @keyframes dash {
-      to {
-        stroke-dashoffset: -10;
-      }
-    }
-
-    .map-legend {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      color: #6b7280;
-    }
-
-    .legend-marker {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 2px solid;
-    }
-
-    .active-marker {
-      background: #3b82f6;
-      border-color: #1e40af;
-    }
-
-    .planned-marker {
-      background: #e5e7eb;
-      border-color: #9ca3af;
-    }
-
-    .hub-marker {
-      background: #f59e0b;
-      border-color: #d97706;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
-    .impact-details {
-      background: white;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    .impact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .impact-card {
-      text-align: center;
-      padding: 1.5rem;
-      background: #f8fafc;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-      transition: transform 0.3s ease;
-    }
-
-    .impact-card:hover {
-      transform: translateY(-2px);
-    }
-
-    .impact-card h4 {
-      font-size: 1rem;
-      color: #1f2937;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .impact-stat {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #3b82f6;
-      margin-bottom: 0.5rem;
-    }
-
-    .impact-desc {
-      font-size: 0.9rem;
-      color: #6b7280;
-      line-height: 1.4;
-    }
-    .cta-section {
-      background: #1f2937;
-      color: white;
-      padding: 4rem 0;
-      text-align: center;
-    }
-
-    .cta-content h3 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .cta-content p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-    }
-
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .btn-primary {
-      background: #3b82f6;
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #2563eb;
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: white;
-      border-color: #6b7280;
-    }
-
-    .btn-secondary:hover {
-      background: #6b7280;
-      transform: translateY(-2px);
-    }
-
-    /* Footer */
-    footer {
-      background: #111827;
-      color: white;
-      padding: 3rem 0;
-      text-align: center;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .hero-section {
-        padding: 3rem 0;
-      }
-
-      .impact-stats {
-        gap: 1rem;
-      }
-
-      .project-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .impact-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .impact-metrics {
-        grid-template-columns: 1fr;
-      }
-
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-    .btn {
-      width: 100%;
-      max-width: 300px;
-      justify-content: center;
-    }
-
-      .map-container {
-        padding: 2rem;
-      }
-
-      .map-legend {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-      }
-
-      .impact-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .impact-card {
-        padding: 1rem;
-      }
-
-      .impact-stat {
-        font-size: 1.5rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .map-container {
-        padding: 1rem;
-      }
-
-      .impact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .impact-details {
-        padding: 1.5rem;
-      }
-
-      .container {
-        padding: 0 1rem;
-      }
-
-      .project-card {
-        padding: 1.5rem;
-      }
-
-      .success-story {
-        padding: 2rem;
-      }
-
-      .stat-item {
-        min-width: 100px;
-        padding: 0.8rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/script.js" defer></script>
 </head>
 <body>
+  <!-- Navigation -->
   <nav>
-    <div class="nav-container">
+    <div class="container nav-container">
       <a href="index.html" class="logo"><span style="font-size:1.3em;vertical-align:middle;">🌍</span> Tech4Village</a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="project.html" class="active">Project</a></li>
-        <li><a href="involved.html">Get Involved</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="donate.html">Donate</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
-      <div class="mobile-menu">☰</div>
+      <div class="mobile-menu" id="mobileMenuBtn">☰</div>
     </div>
   </nav>
 
@@ -767,17 +120,46 @@
             </div>
           </div>
           
-          <div class="success-story">
+          <div class="stories-carousel">
+            <div class="success-story story-slide active">
             <h4>Success Story</h4>
             <p class="testimonial-text">"The laptop helped me research and win our regional science fair. Now I'm teaching other students how to use computers!"</p>
             <p class="testimonial-author">— Grace M., Student, Kiambu County</p>
+            </div>
+
+            <div class="success-story story-slide">
+              <h4>Success Story</h4>
+              <p class="testimonial-text">"With the Wi-Fi hotspot, our entire school now has access to online resources. Students are more engaged and our test scores have improved significantly."</p>
+              <p class="testimonial-author">— Mr. James O., Headteacher, Nakuru County</p>
+            </div>
+
+            <div class="success-story story-slide">
+              <h4>Success Story</h4>
+              <p class="testimonial-text">"I learned coding through the laptop program. Now I'm building websites for local businesses and earning money to support my education."</p>
+              <p class="testimonial-author">— John K., Student, Machakos County</p>
+            </div>
+
+            <div class="success-story story-slide">
+              <h4>Success Story</h4>
+              <p class="testimonial-text">"As a girl in tech, the mentorship program gave me confidence. I'm now leading our school's tech club and inspiring other girls to join STEM."</p>
+              <p class="testimonial-author">— Sarah N., Student, Meru County</p>
+            </div>
+
+            <div class="success-story story-slide">
+              <h4>Success Story</h4>
+              <p class="testimonial-text">"The devices don't just help students - they help entire families. Parents are learning digital skills from their children. It's transforming our village."</p>
+              <p class="testimonial-author">— Elder Mutua, Community Leader, Kitui County</p>
+            </div>
+
+            <div class="success-story story-slide">
+              <h4>Success Story</h4>
+              <p class="testimonial-text">"Through Tech4Village's program, I discovered my passion for technology. I'm now preparing to study Computer Science at university."</p>
+              <p class="testimonial-author">— Michael W., Student, Nyeri County</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Impact Map Section -->
-
 
     <!-- Call to Action -->
     <section class="cta-section">
@@ -787,11 +169,11 @@
           <p>Help us bridge the digital divide and create opportunities for the next generation of Kenyan innovators.</p>
           
           <div class="cta-buttons">
-            <a href="#" class="btn btn-primary">
+            <a href="donate.html" class="btn btn-primary">
               <span>📱</span>
               Donate a Device
             </a>
-            <a href="#" class="btn btn-secondary">
+            <a href="javascript:void(0)" onclick="bookCall()" class="btn btn-secondary">
               <span>📅</span>
               Book a Call
             </a>
@@ -801,164 +183,34 @@
     </section>
   </div>
 
+  <!-- Footer -->
   <footer>
-    <div class="container footer-content">
-      <div class="footer-section">
-        <h3>Tech4Village</h3>
-        <p>Bridging the digital divide in rural Kenya through technology, education, and community empowerment.</p>
-        <div class="social-links">
-          <a href="#" aria-label="Facebook">📘</a>
-          <a href="#" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="X">X</a>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>Tech4Village</h3>
+                <p>Bridging the digital divide in rural Kenya through technology, education, and community empowerment.</p>
+                <div class="social-links">
+          <a href="#" title="Facebook">📘</a>
+          <a href="#" title="Instagram">📷</a>
+          <a href="#" title="X">X</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="about.html">About Us</a></p>
+                <p><a href="project.html">Our Projects</a></p>
+                <p><a href="blog.html">Blog</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <p><a href="contact.html">Contact Us</a></p>
+        <p><a href="javascript:void(0)" onclick="bookCall()">Book a Call</a></p>
+        <p><a href="javascript:void(0)" onclick="showDonationOptions()">Donate</a></p>
+            </div>
         </div>
-      </div>
-      <div class="footer-section">
-        <h3>Quick Links</h3>
-        <p><a href="about.html">About Us</a></p>
-        <p><a href="project.html">Our Projects</a></p>
-        <p><a href="involved.html">Get Involved</a></p>
-        <p><a href="blog.html">Blog</a></p>
-      </div>
-      <div class="footer-section">
-        <h3>Support</h3>
-        <p><a href="contact.html">Contact Us</a></p>
-        <p><a href="donate.html">Donate</a></p>
-      </div>
-    </div>
     <div style="border-top:1px solid #666;padding:2rem 0;text-align:center;">
       <p>&copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology accessible for all.</p>
-    </div>
+        </div>
   </footer>
-  <style>
-    .footer-content {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-    .footer-section {
-      flex: 1 1 200px;
-      min-width: 180px;
-      margin-bottom: 1.5rem;
-    }
-    @media (max-width: 700px) {
-      .footer-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.2rem;
-      }
-      .footer-section {
-        min-width: 0;
-        margin-bottom: 1.2rem;
-      }
-      .footer-section:first-child {
-        grid-column: 1 / -1;
-      }
-    }
-  </style>
-  <script>
-    // Add smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-
-    // Add intersection observer for animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    // Observe project cards
-    document.querySelectorAll('.project-card').forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(card);
-    });
-
-    // Counter animation for stats
-    function animateCounter(element, start, end, duration) {
-      let startTime = null;
-      const step = (timestamp) => {
-        if (!startTime) startTime = timestamp;
-        const progress = Math.min((timestamp - startTime) / duration, 1);
-        const current = Math.floor(progress * (end - start) + start);
-        element.textContent = current + (end >= 100 ? '+' : '');
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        }
-      };
-      requestAnimationFrame(step);
-    }
-
-    // Add map interaction
-    document.querySelectorAll('.location-marker').forEach(marker => {
-      marker.addEventListener('mouseenter', function() {
-        const location = this.getAttribute('data-location');
-        // You could add a tooltip here showing location details
-        this.style.filter = 'drop-shadow(0 2px 4px rgba(59, 130, 246, 0.5))';
-      });
-      
-      marker.addEventListener('mouseleave', function() {
-        this.style.filter = 'none';
-      });
-    });
-
-    // Animate map markers on scroll
-    const mapObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const markers = entry.target.querySelectorAll('.location-marker');
-          markers.forEach((marker, index) => {
-            setTimeout(() => {
-              marker.style.opacity = '1';
-              marker.style.transform = 'scale(1)';
-            }, index * 200);
-          });
-        }
-      });
-    });
-
-    const mapSection = document.querySelector('.kenya-map');
-    if (mapSection) {
-      // Set initial state
-      mapSection.querySelectorAll('.location-marker').forEach(marker => {
-        marker.style.opacity = '0';
-        marker.style.transform = 'scale(0)';
-        marker.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      });
-      
-      mapObserver.observe(mapSection);
-    }
-
-    // Animate counters when they come into view
-    const statObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const number = entry.target.querySelector('.stat-number');
-          const finalNumber = parseInt(number.textContent.replace('+', ''));
-          animateCounter(number, 0, finalNumber, 2000);
-          statObserver.unobserve(entry.target);
-        }
-      });
-    });
-
-    document.querySelectorAll('.stat-item').forEach(item => {
-      statObserver.observe(item);
-    });
-  </script>
 </body>
 </html>
