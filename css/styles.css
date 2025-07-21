@@ -369,7 +369,6 @@ footer {
 } */
 @media (max-width:800px) {
   .hero-container { grid-template-columns:1fr; }
-  /* On mobile, switch hero text & buttons to BLACK */
   .hero-content h1,
   .hero-subtitle,
   .hero-quote,
@@ -395,7 +394,7 @@ footer {
   }
   .hero-container {
     display: block;
-    padding-top: 70px;
+    padding-top: 10px;
     position: relative;
     z-index: 2;
   }
@@ -488,7 +487,7 @@ footer {
     }
 
     /* Mobile Responsiveness */
-    @media (max-width: 768px) {
+    @media (max-width: 800px) {
       .container {
         padding: 0 20px;
       }
@@ -516,7 +515,7 @@ footer {
       }
 
             .hero {
-                padding: 100px 0 60px;
+                padding: 20px 0 60px;
                 background-image: url('images/hero.jpeg');
                 background-size: cover;
                 background-position: center;
@@ -1067,6 +1066,36 @@ footer {
     right: 20px;
     font-size: 1.5rem;
     padding: 10px;
+  }
+}
+
+/* Responsive, always-on hover effect for timeline items */
+.timeline-item:hover, .timeline-item:focus {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(102, 126, 234, 0.25), 0 2px 8px rgba(0,0,0,0.07);
+  background: #fff !important;
+  z-index: 2;
+}
+
+@media (max-width: 800px) {
+  .timeline-item:hover, .timeline-item:focus {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 8px 18px rgba(102, 126, 234, 0.18), 0 1px 4px rgba(0,0,0,0.05);
+    background: #fff !important;
+  }
+}
+@media (max-width: 480px) {
+  .timeline-item:hover, .timeline-item:focus {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.13), 0 1px 2px rgba(0,0,0,0.03);
+    background: #fff !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .timeline-item .timeline-details {
+    display: block !important;
+    animation: none !important;
   }
 }
 
