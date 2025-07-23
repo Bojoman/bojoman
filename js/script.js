@@ -1,379 +1,394 @@
-// Mobile menu toggle
-const mobileMenu = document.querySelector('.mobile-menu');
-const navLinks = document.querySelector('.nav-links');
-if (mobileMenu && navLinks) {
-  mobileMenu.addEventListener('click', function (e) {
+/* ═══════════════════════════════════════════════════════════
+   Tech4Village - Optimized Unified JavaScript
+   ═══════════════════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────────────────
+   Utility helpers
+   ─────────────────────────────────────────────────────────── */
+const $ = sel => document.querySelector(sel);
+const $$ = sel => document.querySelectorAll(sel);
+const on = (el, ev, fn, opt) => el && el.addEventListener(ev, fn, opt);
+const openNew = url => window.open(url, '_blank');
+
+/* ───────────────────────────────────────────────────────────
+   Mobile navigation
+   ─────────────────────────────────────────────────────────── */
+(() => {
+  const burger = $('.mobile-menu');
+  const links = $('.nav-links');
+  if (!burger || !links) return;
+
+  on(burger, 'click', e => {
     e.stopPropagation();
-    navLinks.classList.toggle('active');
+    links.classList.toggle('active');
   });
-  // Close mobile menu when clicking outside
-  document.addEventListener('click', function (e) {
+
+  on(document, 'click', e => {
     const target = e.target;
-    if (!navLinks.contains(target instanceof Node ? target : null) && !mobileMenu.contains(target instanceof Node ? target : null)) {
-      navLinks.classList.remove('active');
+    if (!links.contains(target) && !burger.contains(target)) {
+      links.classList.remove('active');
     }
   });
-}
+})();
 
-// Timeline item click to expand details (works for mobile/touch)
-if (document.querySelectorAll('.timeline-item').length) {
-  document.querySelectorAll('.timeline-item').forEach(item => {
-    item.addEventListener('click', function () {
-      this.classList.toggle('expanded');
+/* ───────────────────────────────────────────────────────────
+   Timeline interactions
+   ─────────────────────────────────────────────────────────── */
+$$('.timeline-item').forEach(item => {
+  on(item, 'click', () => item.classList.toggle('expanded'));
+  
+  on(item, 'touchstart', e => {
+    e.preventDefault();
+    
+    if (item.classList.contains('expanded')) {
+      item.classList.remove('expanded');
+      return;
+    }
+    
+    // Collapse other expanded items
+    $$('.timeline-item').forEach(other => {
+      if (other !== item) other.classList.remove('expanded');
     });
-  });
-}
+    
+    item.classList.add('expanded');
+  }, { passive: false });
+});
 
-// Photo gallery lightbox
-if (document.querySelectorAll('.gallery-item img').length) {
-  document.querySelectorAll('.gallery-item img').forEach(img => {
-    img.addEventListener('click', function () {
-      const lightbox = document.getElementById('lightbox');
-      if (!lightbox) return;
-      const lightboxImg = lightbox.querySelector('.lightbox-img');
-      const lightboxCaption = lightbox.querySelector('.lightbox-caption');
-      if (lightboxImg && lightboxCaption) {
-        if (lightboxImg instanceof HTMLImageElement) {
-          lightboxImg.src = this.src;
-        }
-        lightboxCaption.textContent = this.alt;
+/* ───────────────────────────────────────────────────────────
+   Gallery lightbox
+   ─────────────────────────────────────────────────────────── */
+(() => {
+  const lightbox = $('#lightbox');
+  if (!lightbox) return;
+  
+  const img = lightbox.querySelector('.lightbox-img');
+  const caption = lightbox.querySelector('.lightbox-caption');
+  const closeBtn = lightbox.querySelector('.lightbox-close');
+
+  // Open lightbox
+  $$('.gallery-item img').forEach(pic => {
+    on(pic, 'click', () => {
+      if (img && caption) {
+        img.src = pic.src;
+        caption.textContent = pic.alt;
         lightbox.classList.add('active');
       }
     });
   });
-}
 
-// Close lightbox
-const lightboxClose = document.querySelector('.lightbox-close');
-if (lightboxClose) {
-  lightboxClose.addEventListener('click', function () {
-    const lightbox = document.getElementById('lightbox');
-    if (lightbox) lightbox.classList.remove('active');
+  // Close lightbox
+  const closeLightbox = () => lightbox.classList.remove('active');
+  
+  on(closeBtn, 'click', closeLightbox);
+  on(lightbox, 'click', e => {
+    if (e.target === lightbox) closeLightbox();
   });
-}
+})();
 
-// Close lightbox on background click
-const lightboxEl = document.getElementById('lightbox');
-if (lightboxEl) {
-  lightboxEl.addEventListener('click', function (e) {
-    if (e.target === this) {
-      this.classList.remove('active');
-    }
-  });
-}
+/* ───────────────────────────────────────────────────────────
+   Universal counter animation (handles numbers & "+" suffix)
+   ─────────────────────────────────────────────────────────── */
+function animateCounter(el, duration = 2000) {
+  const raw = el.textContent.trim();
+  const hasPlus = raw.endsWith('+');
+  const target = parseInt(raw.replace(/[^\d]/g, '')) || 0;
 
-document.addEventListener('DOMContentLoaded', function () {
-  // Handle timeline items touch/click events
-  const timelineItems = document.querySelectorAll('.timeline-item');
-
-  timelineItems.forEach(item => {
-    item.addEventListener('touchstart', function (e) {
-      e.preventDefault();
-
-      // If this item is already expanded, collapse it
-      if (this.classList.contains('expanded')) {
-        this.classList.remove('expanded');
-        return;
-      }
-
-      // Collapse any other expanded items
-      timelineItems.forEach(otherItem => {
-        if (otherItem !== this) {
-          otherItem.classList.remove('expanded');
-        }
-      });
-
-      // Expand this item
-      this.classList.add('expanded');
-    });
-  });
-});
-
-// Impact Counter Animation
-function animateCounter(element, target) {
   let current = 0;
-  const duration = 2000; // 2 seconds
   const step = target / (duration / 16);
 
   function update() {
     current += step;
     if (current < target) {
-      element.textContent = Math.round(current);
+      el.textContent = Math.round(current) + (hasPlus ? '+' : '');
       requestAnimationFrame(update);
     } else {
-      element.textContent = target;
+      el.textContent = target + (hasPlus ? '+' : '');
+      el.classList.add('done');
     }
   }
 
   update();
 }
 
-// Intersection Observer for counter animation
-document.addEventListener('DOMContentLoaded', function () {
-  const observer = new IntersectionObserver((entries) => {
+/* Hero counters (immediate animation) */
+$$('.project-hero-section .project-stat-number, .blog-hero .blog-stat-number')
+  .forEach(el => animateCounter(el));
+
+/* Impact counters (scroll-triggered) */
+(() => {
+  const impactSection = $('.impact-counter');
+  if (!impactSection) return;
+
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Animate each counter
-        const counters = entry.target.querySelectorAll('[id$="-counter"]');
-        counters.forEach(counter => {
-          const target = parseInt(counter.textContent || '0');
-          animateCounter(counter, target);
+        entry.target.querySelectorAll('[id$="-counter"]').forEach(counter => {
+          animateCounter(counter);
         });
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.5 });
 
-  // Observe the counter section
-  const counterSection = document.querySelector('.impact-counter');
-  if (counterSection instanceof Element) {
-    observer.observe(counterSection);
-  }
+  observer.observe(impactSection);
+})();
 
-  // Calendly Integration
-  const bookCallButtons = document.querySelectorAll('#bookCallBtn, [onclick="bookCall()"]');
-  bookCallButtons.forEach(button => {
-    button.addEventListener('click', function (e) {
-      e.preventDefault();
-      window.open('https://calendly.com/denomath4/30min', '_blank');
-    });
-  });
-});
-
-// Project Page Animations and Interactions
-
-// @ts-ignore
-/* ░░ Counter animator that keeps trailing "+" ░░ */
-function animateCounter(el, duration = 2000) {
-  const raw = el.textContent.trim();
-  const hasPlus = raw.endsWith('+');
-  const target = parseInt(raw.replace('+', '')) || 0;
-
-  let cur = 0, step = target / (duration / 16);
-
-  (function tick() {
-    cur += step;
-    if (cur < target) {
-      el.textContent = Math.round(cur) + (hasPlus ? '+' : '');
-      requestAnimationFrame(tick);
-    } else {
-      el.textContent = target + (hasPlus ? '+' : '');
-      el.classList.add('done');
-    }
-  })();
-}
-
-/* ░░ Blog‑hero counters  ░░ */
-document.querySelectorAll('.blog-hero        .blog-stat-number')
-  .forEach(el => animateCounter(el));
-
-/* ░░ Hero stat counters ░░ */
-document.querySelectorAll('.project-hero-section .project-stat-number')
-  // @ts-ignore
-  .forEach(num => animateCounter(num, parseInt(num.textContent) || 0));
-
-/* ░░ Impact‑section counters ░░ */
-const impactObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.querySelectorAll('[id$="-counter"]').forEach(c => {
-        // @ts-ignore
-        animateCounter(c, parseInt(c.textContent) || 0);
-      });
-      impactObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-const impactSection = document.querySelector('.impact-counter');
-if (impactSection) impactObserver.observe(impactSection);
-
-/* ░░ Project‑cards & stat reveal ░░ */
-const revealOpt = { threshold: 0.1, rootMargin: '0px 0px -50px' };
-const revealObs = new IntersectionObserver((ents, obs) => {
-  ents.forEach(ent => {
-    if (ent.isIntersecting) {
-      // @ts-ignore
-      ent.target.style.opacity = '1';
-      // @ts-ignore
-      ent.target.style.transform = 'translateY(0)';
-      obs.unobserve(ent.target);
-    }
-  });
-}, revealOpt);
-document.querySelectorAll('.project-card, .stat-item')
-  .forEach(el => {
-    // @ts-ignore
-    el.style.opacity = '0';
-    // @ts-ignore
-    el.style.transform = 'translateY(20px)';
-    // @ts-ignore
-    el.style.transition = 'opacity .6s ease, transform .6s ease';
-    revealObs.observe(el);
-  });
-
-/* ░░ Success‑stories carousel ░░ */
-const carousel = document.querySelector('.stories-carousel');
-if (carousel) {
-  const slides = carousel.querySelectorAll('.story-slide');
-  const prevBtn = carousel.querySelector('.story-nav.prev');
-  const nextBtn = carousel.querySelector('.story-nav.next');
-  let cur = 0, timer;
-  const DELAY = 8000;
-  const show = i => {
-    slides[cur].classList.remove('active');
-    cur = (i + slides.length) % slides.length;
-    slides[cur].classList.add('active');
-  };
-  const next = () => show(cur + 1), prev = () => show(cur - 1);
-  const start = () => timer = setInterval(next, DELAY), stop = () => clearInterval(timer);
-  // @ts-ignore
-  if (prevBtn) prevBtn.onclick = () => { prev(); start(); };
-  // @ts-ignore
-  if (nextBtn) nextBtn.onclick = () => { next(); start(); };
-  carousel.addEventListener('mouseenter', stop);
-  carousel.addEventListener('mouseleave', start);
-  carousel.addEventListener('focusin', stop);
-  carousel.addEventListener('focusout', start);
-  start();
-}
-
-/* ░░ Smooth‑scroll local anchors ░░ */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    // @ts-ignore
-    document.querySelector(a.getAttribute('href'))
-      ?.scrollIntoView({ behavior: 'smooth' });
-  });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-  // Add smooth scrolling
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
-    });
-  });
-
-  // Add intersection observer for animations
+/* ───────────────────────────────────────────────────────────
+   Reveal-on-scroll animations
+   ─────────────────────────────────────────────────────────── */
+(() => {
   const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
   };
 
-  const observer = new IntersectionObserver((entries) => {
+  const revealObserver = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         // @ts-ignore
-        entry.target.style.opacity = '1';
-        // @ts-ignore
-        entry.target.style.transform = 'translateY(0)';
+        Object.assign(entry.target.style, {
+          opacity: '1',
+          transform: 'translateY(0)'
+        });
+        obs.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  // Observe project cards
-  document.querySelectorAll('.project-card').forEach(card => {
-    // @ts-ignore
-    card.style.opacity = '0';
-    // @ts-ignore
-    card.style.transform = 'translateY(20px)';
-    // @ts-ignore
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(card);
+  // Initialize and observe elements
+  const revealElements = '.project-card, .stat-item, .blog-featured-post, .blog-post, .blog-sidebar-section, .blog-newsletter';
+  
+  $$(revealElements).forEach(el => {
+    Object.assign(el.style, {
+      opacity: '0',
+      transform: 'translateY(20px)',
+      transition: 'opacity 0.6s ease, transform 0.6s ease'
+    });
+    revealObserver.observe(el);
   });
-});
+})();
 
-// Success Stories carousel with Prev / Next & pause
-const carousel2 = document.querySelector('.stories-carousel');
-if (carousel2) {
-  const slides = carousel2.querySelectorAll('.story-slide');
-  const prevBtn = carousel2.querySelector('.story-nav.prev');
-  const nextBtn = carousel2.querySelector('.story-nav.next');
-  let current = 0;
+/* ───────────────────────────────────────────────────────────
+   Success stories carousel
+   ─────────────────────────────────────────────────────────── */
+(() => {
+  const carousel = $('.stories-carousel');
+  if (!carousel) return;
+
+  const slides = carousel.querySelectorAll('.story-slide');
+  const prevBtn = carousel.querySelector('.story-nav.prev');
+  const nextBtn = carousel.querySelector('.story-nav.next');
+  
+  let currentIndex = 0;
   let timer;
-  const DELAY = 8000;
+  const AUTO_PLAY_DELAY = 8000;
 
-  function goTo(i) {
-    slides[current].classList.remove('active');
-    current = (i + slides.length) % slides.length;
-    slides[current].classList.add('active');
+  function goToSlide(index) {
+    slides[currentIndex].classList.remove('active');
+    currentIndex = (index + slides.length) % slides.length;
+    slides[currentIndex].classList.add('active');
   }
-  const next = () => goTo(current + 1);
-  const prev = () => goTo(current - 1);
 
-  function start() { timer = setInterval(next, DELAY); }
-  function stop() { clearInterval(timer); }
+  const nextSlide = () => goToSlide(currentIndex + 1);
+  const prevSlide = () => goToSlide(currentIndex - 1);
+  
+  const startAutoPlay = () => timer = setInterval(nextSlide, AUTO_PLAY_DELAY);
+  const stopAutoPlay = () => clearInterval(timer);
 
-  // Button events
-  if (nextBtn) nextBtn.addEventListener('click', () => { next(); start(); });
-  if (prevBtn) prevBtn.addEventListener('click', () => { prev(); start(); });
+  // Navigation controls
+  on(nextBtn, 'click', () => { nextSlide(); startAutoPlay(); });
+  on(prevBtn, 'click', () => { prevSlide(); startAutoPlay(); });
 
-  // Pause while user is hovering or using keyboard focus
-  carousel2.addEventListener('mouseenter', stop);
-  carousel2.addEventListener('mouseleave', start);
-  carousel2.addEventListener('focusin', stop);
-  carousel2.addEventListener('focusout', start);
+  // Pause on hover/focus
+  ['mouseenter', 'focusin'].forEach(event => 
+    on(carousel, event, stopAutoPlay));
+  ['mouseleave', 'focusout'].forEach(event => 
+    on(carousel, event, startAutoPlay));
 
-  start();
-}
+  startAutoPlay();
+})();
 
-// Common Functions
-// @ts-ignore
-window.bookCall = function () {
-  window.open('https://calendly.com/denomath4/30min', '_blank');
-};
-
-// @ts-ignore
-window.showDonationOptions = function () {
-  window.location.href = 'donate.html';
-};
-
-/* ░░ Newsletter AJAX to FormSubmit (no redirect) ░░ */
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('.blog-newsletter-form');
-  if (!form) return;
-  const ENDPOINT = 'https://formsubmit.co/ajax/bojoman05@gmail.com';
-  form.addEventListener('submit', async (e) => {
+/* ───────────────────────────────────────────────────────────
+   Smooth scrolling for anchor links
+   ─────────────────────────────────────────────────────────── */
+$$('a[href^="#"]').forEach(anchor => {
+  on(anchor, 'click', e => {
     e.preventDefault();
-    // @ts-ignore
-    const data = new FormData(form);
-    try {
-      const res = await fetch(ENDPOINT, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        // @ts-ignore
-        form.reset();
-        toast('🎉 Thanks for subscribing!');
-      } else {
-        toast('⚠️ Something went wrong. Please try again.');
-      }
-    } catch {
-      toast('⚠️ Network error. Please try later.');
+    const target = $(anchor.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
     }
   });
-  /* mini helper */
-  function toast(msg) {
-    const note = document.createElement('div');
-    note.textContent = msg;
-    note.style.cssText = `
-      margin-top:1rem; padding:.75rem 1rem;
-      background:#059669; color:#fff; border-radius:8px;
-      text-align:center; font-weight:600; 
-      animation:fadein .4s ease, fadeout .4s ease 3.6s forwards`;
-    // @ts-ignore
-    form.after(note);
-    setTimeout(() => note.remove(), 4000);
-  }
 });
 
-/* ░░ Full‑Post Data ░░ */
+/* ───────────────────────────────────────────────────────────
+   Navigation background on scroll
+   ─────────────────────────────────────────────────────────── */
+(() => {
+  const nav = $('nav');
+  if (!nav) return;
+
+  const updateNavBackground = () => {
+    if (window.scrollY > 50) {
+      Object.assign(nav.style, {
+        background: 'rgba(255,255,255,0.98)',
+        backdropFilter: 'blur(20px)'
+      });
+    } else {
+      Object.assign(nav.style, {
+        background: 'rgba(255,255,255,0.95)',
+        backdropFilter: 'blur(10px)'
+      });
+    }
+  };
+
+  on(window, 'scroll', updateNavBackground);
+})();
+
+/* ───────────────────────────────────────────────────────────
+   Calendly booking integration
+   ─────────────────────────────────────────────────────────── */
+// @ts-ignore
+window.bookCall = () => openNew('https://calendly.com/denomath4/30min');
+
+$$('#bookCallBtn, [onclick="bookCall()"]').forEach(btn => {
+  on(btn, 'click', e => {
+    e.preventDefault();
+    // @ts-ignore
+    window.bookCall();
+  });
+});
+
+/* ───────────────────────────────────────────────────────────
+   Donation page tab system
+   ─────────────────────────────────────────────────────────── */
+(() => {
+  const tabs = $$('.donation-tab');
+  const sections = $$('.donation-content');
+  if (!tabs.length) return;
+
+  const cleanTabName = text => 
+    text.replace(/[^a-z ]/gi, '').trim().split(' ').pop().toLowerCase();
+
+  const activateTab = tabName => {
+    tabs.forEach(btn => 
+      btn.classList.toggle('active', btn.dataset.tab === tabName));
+    sections.forEach(section => 
+      section.classList.toggle('active', section.id === `${tabName}-donation`));
+  };
+
+  // Initialize tabs
+  tabs.forEach(btn => {
+    if (!btn.dataset.tab) {
+      btn.dataset.tab = cleanTabName(btn.textContent);
+    }
+    on(btn, 'click', () => activateTab(btn.dataset.tab));
+  });
+
+  // Activate first tab by default
+  const defaultTab = ($('.donation-tab.active') || tabs[0]).dataset.tab;
+  activateTab(defaultTab);
+
+  // Global function for external use
+  // @ts-ignore
+  window.showDonationTab = activateTab;
+})();
+
+/* ───────────────────────────────────────────────────────────
+   FormSubmit AJAX integration
+   ─────────────────────────────────────────────────────────── */
+(() => {
+  const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/bojoman05@gmail.com';
+
+  async function submitForm(form, extraData = {}) {
+    const successMsg = form.querySelector('.success-message');
+    const errorMsg = form.querySelector('.error-message');
+    const spinner = form.querySelector('.loading-spinner');
+
+    // Reset message states
+    [successMsg, errorMsg].forEach(el => {
+      if (el) el.style.display = 'none';
+    });
+    
+    if (spinner) spinner.classList.add('spinning');
+
+    const formData = new FormData(form);
+    Object.entries(extraData).forEach(([key, value]) => 
+      formData.set(key, value));
+
+    try {
+      const response = await fetch(FORMSUBMIT_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.reset();
+        if (successMsg) successMsg.style.display = 'block';
+      } else {
+        if (errorMsg) errorMsg.style.display = 'block';
+      }
+    } catch (error) {
+      if (errorMsg) errorMsg.style.display = 'block';
+    } finally {
+      if (spinner) spinner.classList.remove('spinning');
+    }
+  }
+
+  // Newsletter form
+  const newsletterForm = $('.blog-newsletter-form');
+  if (newsletterForm) {
+    on(newsletterForm, 'submit', e => {
+      e.preventDefault();
+      submitForm(newsletterForm);
+    });
+  }
+
+  // Donation forms
+  ['#device-form', '#volunteer-form'].forEach(selector => {
+    const form = $(selector);
+    if (form) {
+      on(form, 'submit', e => {
+        e.preventDefault();
+        const subject = form.id === 'device-form' 
+          ? 'New Device Donation' 
+          : 'New Volunteer Application';
+        submitForm(form, { _subject: subject });
+      });
+    }
+  });
+
+  // Contact form with inline spinner
+  const contactForm = $('.contact-form form');
+  if (contactForm) {
+    // Create and append spinner
+    const spinner = document.createElement('span');
+    spinner.className = 'loading-spinner';
+    Object.assign(spinner.style, {
+      display: 'none',
+      marginLeft: '.5rem',
+      width: '14px',
+      height: '14px',
+      border: '2px solid #fff',
+      borderRightColor: 'transparent',
+      borderRadius: '50%',
+      animation: 'spin .6s linear infinite'
+    });
+    
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.appendChild(spinner);
+
+    on(contactForm, 'submit', e => {
+      e.preventDefault();
+      submitForm(contactForm, { _subject: 'Contact Form Message' });
+    });
+  }
+})();
+
+/* ───────────────────────────────────────────────────────────
+   Blog modal system with full post data
+   ─────────────────────────────────────────────────────────── */
 const fullPosts = {
   "tradition-to-tech": {
     title: "🎙️ From Tradition to Tech: Why This Moment Sparked My Mission",
@@ -455,321 +470,164 @@ const fullPosts = {
   }
 };
 
-/* ░░ Modal helpers ░░ */
-function openFullPost(key) {
+// @ts-ignore
+window.openFullPost = key => {
   const post = fullPosts[key];
-  const modal = document.getElementById("blog-fullPostModal");
+  const modal = $('#blog-fullPostModal');
+  const content = $('#blog-fullPostContent');
+  
+  if (!post || !modal || !content) return;
 
-  const content = `
+  content.innerHTML = `
     <article class="blog-modal-body">
       <img src="${post.image}" alt="${post.title}" class="blog-modal-image" />
       <h1>${post.title}</h1>
-
       <div class="blog-modal-meta">
         <span class="blog-post-tag">${post.tag}</span>
         <span>${post.date}</span>
         <span>${post.readTime}</span>
       </div>
-
       ${post.content}
-
       <hr style="margin:2rem 0;border:none;border-top:1px solid var(--border);" />
       <p><em>— Kaggwa Karenge<br>Founder – Tech4Village<br>📧 tech4village@gmail.com<br>💸 Donate: CashApp $karenge | M‑Pesa 0722961906</em></p>
     </article>
   `;
 
-  // @ts-ignore
-  document.getElementById("blog-fullPostContent").innerHTML = content;
-  // @ts-ignore
-  modal.style.display = "block";
-  // @ts-ignore
-  modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-}
+  modal.style.display = 'block';
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+};
 
-function closeFullPost() {
-  const modal = document.getElementById("blog-fullPostModal");
-  // @ts-ignore
-  modal.style.display = "none";
-  // @ts-ignore
-  modal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-}
+// @ts-ignore
+window.closeFullPost = () => {
+  const modal = $('#blog-fullPostModal');
+  if (!modal) return;
+  
+  modal.style.display = 'none';
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+};
 
-/* ░░ Counter Animation ░░ */
-window.addEventListener("load", () => {
-  document.querySelectorAll('[id$="-counter"]').forEach((el) => {
-    // @ts-ignore
-    const target = +el.textContent;
-    el.textContent = "0";
-    let count = 0;
-    const step = Math.ceil(target / 100);
+// Close modal on Escape key
+on(document, 'keydown', e => {
+  // @ts-ignore
+  if (e.key === 'Escape') window.closeFullPost();
+});
 
-    const timer = setInterval(() => {
-      count += step;
-      if (count >= target) {
-        // @ts-ignore
-        el.textContent = target;
-        clearInterval(timer);
-      } else {
-        // @ts-ignore
-        el.textContent = count;
-      }
-    }, 20);
+/* ───────────────────────────────────────────────────────────
+   Advanced UI enhancements
+   ─────────────────────────────────────────────────────────── */
+
+// Copy to clipboard utility
+// @ts-ignore
+window.copyText = text => {
+  navigator.clipboard?.writeText(text).then(() => {
+    // Create temporary feedback
+    const feedback = document.createElement('div');
+    feedback.textContent = `Copied: ${text}`;
+    feedback.style.cssText = `
+      position: fixed; top: 20px; right: 20px; z-index: 9999;
+      background: #059669; color: white; padding: 8px 16px;
+      border-radius: 4px; font-size: 14px;
+      animation: slideIn 0.3s ease, slideOut 0.3s ease 2s forwards;
+    `;
+    document.body.appendChild(feedback);
+    setTimeout(() => feedback.remove(), 2500);
+  }).catch(() => {
+    alert(`Copied: ${text}`);
   });
-});
+};
 
-/* ░░ Smooth Scroll (local anchors) ░░ */
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) target.scrollIntoView({ behavior: "smooth" });
-  });
-});
-
-/* ░░ Nav background on scroll ░░ */
-window.addEventListener("scroll", () => {
-  const nav = document.querySelector("nav");
-  if (window.scrollY > 50) {
-    // @ts-ignore
-    nav.style.background = "rgba(255,255,255,0.98)";
-    // @ts-ignore
-    nav.style.backdropFilter = "blur(20px)";
-  } else {
-    // @ts-ignore
-    nav.style.background = "rgba(255,255,255,0.95)";
-    // @ts-ignore
-    nav.style.backdropFilter = "blur(10px)";
-  }
-});
-
-/* ░░ Intersection‑Observer reveal ░░ */
-const revealObserver = new IntersectionObserver(
-  (entries, obs) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        // @ts-ignore
-        entry.target.style.animation = "fadeInUp 0.8s ease-out forwards";
-        obs.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-);
-
-document
-  .querySelectorAll(
-    ".blog-featured-post, .blog-post, .blog-sidebar-section, .blog-newsletter"
-  )
-  .forEach((el) => revealObserver.observe(el));
-
-/* ░░ Type‑writer effect on hero quote ░░ */
-function typeWriter(el, txt, speed = 30) {
-  let i = 0;
-  el.textContent = "";
-  (function type() {
-    if (i < txt.length) {
-      el.textContent += txt[i++];
+// Typewriter effect for hero quotes
+function typeWriter(element, text, speed = 30) {
+  let index = 0;
+  element.textContent = '';
+  
+  function type() {
+    if (index < text.length) {
+      element.textContent += text[index++];
       setTimeout(type, speed);
     }
-  })();
+  }
+  
+  type();
 }
 
-window.addEventListener("load", () => {
-  const quoteEl = document.querySelector(".blog-hero p");
-  if (quoteEl) {
-    const original = quoteEl.textContent;
-    setTimeout(() => typeWriter(quoteEl, original), 500);
-  }
-});
-
-/* ░░ Floating particles in hero ░░ */
-function createParticles() {
-  const hero = document.querySelector(".blog-hero");
+// Floating particles for hero sections
+function createFloatingParticles() {
+  const hero = $('.blog-hero');
   if (!hero) return;
 
-  const style = document.createElement("style");
-  style.textContent = `
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50%     { transform: translateY(-20px); }
-    }
-    @keyframes fadein {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeout {
-      from { opacity: 1; transform: translateY(0); }
-      to   { opacity: 0; transform: translateY(-10px); }
-    }
-  `;
-  document.head.appendChild(style);
-
   for (let i = 0; i < 50; i++) {
-    const p = document.createElement("div");
-    Object.assign(p.style, {
-      position: "absolute",
-      width: "2px",
-      height: "2px",
-      background: "rgba(255,255,255,0.3)",
-      borderRadius: "50%",
+    const particle = document.createElement('div');
+    Object.assign(particle.style, {
+      position: 'absolute',
+      width: '2px',
+      height: '2px',
+      background: 'rgba(255,255,255,0.3)',
+      borderRadius: '50%',
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
       animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
       animationDelay: `${Math.random() * 2}s`
     });
-    hero.appendChild(p);
+    hero.appendChild(particle);
   }
 }
 
-window.addEventListener('load', createParticles);
-
-// Tab switching logic for donation tabs
-function showDonationTab(tab) {
-  document.querySelectorAll('.donation-tab').forEach(btn => btn.classList.remove('active'));
-  document.querySelectorAll('.donation-content').forEach(content => content.classList.remove('active'));
-  if (tab === 'device') {
-    // @ts-ignore
-    document.querySelector('.donation-tab:nth-child(1)').classList.add('active');
-    // @ts-ignore
-    document.getElementById('device-donation').classList.add('active');
-  } else if (tab === 'volunteer') {
-    // @ts-ignore
-    document.querySelector('.donation-tab:nth-child(2)').classList.add('active');
-    // @ts-ignore
-    document.getElementById('volunteer-donation').classList.add('active');
-  } else if (tab === 'money') {
-    // @ts-ignore
-    document.querySelector('.donation-tab:nth-child(3)').classList.add('active');
-    // @ts-ignore
-    document.getElementById('money-donation').classList.add('active');
-  }
-}
-// Copy to clipboard for donation info
-function copyText(text) {
-  navigator.clipboard.writeText(text);
-  alert('Copied: ' + text);
-}
-
-/* ░░ Donate‑page forms → FormSubmit (AJAX, no redirect) ░░ */
-document.addEventListener('DOMContentLoaded', () => {
-
-  const FS_ENDPOINT = 'https://formsubmit.co/ajax/bojoman05@gmail.com';
-
-  // Handle both forms with the same helper
-  ['#device-form', '#volunteer-form'].forEach(sel => {
-    const form = document.querySelector(sel);
-    if (!form) return;
-
-    const spin = form.querySelector('.loading-spinner');
-    const ok = form.querySelector('.success-message');
-    const err = form.querySelector('.error-message');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      // @ts-ignore
-      ok && (ok.style.display = 'none');
-      // @ts-ignore
-      err && (err.style.display = 'none');
-      spin && spin.classList.add('spinning');
-
-      // @ts-ignore
-      const data = new FormData(form);
-      /* add / override meta fields */
-      data.set('_subject',
-        form.id === 'device-form'
-          ? 'New Device Donation'
-          : 'New Volunteer Application');
-
-      try {
-        const res = await fetch(FS_ENDPOINT, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (res.ok) {
-          // @ts-ignore
-          form.reset();
-          // @ts-ignore
-          ok && (ok.style.display = 'block');
-        } else {
-          // @ts-ignore
-          err && (err.style.display = 'block');
-        }
-      } catch (_) {
-        // @ts-ignore
-        err && (err.style.display = 'block');
-      } finally {
-        spin && spin.classList.remove('spinning');
-      }
-    });
-  });
-});
-
-
-/* ░░ Contact‑page form → FormSubmit  (AJAX, no redirect) ░░ */
-document.addEventListener('DOMContentLoaded', () => {
-
-  const FS_ENDPOINT = 'https://formsubmit.co/ajax/bojoman05@gmail.com';
-
-  const contactForm = document.querySelector('.contact-form form');
-  if (!contactForm) return;
-
-  /* optional inline feedback containers */
-  const spinner = document.createElement('span');
-  spinner.className = 'loading-spinner';
-  spinner.style.cssText =
-    'display:none;margin-left:.5rem;width:14px;height:14px;border:2px solid #fff;border-right-color:transparent;border-radius:50%;animation:spin .6s linear infinite;';
-  // @ts-ignore
-  contactForm.querySelector('button[type="submit"]').appendChild(spinner);
-
-  const ok = document.createElement('p');
-  ok.className = 'success-message';
-  ok.textContent = 'Thanks! Your message has been sent.';
-  ok.style.cssText = 'display:none;color:#059669;margin-top:1rem;';
-  contactForm.appendChild(ok);
-
-  const err = document.createElement('p');
-  err.className = 'error-message';
-  err.textContent = 'Oops, something went wrong. Please try again.';
-  err.style.cssText = 'display:none;color:#dc2626;margin-top:1rem;';
-  contactForm.appendChild(err);
-
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    ok.style.display = 'none';
-    err.style.display = 'none';
-    spinner.style.display = 'inline-block';
-
-    // @ts-ignore
-    const data = new FormData(contactForm);
-    data.set('_subject', 'Contact Form Message');
-
-    try {
-      const res = await fetch(FS_ENDPOINT, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (res.ok) {
-        // @ts-ignore
-        contactForm.reset();
-        ok.style.display = 'block';
-      } else {
-        err.style.display = 'block';
-      }
-    } catch (_) {
-      err.style.display = 'block';
-    } finally {
-      spinner.style.display = 'none';
+/* ───────────────────────────────────────────────────────────
+   CSS animations and styles injection
+   ─────────────────────────────────────────────────────────── */
+(() => {
+  const styles = document.createElement('style');
+  styles.textContent = `
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
-  });
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+    .loading-spinner.spinning {
+      display: inline-block !important;
+    }
+  `;
+  document.head.appendChild(styles);
+})();
+
+/* ───────────────────────────────────────────────────────────
+   DOM ready initialization
+   ─────────────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize typewriter effect for hero quotes
+  const heroQuote = $('.blog-hero p');
+  if (heroQuote) {
+    const originalText = heroQuote.textContent;
+    setTimeout(() => typeWriter(heroQuote, originalText), 500);
+  }
+  
+  // Initialize floating particles
+  setTimeout(createFloatingParticles, 100);
 });
 
-/* tiny spinner animation */
-const spinStyle = document.createElement('style');
-spinStyle.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
-document.head.appendChild(spinStyle);
+/* ───────────────────────────────────────────────────────────
+   Global utility functions
+   ─────────────────────────────────────────────────────────── */
+// @ts-ignore
+window.showDonationOptions = () => {
+  window.location.href = 'donate.html';
+};
+
+/* End of unified script */

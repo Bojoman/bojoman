@@ -1,206 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <script src="js/script.js" defer></script>
-    <title>Tech4Village – Home</title>
-    <link rel="icon" type="image/png" href="favicon.png" />
-  </head>
-  <body>
-    <!-- Navigation -->
-    <nav>
-      <div class="container nav-container">
-        <a href="index.html" class="logo"
-          ><span style="font-size: 1.3em; vertical-align: middle">🌍</span>
-          Tech4Village</a
-        >
-        <ul class="nav-links" id="navLinks">
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="project.html">Project</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="donate.html">Donate</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <div class="mobile-menu" id="mobileMenuBtn">☰</div>
-      </div>
-    </nav>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/script.js" defer></script>
+  <title>Tech4Village – Home</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><span style="font-size:1.3em;vertical-align:middle;">🌍</span> Tech4Village</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="project.html">Project</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="mobile-menu" id="mobileMenuBtn">☰</div>
+    </div>
+  </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-container">
-          <div class="hero-content">
-            <h1>Digital Dreams for Rural Kenya</h1>
-            <p class="hero-subtitle">
-              Bridging the digital divide, one device at a time
-            </p>
-            <blockquote class="hero-quote">
-              "I didn't start this to impress People. I started because I saw my
-              cousins walking to school without a phone, while I was researching
-              scholarships from mine. That felt wrong. I wanted to change it."
-              <br />– Kaggwa Karenge, Founder
-            </blockquote>
-            <div class="cta-buttons">
-              <a href="involved.html" class="btn btn-primary"
-                >Donate a Device</a
-              >
-              <a
-                href="javascript:void(0)"
-                id="bookCallBtn"
-                class="btn btn-secondary"
-                >Book a 15‑min Call</a
-              >
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1>Digital Dreams for Rural Kenya</h1>
+          <p class="hero-subtitle">Bridging the digital divide, one device at a time</p>
+          <blockquote class="hero-quote">
+            "I didn't start this to impress People. I started because I saw my cousins walking to school without a phone, while I was researching scholarships from mine. That felt wrong. I wanted to change it."  
+            <br>– Kaggwa Karenge, Founder
+          </blockquote>
+          <div class="cta-buttons">
+            <a href="donate.html" class="btn btn-primary">Donate a Device</a>
+            <a href="javascript:void(0)" id="bookCallBtn" class="btn btn-secondary">Book a 15‑min Call</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="images/hero.jpeg" alt="Kaggwa addressing peers in rural Kenya">
+        </div>
+        <div class="impact-counter">
+          <div class="counter-grid">
+            <div class="counter-item">
+              <h3 id="devices-counter">247</h3>
+              <p>Devices Distributed</p>
             </div>
-          </div>
-          <div class="hero-image">
-            <img
-              src="images/hero.jpeg"
-              alt="Kaggwa addressing peers in rural Kenya"
-            />
-          </div>
-          <div class="impact-counter">
-            <div class="counter-grid">
-              <div class="counter-item">
-                <h3 id="devices-counter">247</h3>
-                <p>Devices Distributed</p>
-              </div>
-              <div class="counter-item">
-                <h3 id="students-counter">50</h3>
-                <p>Students Reached</p>
-              </div>
-              <div class="counter-item">
-                <h3 id="schools-counter">18</h3>
-                <p>Schools Connected</p>
-              </div>
-              <div class="counter-item">
-                <h3 id="villages-counter">12</h3>
-                <p>Villages Impacted</p>
-              </div>
+            <div class="counter-item">
+              <h3 id="students-counter">50</h3>
+              <p>Students Reached</p>
+            </div>
+            <div class="counter-item">
+              <h3 id="schools-counter">18</h3>
+              <p>Schools Connected</p>
+            </div>
+            <div class="counter-item">
+              <h3 id="villages-counter">12</h3>
+              <p>Villages Impacted</p>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Main Content -->
-    <div class="main-content">
-      <div class="container">
-        <section class="section">
-          <h2>Welcome to Tech4Village</h2>
-          <div class="section-content">
-            <p
-              style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem"
-            >
-              A youth‑led initiative providing recycled laptops, routers, and
-              smartphones to underserved youth in rural Kenya.
-            </p>
-            <div class="project-grid">
-              <div class="project-card">
-                <div class="project-icon">💻</div>
-                <h3>Recycled Devices</h3>
-                <p>
-                  Giving laptops, smartphones, and tablets a second life by
-                  refurbishing and distributing them to students who need them
-                  most.
-                </p>
-                <ul class="project-features">
-                  <li>Professional device refurbishment</li>
-                  <li>Quality assurance testing</li>
-                  <li>Pre‑loaded educational software</li>
-                  <li>Basic maintenance training</li>
-                </ul>
-                <div class="project-stats">
-                  <strong>247 devices</strong> refurbished and distributed
-                </div>
-              </div>
-              <div class="project-card">
-                <div class="project-icon">🌐</div>
-                <h3>Internet Access</h3>
-                <p>
-                  Establishing Wi‑Fi hotspots and internet connectivity
-                  solutions to bring the digital world to remote schools and
-                  communities.
-                </p>
-                <ul class="project-features">
-                  <li>Solar‑powered Wi‑Fi hotspots</li>
-                  <li>Satellite internet connections</li>
-                  <li>Network maintenance support</li>
-                  <li>Digital literacy training</li>
-                </ul>
-                <div class="project-stats">
-                  <strong>18 schools</strong> connected to the internet
-                </div>
-              </div>
-              <div class="project-card">
-                <div class="project-icon">👥</div>
-                <h3>Mentorship</h3>
-                <p>
-                  Providing one‑on‑one guidance, coding workshops, and career
-                  counseling to empower the next generation of African tech
-                  leaders.
-                </p>
-                <ul class="project-features">
-                  <li>Weekly coding workshops</li>
-                  <li>Career guidance sessions</li>
-                  <li>Scholarship application support</li>
-                  <li>Peer‑to‑peer learning groups</li>
-                </ul>
-                <div class="project-stats">
-                  <strong>150 students</strong> actively mentored
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
     </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-      <div class="container footer-content">
-        <div class="footer-section">
-          <h3>Tech4Village</h3>
-          <p>
-            Bridging the digital divide in rural Kenya through technology,
-            education, and community empowerment.
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <section class="section">
+        <h2>Welcome to Tech4Village</h2>
+        <div class="section-content">
+          <p style="text-align:center;font-size:1.2rem;margin-bottom:2rem;">
+            A youth‑led initiative providing recycled laptops, routers, and smartphones to underserved youth in rural Kenya.
           </p>
-          <div class="social-links">
-            <a href="#" title="Facebook">📘</a>
-            <a href="#" title="Instagram">📷</a>
-            <a href="#" title="X">X</a>
+          <div class="project-grid">
+            <div class="project-card">
+              <div class="project-icon">💻</div>
+              <h3>Recycled Devices</h3>
+              <p>Giving laptops, smartphones, and tablets a second life by refurbishing and distributing them to students who need them most.</p>
+              <ul class="project-features">
+                <li>Professional device refurbishment</li>
+                <li>Quality assurance testing</li>
+                <li>Pre‑loaded educational software</li>
+                <li>Basic maintenance training</li>
+              </ul>
+              <div class="project-stats">
+                <strong>247 devices</strong> refurbished and distributed
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-icon">🌐</div>
+              <h3>Internet Access</h3>
+              <p>Establishing Wi‑Fi hotspots and internet connectivity solutions to bring the digital world to remote schools and communities.</p>
+              <ul class="project-features">
+                <li>Solar‑powered Wi‑Fi hotspots</li>
+                <li>Satellite internet connections</li>
+                <li>Network maintenance support</li>
+                <li>Digital literacy training</li>
+              </ul>
+              <div class="project-stats">
+                <strong>18 schools</strong> connected to the internet
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-icon">👥</div>
+              <h3>Mentorship</h3>
+              <p>Providing one‑on‑one guidance, coding workshops, and career counseling to empower the next generation of African tech leaders.</p>
+              <ul class="project-features">
+                <li>Weekly coding workshops</li>
+                <li>Career guidance sessions</li>
+                <li>Scholarship application support</li>
+                <li>Peer‑to‑peer learning groups</li>
+              </ul>
+              <div class="project-stats">
+                <strong>150 students</strong> actively mentored
+              </div>
+            </div>
           </div>
         </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <p><a href="about.html">About Us</a></p>
-          <p><a href="project.html">Our Projects</a></p>
-          <p><a href="involved.html">Get Involved</a></p>
-          <p><a href="blog.html">Blog</a></p>
-        </div>
-        <div class="footer-section">
-          <h3>Support</h3>
-          <p><a href="contact.html">Contact Us</a></p>
-          <p>
-            <a href="javascript:void(0)" onclick="bookCall()">Book a Call</a>
-          </p>
-          <p>
-            <a href="javascript:void(0)" onclick="showDonationOptions()"
-              >Donate</a
-            >
-          </p>
+      </section>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>Tech4Village</h3>
+        <p>Bridging the digital divide in rural Kenya through technology, education, and community empowerment.</p>
+        <div class="social-links">
+          <a href="#" title="Facebook">📘</a>
+          <a href="#" title="Instagram">📷</a>
+          <a href="#" title="X">X</a>
         </div>
       </div>
-      <div
-        style="border-top: 1px solid #666; padding: 2rem 0; text-align: center"
-      >
-        <p>
-          &copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology
-          accessible for all.
-        </p>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <p><a href="about.html">About Us</a></p>
+        <p><a href="project.html">Our Projects</a></p>
+        <p><a href="involved.html">Get Involved</a></p>
+        <p><a href="blog.html">Blog</a></p>
       </div>
-    </footer>
-  </body>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <p><a href="contact.html">Contact Us</a></p>
+        <p><a href="javascript:void(0)" onclick="bookCall()">Book a Call</a></p>
+        <p><a href="javascript:void(0)" onclick="showDonationOptions()">Donate</a></p>
+      </div>
+    </div>
+    <div style="border-top:1px solid #666;padding:2rem 0;text-align:center;">
+      <p>&copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology accessible for all.</p>
+    </div>
+  </footer>
+</body>
 </html>
