@@ -1,122 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Contact — Tech4Village</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="js/script.js" defer></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Contact — Tech4Village</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/script.js" defer></script>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="container nav-container">
+        <a href="index.html" class="logo"
+          ><span style="font-size: 1.3em; vertical-align: middle">🌍</span>
+          Tech4Village</a
+        >
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="project.html">Project</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+        <div class="mobile-menu" id="mobileMenuBtn">☰</div>
+      </div>
+    </nav>
 
-</head>
-<body>
-  <!-- Navigation -->
-  <nav>
-    <div class="container nav-container">
-      <a href="index.html" class="logo"><span style="font-size:1.3em;vertical-align:middle;">🌍</span> Tech4Village</a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="project.html">Project</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="donate.html">Donate</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-      </ul>
-      <div class="mobile-menu" id="mobileMenuBtn">☰</div>
-    </div>
-  </nav>
-
-  <div class="main-content">
-    <div class="container">
-      <section class="section" id="contact">
-        <h2 style="text-align:center;margin-bottom:2.5rem;">Get in Touch</h2>
-        <div class="section-content">
-          <div class="contact-grid">
-            <!-- Contact Form -->
-            <div class="contact-form">
-              <h3 style="color:#667eea;margin-bottom:1.2rem;">Send a Message</h3>
-              <form action="https://formspree.io/f/xblkljqa" method="POST">
-                <div class="form-group">
-                  <label for="name" style="font-weight:500;color:#667eea;">Name</label>
-                  <input type="text" id="name" name="name" required style="padding:0.7rem 1rem;border-radius:8px;border:1px solid #d1d5db;font-size:1rem;">
-                </div>
-                <div class="form-group">
-                  <label for="email" style="font-weight:500;color:#667eea;">Email</label>
-                  <input type="email" id="email" name="email" required style="padding:0.7rem 1rem;border-radius:8px;border:1px solid #d1d5db;font-size:1rem;">
-                </div>
-                <div class="form-group">
-                  <label for="subject" style="font-weight:500;color:#667eea;">Subject</label>
-                  <input type="text" id="subject" name="subject" required style="padding:0.7rem 1rem;border-radius:8px;border:1px solid #d1d5db;font-size:1rem;">
-                </div>
-                <div class="form-group">
-                  <label for="message" style="font-weight:500;color:#667eea;">Message</label>
-                  <textarea id="message" name="message" rows="5" required style="padding:0.7rem 1rem;border-radius:8px;border:1px solid #d1d5db;font-size:1rem;"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="margin-top:0.5rem;">Send Message</button>
-              </form>
-            </div>
-            <!-- Contact Info -->
-            <div class="contact-info">
-              <!-- Profile Section -->
-              <div class="profile-section">
-                <img src="images/kaggwa-potrait.jpeg" alt="Kaggwa Karenge portrait">
-                <div class="profile-name">Kaggwa Karenge</div>
-                <div class="profile-title">Founder, Tech4Village</div>
+    <div class="main-content">
+      <div class="container">
+        <section class="section" id="contact">
+          <h2 style="text-align: center; margin-bottom: 2.5rem">
+            Get in Touch
+          </h2>
+          <div class="section-content">
+            <div class="contact-grid">
+              <!-- Contact Form -->
+              <div class="contact-form">
+                <h3 style="color: #667eea; margin-bottom: 1.2rem">
+                  Send a Message
+                </h3>
+                <form action="https://formspree.io/f/xblkljqa" method="POST">
+                  <div class="form-group">
+                    <label for="name" style="font-weight: 500; color: #667eea"
+                      >Name</label
+                    >
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      style="
+                        padding: 0.7rem 1rem;
+                        border-radius: 8px;
+                        border: 1px solid #d1d5db;
+                        font-size: 1rem;
+                      "
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="email" style="font-weight: 500; color: #667eea"
+                      >Email</label
+                    >
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      style="
+                        padding: 0.7rem 1rem;
+                        border-radius: 8px;
+                        border: 1px solid #d1d5db;
+                        font-size: 1rem;
+                      "
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label
+                      for="subject"
+                      style="font-weight: 500; color: #667eea"
+                      >Subject</label
+                    >
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      required
+                      style="
+                        padding: 0.7rem 1rem;
+                        border-radius: 8px;
+                        border: 1px solid #d1d5db;
+                        font-size: 1rem;
+                      "
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label
+                      for="message"
+                      style="font-weight: 500; color: #667eea"
+                      >Message</label
+                    >
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows="5"
+                      required
+                      style="
+                        padding: 0.7rem 1rem;
+                        border-radius: 8px;
+                        border: 1px solid #d1d5db;
+                        font-size: 1rem;
+                      "
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    style="margin-top: 0.5rem"
+                  >
+                    Send Message
+                  </button>
+                </form>
               </div>
-              <h3 style="color:#667eea;margin-bottom:1.2rem;">Contact Information</h3>
-              <div class="contact-item">
-                <div class="contact-icon">📧</div>
-                <div><strong>Email</strong><br><a href="mailto:tech4village@gmail.com" style="color:#764ba2;text-decoration:underline;">tech4village@gmail.com</a></div>
-              </div>
-              <div class="contact-item">
-                <div class="contact-icon">📱</div>
-                <div><strong>WhatsApp</strong><br><a href="https://wa.me/254722961906" style="color:#764ba2;text-decoration:underline;">+254 722 961 906</a></div>
-              </div>
-              <div class="contact-item">
-                <div class="contact-icon">💼</div>
-                <div><strong>For Partnerships</strong><br><a href="mailto:tech4village@gmail.com" style="color:#764ba2;text-decoration:underline;">tech4village@gmail.com</a></div>
-              </div>
-              <div class="donation-box">
-                <h4 style="color:#667eea;margin-bottom:0.7rem;">Quick Donation Info</h4>
-                <p style="margin:0.2rem 0;"><strong>CashApp:</strong> $karenge</p>
-                <p style="margin:0.2rem 0;"><strong>M-Pesa:</strong> 0722961906</p>
+              <!-- Contact Info -->
+              <div class="contact-info">
+                <!-- Profile Section -->
+                <div class="profile-section">
+                  <img
+                    src="images/kaggwa-potrait.jpeg"
+                    alt="Kaggwa Karenge portrait"
+                  />
+                  <div class="profile-name">Kaggwa Karenge</div>
+                  <div class="profile-title">Founder, Tech4Village</div>
+                </div>
+                <h3 style="color: #667eea; margin-bottom: 1.2rem">
+                  Contact Information
+                </h3>
+                <div class="contact-item">
+                  <div class="contact-icon">📧</div>
+                  <div>
+                    <strong>Email</strong><br /><a
+                      href="mailto:tech4village@gmail.com"
+                      style="color: #764ba2; text-decoration: underline"
+                      >tech4village@gmail.com</a
+                    >
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <div class="contact-icon">📱</div>
+                  <div>
+                    <strong>WhatsApp</strong><br /><a
+                      href="https://wa.me/254722961906"
+                      style="color: #764ba2; text-decoration: underline"
+                      >+254 722 961 906</a
+                    >
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <div class="contact-icon">💼</div>
+                  <div>
+                    <strong>For Partnerships</strong><br /><a
+                      href="mailto:tech4village@gmail.com"
+                      style="color: #764ba2; text-decoration: underline"
+                      >tech4village@gmail.com</a
+                    >
+                  </div>
+                </div>
+                <div class="donation-box">
+                  <h4 style="color: #667eea; margin-bottom: 0.7rem">
+                    Quick Donation Info
+                  </h4>
+                  <p style="margin: 0.2rem 0">
+                    <strong>CashApp:</strong> $karenge
+                  </p>
+                  <p style="margin: 0.2rem 0">
+                    <strong>M-Pesa:</strong> 0722961906
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container footer-content">
-      <div class="footer-section">
-        <h3>Tech4Village</h3>
-        <p>Bridging the digital divide in rural Kenya through technology, education, and community empowerment.</p>
-        <div class="social-links">
-          <a href="#" aria-label="Facebook">📘</a>
-          <a href="#" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="X">X</a>
+    <!-- Footer -->
+    <footer>
+      <div class="container footer-content">
+        <div class="footer-section">
+          <h3>Tech4Village</h3>
+          <p>
+            Bridging the digital divide in rural Kenya through technology,
+            education, and community empowerment.
+          </p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="#" aria-label="X">X</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p><a href="about.html">About Us</a></p>
+          <p><a href="project.html">Our Projects</a></p>
+          <p><a href="involved.html">Get Involved</a></p>
+          <p><a href="blog.html">Blog</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>Support</h3>
+          <p><a href="contact.html">Contact Us</a></p>
+          <p><a href="donate.html">Donate</a></p>
         </div>
       </div>
-      <div class="footer-section">
-        <h3>Quick Links</h3>
-        <p><a href="about.html">About Us</a></p>
-        <p><a href="project.html">Our Projects</a></p>
-        <p><a href="involved.html">Get Involved</a></p>
-        <p><a href="blog.html">Blog</a></p>
+      <div
+        style="border-top: 1px solid #666; padding: 2rem 0; text-align: center"
+      >
+        <p>
+          &copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology
+          accessible for all.
+        </p>
       </div>
-      <div class="footer-section">
-        <h3>Support</h3>
-        <p><a href="contact.html">Contact Us</a></p>
-        <p><a href="donate.html">Donate</a></p>
-      </div>
-    </div>
-    <div style="border-top:1px solid #666;padding:2rem 0;text-align:center;">
-      <p>&copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology accessible for all.</p>
-    </div>
-  </footer>
-</body>
+    </footer>
+  </body>
 </html>
-

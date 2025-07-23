@@ -1,1 +1,0 @@
-Place your site and blog images in this folder. Example: hero.jpeg, kaggwa-potrait.jpeg, crawling-through-the-mud.jpeg, young-leader-speaking.jpeg, etc. 

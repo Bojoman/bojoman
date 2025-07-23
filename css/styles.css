@@ -1147,7 +1147,6 @@ footer {
 
 /* Timeline hover and touch interactions */
 @media (hover: hover) {
-  /* For devices that support hover */
   .timeline-item:hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 35px rgba(102, 126, 234, 0.25);
@@ -1510,7 +1509,7 @@ footer {
 .project-section-title{
   white-space:nowrap;             
   overflow-wrap:normal;
-  font-size:clamp(0.95rem,3.5vw,2.5rem); /* 15 px on 360 px → 40 px on 4 K */
+  font-size:clamp(0.95rem,3.5vw,2.5rem); 
   line-height:1.2;
   letter-spacing:-0.015em;           
 }
@@ -1858,7 +1857,7 @@ footer {
   }
 }
 /* ===========================================================
-   BLOG‑PAGE‑ONLY STYLES  (namespaced with .blog‑*)
+   BLOG‑PAGE‑ONLY STYLES  
    =========================================================== */
 
 /* ---------- Blog Hero ---------- */
@@ -2097,9 +2096,6 @@ footer {
   .blog-sidebar{padding:1rem .5rem;}
 }
 
-/* ===========================================================
-   END OF BLOG‑ONLY RULES
-   =========================================================== */
 
 /* ===========================================================
    DONATIONS PAGE STYLES
@@ -2562,7 +2558,7 @@ footer {
         /* Update mobile styles */
         @media (max-width: 768px) {
             .donation-tabs {
-                flex-direction: row !important; /* Force row layout */
+                flex-direction: row !important; 
                 width: 100%;
                 gap: 0.25rem;
                 padding: 0 0.5rem;

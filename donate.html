@@ -1,367 +1,506 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Support Tech4Village's mission to bridge the digital divide in rural Kenya through device donations and financial contributions.">
-    <meta name="keywords" content="donate, tech4village, rural kenya, digital divide, device donation">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Support Tech4Village's mission to bridge the digital divide in rural Kenya through device donations and financial contributions."
+    />
+    <meta
+      name="keywords"
+      content="donate, tech4village, rural kenya, digital divide, device donation"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <title>Donate - Tech4Village</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-
-</head>
-<body>
+    <link rel="icon" type="image/png" href="favicon.png" />
+  </head>
+  <body>
     <!-- Navigation -->
     <nav>
-        <div class="container nav-container">
-            <a href="index.html" class="logo"><span style="font-size:1.3em;vertical-align:middle;">🌍</span> Tech4Village</a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="project.html">Project</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="donate.html" class="active">Donate</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="mobile-menu" id="mobileMenuBtn">☰</div>
-        </div>
+      <div class="container nav-container">
+        <a href="index.html" class="logo"
+          ><span style="font-size: 1.3em; vertical-align: middle">🌍</span>
+          Tech4Village</a
+        >
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="project.html">Project</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="donate.html" class="active">Donate</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="mobile-menu" id="mobileMenuBtn">☰</div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="donation-hero">
-        <div class="container">
-            <h1>Make a Lasting Impact</h1>
-            <p>Your donation helps bridge the digital divide in rural Kenya. Every device and dollar creates opportunities for students who need them most.</p>
-        </div>
+      <div class="container">
+        <h1>Make a Lasting Impact</h1>
+        <p>
+          Your donation helps bridge the digital divide in rural Kenya. Every
+          device and dollar creates opportunities for students who need them
+          most.
+        </p>
+      </div>
     </section>
 
     <!-- Donation Options -->
     <section class="donation-options">
-        <div class="container">
-            <!-- Update the donation tabs order -->
-            <div class="donation-tabs">
-                <button class="donation-tab active" onclick="showDonationTab('device')">💻 Device</button>
-                <button class="donation-tab" onclick="showDonationTab('volunteer')">🤝 Volunteer</button>
-                <button class="donation-tab" onclick="showDonationTab('money')">💰 Money</button>
-            </div>
-
-            <!-- Reorder the content sections -->
-            <!-- Device Donation -->
-            <div id="device-donation" class="donation-content active">
-                <div class="device-donation-grid">
-                    <div class="device-card">
-                        <div class="device-icon">💻</div>
-                        <h3>Laptops</h3>
-                        <p>Working laptops help students access educational resources and develop digital skills.</p>
-                        <div class="device-requirements">
-                            <strong>Requirements:</strong>
-                            <ul>
-                                <li>Windows 7 or newer / macOS 10.10+</li>
-                                <li>4GB RAM minimum</li>
-                                <li>Working battery (replaceable)</li>
-                                <li>No major physical damage</li>
-                                <li>Original charger included</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="device-card">
-                        <div class="device-icon">📱</div>
-                        <h3>Smartphones</h3>
-                        <p>Smartphones provide instant access to information and communication tools.</p>
-                        <div class="device-requirements">
-                            <strong>Requirements:</strong>
-                            <ul>
-                                <li>Android 6.0+ or iOS 10+</li>
-                                <li>Working screen and buttons</li>
-                                <li>Battery holds charge</li>
-                                <li>Unlocked or with reset instructions</li>
-                                <li>Charger included</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="device-card">
-                        <div class="device-icon">📟</div>
-                        <h3>Tablets</h3>
-                        <p>Tablets are perfect for reading, note-taking, and interactive learning.</p>
-                        <div class="device-requirements">
-                            <strong>Requirements:</strong>
-                            <ul>
-                                <li>Android 6.0+ or iOS 10+</li>
-                                <li>10+ inch screen preferred</li>
-                                <li>Touch screen fully functional</li>
-                                <li>No cracks or dead pixels</li>
-                                <li>Charger and case included</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="donation-form-container" style="margin-top: 3rem;">
-                    <h2>Device Donation Form</h2>
-                    <form id="device-form" method="POST">
-                        <input type="hidden" name="_subject" value="New Device Donation">
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="donor-name">Full Name *</label>
-                                <input type="text" id="donor-name" name="donor_name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="donor-email">Email Address *</label>
-                                <input type="email" id="donor-email" name="donor_email" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="donor-phone">Phone Number</label>
-                                <input type="tel" id="donor-phone" name="donor_phone">
-                            </div>
-                            <div class="form-group">
-                                <label for="donor-location">Location *</label>
-                                <input type="text" id="donor-location" name="donor_location" placeholder="City, State/Country" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="device-type">Device Type *</label>
-                            <select id="device-type" name="device_type" required>
-                                <option value="">Select device type</option>
-                                <option value="laptop">Laptop</option>
-                                <option value="smartphone">Smartphone</option>
-                                <option value="tablet">Tablet</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="device-quantity">Quantity *</label>
-                                <input type="number" id="device-quantity" name="device_quantity" min="1" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="device-condition">Condition *</label>
-                                <select id="device-condition" name="device_condition" required>
-                                    <option value="">Select condition</option>
-                                    <option value="excellent">Excellent</option>
-                                    <option value="good">Good</option>
-                                    <option value="fair">Fair (needs minor repair)</option>
-                                    <option value="poor">Poor (needs major repair)</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="device-details">Device Details</label>
-                            <textarea id="device-details" name="device_details" rows="4" placeholder="Brand, model, specifications, included accessories, any issues..."></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="shipping-preference">Shipping Preference *</label>
-                            <select id="shipping-preference" name="shipping_preference" required>
-                                <option value="">Select preference</option>
-                                <option value="self-ship">I'll ship the device(s)</option>
-                                <option value="pickup">Arrange local pickup</option>
-                                <option value="dropoff">I'll drop off locally</option>
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="donation-btn">
-                            <span class="loading-spinner"></span>
-                            Submit Device Donation
-                        </button>
-                        
-                        <div class="success-message">
-                            Thank you! Your device donation has been submitted. We'll contact you with next steps.
-                        </div>
-                        
-                        <div class="error-message">
-                            Something went wrong. Please try again or contact us directly.
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Volunteer -->
-            <div id="volunteer-donation" class="donation-content">
-                <div class="donation-grid">
-                    <div class="donation-form-container">
-                        <h2>Volunteer Application</h2>
-                        <form id="volunteer-form" method="POST">
-                            <input type="hidden" name="_subject" value="New Volunteer Application">
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="volunteer-name">Full Name *</label>
-                                    <input type="text" id="volunteer-name" name="volunteer_name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="volunteer-email">Email Address *</label>
-                                    <input type="email" id="volunteer-email" name="volunteer_email" required>
-                                </div>
-                            </div>
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="volunteer-phone">Phone Number</label>
-                                    <input type="tel" id="volunteer-phone" name="volunteer_phone">
-                                </div>
-                                <div class="form-group">
-                                    <label for="volunteer-location">Location *</label>
-                                    <input type="text" id="volunteer-location" name="volunteer_location" required>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="volunteer-skills">Skills & Expertise *</label>
-                                <select id="volunteer-skills" name="volunteer_skills" required>
-                                    <option value="">Select your primary skill</option>
-                                    <option value="tech-repair">Technology Repair</option>
-                                    <option value="teaching">Teaching/Training</option>
-                                    <option value="logistics">Logistics & Operations</option>
-                                    <option value="fundraising">Fundraising</option>
-                                    <option value="marketing">Marketing/Social Media</option>
-                                    <option value="web-dev">Web Development</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="volunteer-availability">Availability *</label>
-                                <select id="volunteer-availability" name="volunteer_availability" required>
-                                    <option value="">Select availability</option>
-                                    <option value="full-time">Full-time</option>
-                                    <option value="part-time">Part-time</option>
-                                    <option value="weekends">Weekends only</option>
-                                    <option value="occasional">Occasional/As needed</option>
-                                    <option value="remote">Remote only</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="volunteer-experience">Relevant Experience</label>
-                                <textarea id="volunteer-experience" name="volunteer_experience" rows="4" placeholder="Tell us about your relevant experience and why you want to volunteer..."></textarea>
-                            </div>
-                            <button type="submit" class="donation-btn">
-                                <span class="loading-spinner"></span>
-                                Submit Volunteer Application
-                            </button>
-                            <div class="success-message">
-                                Thank you! Your volunteer application has been submitted. We'll contact you soon.
-                            </div>
-                            <div class="error-message">
-                                Something went wrong. Please try again or contact us directly.
-                            </div>
-                        </form>
-                    </div>
-                    <div class="donation-info">
-                        <h3>Why Volunteer?</h3>
-                        <p>Volunteers are the heart of Tech4Village. Whether you have technical skills, teaching experience, or just a passion for making a difference, we welcome your support!</p>
-                        <ul>
-                            <li>Help refurbish and distribute devices</li>
-                            <li>Mentor students in coding and digital skills</li>
-                            <li>Assist with logistics, outreach, or fundraising</li>
-                            <li>Spread the word about our mission</li>
-                        </ul>
-                        <p>Ready to join us? Fill out the form or <a href="contact.html">contact us</a> for more info.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Money Donation -->
-            <div id="money-donation" class="donation-content">
-                <div class="donation-motivation-grid">
-                    <div class="donation-motivation">
-                        <h2>Your gift changes a life.</h2>
-                        <p>Every device or shilling you give helps a real student in rural Kenya unlock their potential.<br>
-                        <em>“I never thought I’d use a computer. Now I dream of being an engineer.”</em></p>
-                        <div class="donation-badge">100% of your donation goes to students</div>
-                    </div>
-                    <div class="donation-info-card">
-                        <h3 style="color:#667eea;">Donate Money</h3>
-                        <div class="donation-method">
-                            <strong>CashApp:</strong> <span class="donation-highlight">$karenge</span>
-                            <button onclick="copyText('$karenge')" class="copy-btn">Copy</button>
-                        </div>
-                        <div class="donation-method">
-                            <strong>M-Pesa:</strong> <span class="donation-highlight">0722961906</span>
-                            <button onclick="copyText('0722961906')" class="copy-btn">Copy</button>
-                        </div>
-                        <p style="margin-top:1rem;">For bank transfer or international giving, <a href="contact.html">contact us</a>.</p>
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <!-- Update the donation tabs order -->
+        <div class="donation-tabs">
+          <button
+            class="donation-tab active"
+            onclick="showDonationTab('device')"
+          >
+            💻 Device
+          </button>
+          <button class="donation-tab" onclick="showDonationTab('volunteer')">
+            🤝 Volunteer
+          </button>
+          <button class="donation-tab" onclick="showDonationTab('money')">
+            💰 Money
+          </button>
         </div>
+
+        <!-- Reorder the content sections -->
+        <!-- Device Donation -->
+        <div id="device-donation" class="donation-content active">
+          <div class="device-donation-grid">
+            <div class="device-card">
+              <div class="device-icon">💻</div>
+              <h3>Laptops</h3>
+              <p>
+                Working laptops help students access educational resources and
+                develop digital skills.
+              </p>
+              <div class="device-requirements">
+                <strong>Requirements:</strong>
+                <ul>
+                  <li>Windows 7 or newer / macOS 10.10+</li>
+                  <li>4GB RAM minimum</li>
+                  <li>Working battery (replaceable)</li>
+                  <li>No major physical damage</li>
+                  <li>Original charger included</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="device-card">
+              <div class="device-icon">📱</div>
+              <h3>Smartphones</h3>
+              <p>
+                Smartphones provide instant access to information and
+                communication tools.
+              </p>
+              <div class="device-requirements">
+                <strong>Requirements:</strong>
+                <ul>
+                  <li>Android 6.0+ or iOS 10+</li>
+                  <li>Working screen and buttons</li>
+                  <li>Battery holds charge</li>
+                  <li>Unlocked or with reset instructions</li>
+                  <li>Charger included</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="device-card">
+              <div class="device-icon">📟</div>
+              <h3>Tablets</h3>
+              <p>
+                Tablets are perfect for reading, note-taking, and interactive
+                learning.
+              </p>
+              <div class="device-requirements">
+                <strong>Requirements:</strong>
+                <ul>
+                  <li>Android 6.0+ or iOS 10+</li>
+                  <li>10+ inch screen preferred</li>
+                  <li>Touch screen fully functional</li>
+                  <li>No cracks or dead pixels</li>
+                  <li>Charger and case included</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="donation-form-container" style="margin-top: 3rem">
+            <h2>Device Donation Form</h2>
+            <form id="device-form" method="POST">
+              <input
+                type="hidden"
+                name="_subject"
+                value="New Device Donation"
+              />
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="donor-name">Full Name *</label>
+                  <input
+                    type="text"
+                    id="donor-name"
+                    name="donor_name"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="donor-email">Email Address *</label>
+                  <input
+                    type="email"
+                    id="donor-email"
+                    name="donor_email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="donor-phone">Phone Number</label>
+                  <input type="tel" id="donor-phone" name="donor_phone" />
+                </div>
+                <div class="form-group">
+                  <label for="donor-location">Location *</label>
+                  <input
+                    type="text"
+                    id="donor-location"
+                    name="donor_location"
+                    placeholder="City, State/Country"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="device-type">Device Type *</label>
+                <select id="device-type" name="device_type" required>
+                  <option value="">Select device type</option>
+                  <option value="laptop">Laptop</option>
+                  <option value="smartphone">Smartphone</option>
+                  <option value="tablet">Tablet</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="device-quantity">Quantity *</label>
+                  <input
+                    type="number"
+                    id="device-quantity"
+                    name="device_quantity"
+                    min="1"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="device-condition">Condition *</label>
+                  <select
+                    id="device-condition"
+                    name="device_condition"
+                    required
+                  >
+                    <option value="">Select condition</option>
+                    <option value="excellent">Excellent</option>
+                    <option value="good">Good</option>
+                    <option value="fair">Fair (needs minor repair)</option>
+                    <option value="poor">Poor (needs major repair)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="device-details">Device Details</label>
+                <textarea
+                  id="device-details"
+                  name="device_details"
+                  rows="4"
+                  placeholder="Brand, model, specifications, included accessories, any issues..."
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="shipping-preference">Shipping Preference *</label>
+                <select
+                  id="shipping-preference"
+                  name="shipping_preference"
+                  required
+                >
+                  <option value="">Select preference</option>
+                  <option value="self-ship">I'll ship the device(s)</option>
+                  <option value="pickup">Arrange local pickup</option>
+                  <option value="dropoff">I'll drop off locally</option>
+                </select>
+              </div>
+
+              <button type="submit" class="donation-btn">
+                <span class="loading-spinner"></span>
+                Submit Device Donation
+              </button>
+
+              <div class="success-message">
+                Thank you! Your device donation has been submitted. We'll
+                contact you with next steps.
+              </div>
+
+              <div class="error-message">
+                Something went wrong. Please try again or contact us directly.
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Volunteer -->
+        <div id="volunteer-donation" class="donation-content">
+          <div class="donation-grid">
+            <div class="donation-form-container">
+              <h2>Volunteer Application</h2>
+              <form id="volunteer-form" method="POST">
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="New Volunteer Application"
+                />
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="volunteer-name">Full Name *</label>
+                    <input
+                      type="text"
+                      id="volunteer-name"
+                      name="volunteer_name"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="volunteer-email">Email Address *</label>
+                    <input
+                      type="email"
+                      id="volunteer-email"
+                      name="volunteer_email"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="volunteer-phone">Phone Number</label>
+                    <input
+                      type="tel"
+                      id="volunteer-phone"
+                      name="volunteer_phone"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="volunteer-location">Location *</label>
+                    <input
+                      type="text"
+                      id="volunteer-location"
+                      name="volunteer_location"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="volunteer-skills">Skills & Expertise *</label>
+                  <select
+                    id="volunteer-skills"
+                    name="volunteer_skills"
+                    required
+                  >
+                    <option value="">Select your primary skill</option>
+                    <option value="tech-repair">Technology Repair</option>
+                    <option value="teaching">Teaching/Training</option>
+                    <option value="logistics">Logistics & Operations</option>
+                    <option value="fundraising">Fundraising</option>
+                    <option value="marketing">Marketing/Social Media</option>
+                    <option value="web-dev">Web Development</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="volunteer-availability">Availability *</label>
+                  <select
+                    id="volunteer-availability"
+                    name="volunteer_availability"
+                    required
+                  >
+                    <option value="">Select availability</option>
+                    <option value="full-time">Full-time</option>
+                    <option value="part-time">Part-time</option>
+                    <option value="weekends">Weekends only</option>
+                    <option value="occasional">Occasional/As needed</option>
+                    <option value="remote">Remote only</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="volunteer-experience">Relevant Experience</label>
+                  <textarea
+                    id="volunteer-experience"
+                    name="volunteer_experience"
+                    rows="4"
+                    placeholder="Tell us about your relevant experience and why you want to volunteer..."
+                  ></textarea>
+                </div>
+                <button type="submit" class="donation-btn">
+                  <span class="loading-spinner"></span>
+                  Submit Volunteer Application
+                </button>
+                <div class="success-message">
+                  Thank you! Your volunteer application has been submitted.
+                  We'll contact you soon.
+                </div>
+                <div class="error-message">
+                  Something went wrong. Please try again or contact us directly.
+                </div>
+              </form>
+            </div>
+            <div class="donation-info">
+              <h3>Why Volunteer?</h3>
+              <p>
+                Volunteers are the heart of Tech4Village. Whether you have
+                technical skills, teaching experience, or just a passion for
+                making a difference, we welcome your support!
+              </p>
+              <ul>
+                <li>Help refurbish and distribute devices</li>
+                <li>Mentor students in coding and digital skills</li>
+                <li>Assist with logistics, outreach, or fundraising</li>
+                <li>Spread the word about our mission</li>
+              </ul>
+              <p>
+                Ready to join us? Fill out the form or
+                <a href="contact.html">contact us</a> for more info.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Money Donation -->
+        <div id="money-donation" class="donation-content">
+          <div class="donation-motivation-grid">
+            <div class="donation-motivation">
+              <h2>Your gift changes a life.</h2>
+              <p>
+                Every device or shilling you give helps a real student in rural
+                Kenya unlock their potential.<br />
+                <em
+                  >“I never thought I’d use a computer. Now I dream of being an
+                  engineer.”</em
+                >
+              </p>
+              <div class="donation-badge">
+                100% of your donation goes to students
+              </div>
+            </div>
+            <div class="donation-info-card">
+              <h3 style="color: #667eea">Donate Money</h3>
+              <div class="donation-method">
+                <strong>CashApp:</strong>
+                <span class="donation-highlight">$karenge</span>
+                <button onclick="copyText('$karenge')" class="copy-btn">
+                  Copy
+                </button>
+              </div>
+              <div class="donation-method">
+                <strong>M-Pesa:</strong>
+                <span class="donation-highlight">0722961906</span>
+                <button onclick="copyText('0722961906')" class="copy-btn">
+                  Copy
+                </button>
+              </div>
+              <p style="margin-top: 1rem">
+                For bank transfer or international giving,
+                <a href="contact.html">contact us</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Add Corporate Partnership Section before Impact Showcase -->
     <section class="partnership-section">
-        <div class="container">
-            <h2>Corporate Partnerships</h2>
-            <p>Partner with us to scale our impact and create lasting change in rural communities across the globe.</p>
-            <a href="contact.html" class="btn">Partner With Us</a>
-        </div>
+      <div class="container">
+        <h2>Corporate Partnerships</h2>
+        <p>
+          Partner with us to scale our impact and create lasting change in rural
+          communities across the globe.
+        </p>
+        <a href="contact.html" class="btn">Partner With Us</a>
+      </div>
     </section>
 
     <!-- Impact Showcase -->
     <section class="impact-showcase">
-        <div class="container">
-            <h2>Our Impact</h2>
-            <div class="impact-grid">
-                <div class="impact-item">
-                    <div class="impact-number">247</div>
-                    <div>Devices Distributed</div>
-                </div>
-                <div class="impact-item">
-                    <div class="impact-number">50</div>
-                    <div>Students Reached</div>
-                </div>
-                <div class="impact-item">
-                    <div class="impact-number">18</div>
-                    <div>Schools Connected</div>
-                </div>
-                <div class="impact-item">
-                    <div class="impact-number">12</div>
-                    <div>Villages Impacted</div>
-                </div>
-            </div>
+      <div class="container">
+        <h2>Our Impact</h2>
+        <div class="impact-grid">
+          <div class="impact-item">
+            <div class="impact-number">247</div>
+            <div>Devices Distributed</div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-number">50</div>
+            <div>Students Reached</div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-number">18</div>
+            <div>Schools Connected</div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-number">12</div>
+            <div>Villages Impacted</div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container footer-content">
-            <div class="footer-section">
-                <h3>Tech4Village</h3>
-                <p>Bridging the digital divide in rural Kenya through technology, education, and community empowerment.</p>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook">📘</a>
-                    <a href="#" aria-label="Instagram">📷</a>
-                    <a href="#" aria-label="X">X</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <p><a href="about.html">About Us</a></p>
-                <p><a href="project.html">Our Projects</a></p>
-                <p><a href="blog.html">Blog</a></p>
-                <p><a href="donate.html">Donate</a></p>
-            </div>
-            <div class="footer-section">
-                <h3>Support</h3>
-                <p><a href="contact.html">Contact Us</a></p>
-                <p><a href="donate.html">Donate</a></p>
-            </div>
+      <div class="container footer-content">
+        <div class="footer-section">
+          <h3>Tech4Village</h3>
+          <p>
+            Bridging the digital divide in rural Kenya through technology,
+            education, and community empowerment.
+          </p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="#" aria-label="X">X</a>
+          </div>
         </div>
-        <div style="border-top:1px solid #666;padding:2rem 0;text-align:center;">
-            <p>&copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology accessible for all.</p>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p><a href="about.html">About Us</a></p>
+          <p><a href="project.html">Our Projects</a></p>
+          <p><a href="blog.html">Blog</a></p>
+          <p><a href="donate.html">Donate</a></p>
         </div>
+        <div class="footer-section">
+          <h3>Support</h3>
+          <p><a href="contact.html">Contact Us</a></p>
+          <p><a href="donate.html">Donate</a></p>
+        </div>
+      </div>
+      <div
+        style="border-top: 1px solid #666; padding: 2rem 0; text-align: center"
+      >
+        <p>
+          &copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology
+          accessible for all.
+        </p>
+      </div>
     </footer>
     <script src="js/script.js" defer></script>
-</body>
+  </body>
 </html>
-
-

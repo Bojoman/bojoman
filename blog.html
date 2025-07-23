@@ -1,15 +1,19 @@
-  <!DOCTYPE html>
-  <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog — Tech4Village</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="css/styles.css" />
     <script src="js/script.js" defer></script>
     <style>
       /* ─── Reset & Base ─── */
-      * { margin:0; padding:0; box-sizing:border-box; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       :root {
         --primary-color: #2563eb;
         --primary-hover: #1d4ed8;
@@ -19,29 +23,39 @@
         --background: #ffffff;
         --surface: #f8fafc;
         --border: #e2e8f0;
-        --shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
-        --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
         --border-radius: 12px;
-        --transition: all .3s cubic-bezier(.4,0,.2,1);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
       body {
-        font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-        line-height:1.6;
-        color:var(--text-primary);
-        background:var(--background);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        line-height: 1.6;
+        color: var(--text-primary);
+        background: var(--background);
       }
-      a { text-decoration:none; }
-      img { display:block; max-width:100%; }
+      a {
+        text-decoration: none;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
     </style>
   </head>
   <body>
-
     <!-- Navigation -->
     <nav>
       <div class="container nav-container">
-        <a href="index.html" class="logo"><span style="font-size:1.3em;vertical-align:middle;">🌍</span> Tech4Village</a>
+        <a href="index.html" class="logo"
+          ><span style="font-size: 1.3em; vertical-align: middle">🌍</span>
+          Tech4Village</a
+        >
         <ul class="nav-links" id="navLinks">
-          <li><a href="index.html" >Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="project.html">Project</a></li>
           <li><a href="blog.html" class="active">Blog</a></li>
@@ -56,7 +70,10 @@
     <div class="blog-hero">
       <div class="blog-hero-content">
         <h1>Stories of Change</h1>
-        <p>From tradition to technology, discover the journey of bridging the digital divide in rural communities</p>
+        <p>
+          From tradition to technology, discover the journey of bridging the
+          digital divide in rural communities
+        </p>
         <div class="blog-hero-stats">
           <div class="blog-stat">
             <span class="blog-stat-number">500+</span>
@@ -80,67 +97,118 @@
         <main>
           <!-- Featured Post -->
           <article class="blog-featured-post">
-            <img src="images/young-leader-speaking.jpeg" alt="Young leader speaking" class="blog-featured-image">
+            <img
+              src="images/young-leader-speaking.jpeg"
+              alt="Young leader speaking"
+              class="blog-featured-image"
+            />
             <div class="blog-featured-content">
               <div class="blog-post-meta">
                 <span class="blog-post-tag">Leadership</span>
-                      <span>December 15, 2024</span>
-                      <span>5 min read</span>
+                <span>December 15, 2024</span>
+                <span>5 min read</span>
               </div>
-              <h2 class="blog-post-title">🎙️ From Tradition to Tech: Why This Moment Sparked My Mission</h2>
+              <h2 class="blog-post-title">
+                🎙️ From Tradition to Tech: Why This Moment Sparked My Mission
+              </h2>
               <p class="blog-post-excerpt">
-                When I stood up to speak at my Kikuyu rite of passage, I wasn't just wearing tradition—I was stepping into it...
+                When I stood up to speak at my Kikuyu rite of passage, I wasn't
+                just wearing tradition—I was stepping into it...
               </p>
-                  <a href="#" class="blog-read-more" onclick="openFullPost('tradition-to-tech')">Read Full Story →</a>
+              <a
+                href="#"
+                class="blog-read-more"
+                onclick="openFullPost('tradition-to-tech')"
+                >Read Full Story →</a
+              >
             </div>
           </article>
 
           <!-- Blog Posts Grid -->
           <div class="blog-posts">
-          <article class="blog-post">
-            <img src="images/crawling-through-the-mud.jpeg" alt="Crawling through mud" class="blog-post-image">
-            <div class="blog-post-content">
-              <div class="blog-post-meta">
-                <span class="blog-post-tag">Resilience</span>
-                          <span>December 10, 2024</span>
+            <article class="blog-post">
+              <img
+                src="images/crawling-through-the-mud.jpeg"
+                alt="Crawling through mud"
+                class="blog-post-image"
+              />
+              <div class="blog-post-content">
+                <div class="blog-post-meta">
+                  <span class="blog-post-tag">Resilience</span>
+                  <span>December 10, 2024</span>
+                </div>
+                <h3 class="blog-post-title">
+                  🥾 Crawl Forward Anyway: Lessons from the Mud
+                </h3>
+                <p class="blog-post-excerpt">
+                  This photo was taken during my rite of passage leadership
+                  training, deep in the forest. We had to crawl through narrow,
+                  muddy tunnels...
+                </p>
+                <a
+                  href="#"
+                  class="blog-read-more"
+                  onclick="openFullPost('crawl-forward')"
+                  >Read Full Story →</a
+                >
               </div>
-              <h3 class="blog-post-title">🥾 Crawl Forward Anyway: Lessons from the Mud</h3>
-              <p class="blog-post-excerpt">
-                This photo was taken during my rite of passage leadership training, deep in the forest. We had to crawl through narrow, muddy tunnels...
-              </p>
-                      <a href="#" class="blog-read-more" onclick="openFullPost('crawl-forward')">Read Full Story →</a>
-                  </div>
-              </article>
+            </article>
 
-              <article class="blog-post">
-                  <img src="images/kaggwa-team.jpeg" alt="Tech4Village Team" class="blog-post-image">
-                  <div class="blog-post-content">
-                      <div class="blog-post-meta">
-                          <span class="blog-post-tag">Community</span>
-                          <span>December 5, 2024</span>
-                      </div>
-                      <h3 class="blog-post-title">🤝 Building Dreams: Our First Tech Hub</h3>
-                      <p class="blog-post-excerpt">
-                          What started as a simple idea has grown into a movement. Today, we celebrated the opening of our first community tech hub...
-                      </p>
-                      <a href="#" class="blog-read-more" onclick="openFullPost('tech-hub')">Read Full Story →</a>
-                  </div>
-              </article>
+            <article class="blog-post">
+              <img
+                src="images/kaggwa-team.jpeg"
+                alt="Tech4Village Team"
+                class="blog-post-image"
+              />
+              <div class="blog-post-content">
+                <div class="blog-post-meta">
+                  <span class="blog-post-tag">Community</span>
+                  <span>December 5, 2024</span>
+                </div>
+                <h3 class="blog-post-title">
+                  🤝 Building Dreams: Our First Tech Hub
+                </h3>
+                <p class="blog-post-excerpt">
+                  What started as a simple idea has grown into a movement.
+                  Today, we celebrated the opening of our first community tech
+                  hub...
+                </p>
+                <a
+                  href="#"
+                  class="blog-read-more"
+                  onclick="openFullPost('tech-hub')"
+                  >Read Full Story →</a
+                >
+              </div>
+            </article>
 
-              <article class="blog-post">
-                  <img src="images/kagwa-speaking.jpeg" alt="Speaking at conference" class="blog-post-image">
-                  <div class="blog-post-content">
-                      <div class="blog-post-meta">
-                          <span class="blog-post-tag">Impact</span>
-                          <span>November 30, 2024</span>
-                      </div>
-                      <h3 class="blog-post-title">🌟 Beyond Devices: The Real Impact</h3>
-                      <p class="blog-post-excerpt">
-                          Numbers tell one story, but the real impact lies in the lives changed. Meet Sarah, a 15-year-old who discovered coding through...
-                      </p>
-                      <a href="#" class="blog-read-more" onclick="openFullPost('real-impact')">Read Full Story →</a>
-            </div>
-          </article>
+            <article class="blog-post">
+              <img
+                src="images/kagwa-speaking.jpeg"
+                alt="Speaking at conference"
+                class="blog-post-image"
+              />
+              <div class="blog-post-content">
+                <div class="blog-post-meta">
+                  <span class="blog-post-tag">Impact</span>
+                  <span>November 30, 2024</span>
+                </div>
+                <h3 class="blog-post-title">
+                  🌟 Beyond Devices: The Real Impact
+                </h3>
+                <p class="blog-post-excerpt">
+                  Numbers tell one story, but the real impact lies in the lives
+                  changed. Meet Sarah, a 15-year-old who discovered coding
+                  through...
+                </p>
+                <a
+                  href="#"
+                  class="blog-read-more"
+                  onclick="openFullPost('real-impact')"
+                  >Read Full Story →</a
+                >
+              </div>
+            </article>
           </div>
         </main>
 
@@ -150,7 +218,8 @@
             <div class="blog-author-avatar">KK</div>
             <div class="blog-author-name">Kaggwa Karenge</div>
             <div class="blog-author-bio">
-              17‑year‑old founder of Tech4Village, bridging the digital divide in rural Kenya.
+              17‑year‑old founder of Tech4Village, bridging the digital divide
+              in rural Kenya.
             </div>
             <div class="blog-social-links">
               <a href="#" title="Email">📧</a>
@@ -192,25 +261,22 @@
       </div>
 
       <!-- Newsletter -->
-<div class="blog-newsletter">
-  <h3>Stay Connected</h3>
-  <p>Get updates on Tech4Village’s mission and latest stories</p>
+      <div class="blog-newsletter">
+        <h3>Stay Connected</h3>
+        <p>Get updates on Tech4Village’s mission and latest stories</p>
 
-  <!--  ❱❱  keep method & inputs but omit action attribute  -->
-  <form class="blog-newsletter-form" method="POST">
-    <input type="email"
-           name="email"               
-           placeholder="Enter your email"
-           class="blog-newsletter-input"
-           required />
+        <form class="blog-newsletter-form" method="POST">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            class="blog-newsletter-input"
+            required
+          />
 
-
-    <button type="submit" class="blog-newsletter-btn">
-      Subscribe
-    </button>
-  </form>
-</div>
-
+          <button type="submit" class="blog-newsletter-btn">Subscribe</button>
+        </form>
+      </div>
     </div>
 
     <!-- Footer -->
@@ -218,7 +284,10 @@
       <div class="container footer-content">
         <div class="footer-section">
           <h3>Tech4Village</h3>
-          <p>Bridging the digital divide in rural Kenya through technology, education, and community empowerment.</p>
+          <p>
+            Bridging the digital divide in rural Kenya through technology,
+            education, and community empowerment.
+          </p>
           <div class="social-links">
             <a href="#" title="Facebook">📘</a>
             <a href="#" title="Instagram">📷</a>
@@ -235,21 +304,45 @@
         <div class="footer-section">
           <h3>Support</h3>
           <p><a href="contact.html">Contact Us</a></p>
-          <p><a href="javascript:void(0)" onclick="bookCall()">Book a Call</a></p>
-          <p><a href="javascript:void(0)" onclick="showDonationOptions()">Donate</a></p>
+          <p>
+            <a href="javascript:void(0)" onclick="bookCall()">Book a Call</a>
+          </p>
+          <p>
+            <a href="javascript:void(0)" onclick="showDonationOptions()"
+              >Donate</a
+            >
+          </p>
         </div>
       </div>
-      <div style="border-top:1px solid #666;padding:2rem 0;text-align:center;">
-        <p>&copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology accessible for all.</p>
+      <div
+        style="border-top: 1px solid #666; padding: 2rem 0; text-align: center"
+      >
+        <p>
+          &copy; 2025 Tech4Village. Founded by Kaggwa Karenge. Making technology
+          accessible for all.
+        </p>
       </div>
     </footer>
 
     <!-- Full Post Modal -->
     <div id="blog-fullPostModal" class="blog-modal" aria-hidden="true">
       <div class="blog-modal-content">
-        <button onclick="closeFullPost()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+        <button
+          onclick="closeFullPost()"
+          style="
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+          "
+        >
+          &times;
+        </button>
         <div id="blog-fullPostContent"></div>
       </div>
     </div>
   </body>
-  </html>
+</html>

@@ -2,12 +2,12 @@
 const mobileMenu = document.querySelector('.mobile-menu');
 const navLinks = document.querySelector('.nav-links');
 if (mobileMenu && navLinks) {
-  mobileMenu.addEventListener('click', function(e) {
+  mobileMenu.addEventListener('click', function (e) {
     e.stopPropagation();
     navLinks.classList.toggle('active');
   });
   // Close mobile menu when clicking outside
-  document.addEventListener('click', function(e) {
+  document.addEventListener('click', function (e) {
     const target = e.target;
     if (!navLinks.contains(target instanceof Node ? target : null) && !mobileMenu.contains(target instanceof Node ? target : null)) {
       navLinks.classList.remove('active');
@@ -18,7 +18,7 @@ if (mobileMenu && navLinks) {
 // Timeline item click to expand details (works for mobile/touch)
 if (document.querySelectorAll('.timeline-item').length) {
   document.querySelectorAll('.timeline-item').forEach(item => {
-    item.addEventListener('click', function() {
+    item.addEventListener('click', function () {
       this.classList.toggle('expanded');
     });
   });
@@ -27,7 +27,7 @@ if (document.querySelectorAll('.timeline-item').length) {
 // Photo gallery lightbox
 if (document.querySelectorAll('.gallery-item img').length) {
   document.querySelectorAll('.gallery-item img').forEach(img => {
-    img.addEventListener('click', function() {
+    img.addEventListener('click', function () {
       const lightbox = document.getElementById('lightbox');
       if (!lightbox) return;
       const lightboxImg = lightbox.querySelector('.lightbox-img');
@@ -46,7 +46,7 @@ if (document.querySelectorAll('.gallery-item img').length) {
 // Close lightbox
 const lightboxClose = document.querySelector('.lightbox-close');
 if (lightboxClose) {
-  lightboxClose.addEventListener('click', function() {
+  lightboxClose.addEventListener('click', function () {
     const lightbox = document.getElementById('lightbox');
     if (lightbox) lightbox.classList.remove('active');
   });
@@ -55,34 +55,34 @@ if (lightboxClose) {
 // Close lightbox on background click
 const lightboxEl = document.getElementById('lightbox');
 if (lightboxEl) {
-  lightboxEl.addEventListener('click', function(e) {
+  lightboxEl.addEventListener('click', function (e) {
     if (e.target === this) {
       this.classList.remove('active');
     }
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Handle timeline items touch/click events
   const timelineItems = document.querySelectorAll('.timeline-item');
-  
+
   timelineItems.forEach(item => {
-    item.addEventListener('touchstart', function(e) {
-      e.preventDefault(); // Prevent hover effects from interfering
-      
+    item.addEventListener('touchstart', function (e) {
+      e.preventDefault();
+
       // If this item is already expanded, collapse it
       if (this.classList.contains('expanded')) {
         this.classList.remove('expanded');
         return;
       }
-      
+
       // Collapse any other expanded items
       timelineItems.forEach(otherItem => {
         if (otherItem !== this) {
           otherItem.classList.remove('expanded');
         }
       });
-      
+
       // Expand this item
       this.classList.add('expanded');
     });
@@ -93,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function animateCounter(element, target) {
   let current = 0;
   const duration = 2000; // 2 seconds
-  const step = target / (duration / 16); // Update every 16ms for smooth 60fps
-  
+  const step = target / (duration / 16);
+
   function update() {
     current += step;
     if (current < target) {
@@ -104,12 +104,12 @@ function animateCounter(element, target) {
       element.textContent = target;
     }
   }
-  
+
   update();
 }
 
 // Intersection Observer for counter animation
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const target = parseInt(counter.textContent || '0');
           animateCounter(counter, target);
         });
-        observer.unobserve(entry.target); // Only animate once
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.5 });
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Calendly Integration
   const bookCallButtons = document.querySelectorAll('#bookCallBtn, [onclick="bookCall()"]');
   bookCallButtons.forEach(button => {
-    button.addEventListener('click', function(e) {
+    button.addEventListener('click', function (e) {
       e.preventDefault();
       window.open('https://calendly.com/denomath4/30min', '_blank');
     });
@@ -144,16 +144,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // @ts-ignore
 /* ░░ Counter animator that keeps trailing "+" ░░ */
-function animateCounter(el, duration = 2000){
-  const raw      = el.textContent.trim();
-  const hasPlus  = raw.endsWith('+');
-  const target   = parseInt(raw.replace('+','')) || 0;
+function animateCounter(el, duration = 2000) {
+  const raw = el.textContent.trim();
+  const hasPlus = raw.endsWith('+');
+  const target = parseInt(raw.replace('+', '')) || 0;
 
   let cur = 0, step = target / (duration / 16);
 
-  (function tick(){
+  (function tick() {
     cur += step;
-    if (cur < target){
+    if (cur < target) {
       el.textContent = Math.round(cur) + (hasPlus ? '+' : '');
       requestAnimationFrame(tick);
     } else {
@@ -163,91 +163,91 @@ function animateCounter(el, duration = 2000){
   })();
 }
 
-/* ░░ Blog‑hero counters  <—‑‑‑‑‑‑‑‑ NEW ░░ */
+/* ░░ Blog‑hero counters  ░░ */
 document.querySelectorAll('.blog-hero        .blog-stat-number')
-        .forEach(el => animateCounter(el));
+  .forEach(el => animateCounter(el));
 
 /* ░░ Hero stat counters ░░ */
 document.querySelectorAll('.project-hero-section .project-stat-number')
-        // @ts-ignore
-        .forEach(num=> animateCounter(num, parseInt(num.textContent)||0));
+  // @ts-ignore
+  .forEach(num => animateCounter(num, parseInt(num.textContent) || 0));
 
 /* ░░ Impact‑section counters ░░ */
-const impactObserver = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.querySelectorAll('[id$="-counter"]').forEach(c=>{
+const impactObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('[id$="-counter"]').forEach(c => {
         // @ts-ignore
-        animateCounter(c, parseInt(c.textContent)||0);
+        animateCounter(c, parseInt(c.textContent) || 0);
       });
       impactObserver.unobserve(entry.target);
     }
   });
-},{threshold:0.5});
+}, { threshold: 0.5 });
 const impactSection = document.querySelector('.impact-counter');
-if(impactSection) impactObserver.observe(impactSection);
+if (impactSection) impactObserver.observe(impactSection);
 
 /* ░░ Project‑cards & stat reveal ░░ */
-const revealOpt = {threshold:0.1, rootMargin:'0px 0px -50px'};
-const revealObs = new IntersectionObserver((ents,obs)=>{
-  ents.forEach(ent=>{
-    if(ent.isIntersecting){
+const revealOpt = { threshold: 0.1, rootMargin: '0px 0px -50px' };
+const revealObs = new IntersectionObserver((ents, obs) => {
+  ents.forEach(ent => {
+    if (ent.isIntersecting) {
       // @ts-ignore
-      ent.target.style.opacity='1';
+      ent.target.style.opacity = '1';
       // @ts-ignore
-      ent.target.style.transform='translateY(0)';
+      ent.target.style.transform = 'translateY(0)';
       obs.unobserve(ent.target);
     }
   });
-},revealOpt);
+}, revealOpt);
 document.querySelectorAll('.project-card, .stat-item')
-        .forEach(el=>{
-          // @ts-ignore
-          el.style.opacity='0';
-          // @ts-ignore
-          el.style.transform='translateY(20px)';
-          // @ts-ignore
-          el.style.transition='opacity .6s ease, transform .6s ease';
-          revealObs.observe(el);
-        });
+  .forEach(el => {
+    // @ts-ignore
+    el.style.opacity = '0';
+    // @ts-ignore
+    el.style.transform = 'translateY(20px)';
+    // @ts-ignore
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    revealObs.observe(el);
+  });
 
 /* ░░ Success‑stories carousel ░░ */
 const carousel = document.querySelector('.stories-carousel');
-if(carousel){
-  const slides  = carousel.querySelectorAll('.story-slide');
+if (carousel) {
+  const slides = carousel.querySelectorAll('.story-slide');
   const prevBtn = carousel.querySelector('.story-nav.prev');
   const nextBtn = carousel.querySelector('.story-nav.next');
   let cur = 0, timer;
   const DELAY = 8000;
-  const show = i=>{
+  const show = i => {
     slides[cur].classList.remove('active');
     cur = (i + slides.length) % slides.length;
     slides[cur].classList.add('active');
   };
-  const next = ()=> show(cur+1), prev = ()=> show(cur-1);
-  const start = ()=> timer=setInterval(next,DELAY), stop = ()=>clearInterval(timer);
+  const next = () => show(cur + 1), prev = () => show(cur - 1);
+  const start = () => timer = setInterval(next, DELAY), stop = () => clearInterval(timer);
   // @ts-ignore
-  if(prevBtn) prevBtn.onclick = ()=>{ prev(); start(); };
+  if (prevBtn) prevBtn.onclick = () => { prev(); start(); };
   // @ts-ignore
-  if(nextBtn) nextBtn.onclick = ()=>{ next(); start(); };
-  carousel.addEventListener('mouseenter',stop);
-  carousel.addEventListener('mouseleave',start);
-  carousel.addEventListener('focusin',stop);
-  carousel.addEventListener('focusout',start);
+  if (nextBtn) nextBtn.onclick = () => { next(); start(); };
+  carousel.addEventListener('mouseenter', stop);
+  carousel.addEventListener('mouseleave', start);
+  carousel.addEventListener('focusin', stop);
+  carousel.addEventListener('focusout', start);
   start();
 }
 
 /* ░░ Smooth‑scroll local anchors ░░ */
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
     e.preventDefault();
     // @ts-ignore
     document.querySelector(a.getAttribute('href'))
-            ?.scrollIntoView({behavior:'smooth'});
+      ?.scrollIntoView({ behavior: 'smooth' });
   });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Add smooth scrolling
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -290,14 +290,14 @@ document.addEventListener('DOMContentLoaded', function() {
 // Success Stories carousel with Prev / Next & pause
 const carousel2 = document.querySelector('.stories-carousel');
 if (carousel2) {
-  const slides  = carousel2.querySelectorAll('.story-slide');
+  const slides = carousel2.querySelectorAll('.story-slide');
   const prevBtn = carousel2.querySelector('.story-nav.prev');
   const nextBtn = carousel2.querySelector('.story-nav.next');
-  let current   = 0;
+  let current = 0;
   let timer;
-  const DELAY   = 8000;          
+  const DELAY = 8000;
 
-  function goTo(i){
+  function goTo(i) {
     slides[current].classList.remove('active');
     current = (i + slides.length) % slides.length;
     slides[current].classList.add('active');
@@ -305,8 +305,8 @@ if (carousel2) {
   const next = () => goTo(current + 1);
   const prev = () => goTo(current - 1);
 
-  function start(){ timer = setInterval(next, DELAY); }
-  function stop(){  clearInterval(timer); }
+  function start() { timer = setInterval(next, DELAY); }
+  function stop() { clearInterval(timer); }
 
   // Button events
   if (nextBtn) nextBtn.addEventListener('click', () => { next(); start(); });
@@ -315,20 +315,20 @@ if (carousel2) {
   // Pause while user is hovering or using keyboard focus
   carousel2.addEventListener('mouseenter', stop);
   carousel2.addEventListener('mouseleave', start);
-  carousel2.addEventListener('focusin',  stop);
+  carousel2.addEventListener('focusin', stop);
   carousel2.addEventListener('focusout', start);
 
-  start(); 
+  start();
 }
 
 // Common Functions
 // @ts-ignore
-window.bookCall = function() {
+window.bookCall = function () {
   window.open('https://calendly.com/denomath4/30min', '_blank');
 };
 
 // @ts-ignore
-window.showDonationOptions = function() {
+window.showDonationOptions = function () {
   window.location.href = 'donate.html';
 };
 
@@ -336,20 +336,20 @@ window.showDonationOptions = function() {
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.blog-newsletter-form');
   if (!form) return;
-  const ENDPOINT = 'https://formsubmit.co/ajax/bojoman05@gmail.com'; // injected at run-time
+  const ENDPOINT = 'https://formsubmit.co/ajax/bojoman05@gmail.com';
   form.addEventListener('submit', async (e) => {
-    e.preventDefault();                         // stay on page
+    e.preventDefault();
     // @ts-ignore
     const data = new FormData(form);
     try {
       const res = await fetch(ENDPOINT, {
         method: 'POST',
-        body:   data,
-        headers:{ 'Accept':'application/json' }
+        body: data,
+        headers: { 'Accept': 'application/json' }
       });
       if (res.ok) {
         // @ts-ignore
-        form.reset();                           // clear input
+        form.reset();
         toast('🎉 Thanks for subscribing!');
       } else {
         toast('⚠️ Something went wrong. Please try again.');
@@ -359,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   /* mini helper */
-  function toast(msg){
+  function toast(msg) {
     const note = document.createElement('div');
     note.textContent = msg;
     note.style.cssText = `
@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
       animation:fadein .4s ease, fadeout .4s ease 3.6s forwards`;
     // @ts-ignore
     form.after(note);
-    setTimeout(()=> note.remove(), 4000);
+    setTimeout(() => note.remove(), 4000);
   }
 });
 
@@ -457,7 +457,7 @@ const fullPosts = {
 
 /* ░░ Modal helpers ░░ */
 function openFullPost(key) {
-  const post  = fullPosts[key];
+  const post = fullPosts[key];
   const modal = document.getElementById("blog-fullPostModal");
 
   const content = `
@@ -503,7 +503,7 @@ window.addEventListener("load", () => {
     const target = +el.textContent;
     el.textContent = "0";
     let count = 0;
-    const step  = Math.ceil(target / 100);
+    const step = Math.ceil(target / 100);
 
     const timer = setInterval(() => {
       count += step;
@@ -533,12 +533,12 @@ window.addEventListener("scroll", () => {
   const nav = document.querySelector("nav");
   if (window.scrollY > 50) {
     // @ts-ignore
-    nav.style.background     = "rgba(255,255,255,0.98)";
+    nav.style.background = "rgba(255,255,255,0.98)";
     // @ts-ignore
     nav.style.backdropFilter = "blur(20px)";
   } else {
     // @ts-ignore
-    nav.style.background     = "rgba(255,255,255,0.95)";
+    nav.style.background = "rgba(255,255,255,0.95)";
     // @ts-ignore
     nav.style.backdropFilter = "blur(10px)";
   }
@@ -625,32 +625,32 @@ function createParticles() {
 
 window.addEventListener('load', createParticles);
 
-        // Tab switching logic for donation tabs
-        function showDonationTab(tab) {
-            document.querySelectorAll('.donation-tab').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.donation-content').forEach(content => content.classList.remove('active'));
-            if (tab === 'device') {
-                // @ts-ignore
-                document.querySelector('.donation-tab:nth-child(1)').classList.add('active');
-                // @ts-ignore
-                document.getElementById('device-donation').classList.add('active');
-            } else if (tab === 'volunteer') {
-                // @ts-ignore
-                document.querySelector('.donation-tab:nth-child(2)').classList.add('active');
-                // @ts-ignore
-                document.getElementById('volunteer-donation').classList.add('active');
-            } else if (tab === 'money') {
-                // @ts-ignore
-                document.querySelector('.donation-tab:nth-child(3)').classList.add('active');
-                // @ts-ignore
-                document.getElementById('money-donation').classList.add('active');
-            }
-        }
-        // Copy to clipboard for donation info
-        function copyText(text) {
-            navigator.clipboard.writeText(text);
-            alert('Copied: ' + text);
-        }
+// Tab switching logic for donation tabs
+function showDonationTab(tab) {
+  document.querySelectorAll('.donation-tab').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.donation-content').forEach(content => content.classList.remove('active'));
+  if (tab === 'device') {
+    // @ts-ignore
+    document.querySelector('.donation-tab:nth-child(1)').classList.add('active');
+    // @ts-ignore
+    document.getElementById('device-donation').classList.add('active');
+  } else if (tab === 'volunteer') {
+    // @ts-ignore
+    document.querySelector('.donation-tab:nth-child(2)').classList.add('active');
+    // @ts-ignore
+    document.getElementById('volunteer-donation').classList.add('active');
+  } else if (tab === 'money') {
+    // @ts-ignore
+    document.querySelector('.donation-tab:nth-child(3)').classList.add('active');
+    // @ts-ignore
+    document.getElementById('money-donation').classList.add('active');
+  }
+}
+// Copy to clipboard for donation info
+function copyText(text) {
+  navigator.clipboard.writeText(text);
+  alert('Copied: ' + text);
+}
 
 /* ░░ Donate‑page forms → FormSubmit (AJAX, no redirect) ░░ */
 document.addEventListener('DOMContentLoaded', () => {
@@ -663,16 +663,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!form) return;
 
     const spin = form.querySelector('.loading-spinner');
-    const ok   = form.querySelector('.success-message');
-    const err  = form.querySelector('.error-message');
+    const ok = form.querySelector('.success-message');
+    const err = form.querySelector('.error-message');
 
     form.addEventListener('submit', async (e) => {
-      e.preventDefault();                       // stay on page
+      e.preventDefault();
       // @ts-ignore
       ok && (ok.style.display = 'none');
       // @ts-ignore
       err && (err.style.display = 'none');
-      spin &&  spin.classList.add('spinning'); 
+      spin && spin.classList.add('spinning');
 
       // @ts-ignore
       const data = new FormData(form);
@@ -684,8 +684,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         const res = await fetch(FS_ENDPOINT, {
-          method:  'POST',
-          body:    data,
+          method: 'POST',
+          body: data,
           headers: { 'Accept': 'application/json' }
         });
 
@@ -693,14 +693,14 @@ document.addEventListener('DOMContentLoaded', () => {
           // @ts-ignore
           form.reset();
           // @ts-ignore
-          ok  && (ok.style.display  = 'block');
+          ok && (ok.style.display = 'block');
         } else {
           // @ts-ignore
           err && (err.style.display = 'block');
         }
       } catch (_) {
         // @ts-ignore
-        err && (err.style.display   = 'block');
+        err && (err.style.display = 'block');
       } finally {
         spin && spin.classList.remove('spinning');
       }
@@ -712,7 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ░░ Contact‑page form → FormSubmit  (AJAX, no redirect) ░░ */
 document.addEventListener('DOMContentLoaded', () => {
 
-  const FS_ENDPOINT = 'https://formsubmit.co/ajax/bojoman05@gmail.com'; // already used above
+  const FS_ENDPOINT = 'https://formsubmit.co/ajax/bojoman05@gmail.com';
 
   const contactForm = document.querySelector('.contact-form form');
   if (!contactForm) return;
@@ -725,10 +725,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // @ts-ignore
   contactForm.querySelector('button[type="submit"]').appendChild(spinner);
 
-  const ok  = document.createElement('p');
-  ok.className  = 'success-message';
+  const ok = document.createElement('p');
+  ok.className = 'success-message';
   ok.textContent = 'Thanks! Your message has been sent.';
-  ok.style.cssText   = 'display:none;color:#059669;margin-top:1rem;';
+  ok.style.cssText = 'display:none;color:#059669;margin-top:1rem;';
   contactForm.appendChild(ok);
 
   const err = document.createElement('p');
@@ -739,7 +739,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    ok.style.display  = 'none';
+    ok.style.display = 'none';
     err.style.display = 'none';
     spinner.style.display = 'inline-block';
 
@@ -749,8 +749,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const res = await fetch(FS_ENDPOINT, {
-        method:  'POST',
-        body:    data,
+        method: 'POST',
+        body: data,
         headers: { 'Accept': 'application/json' }
       });
 
