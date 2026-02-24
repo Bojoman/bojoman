@@ -2860,3 +2860,43 @@ footer {
         grid-column: 1 / -1;
       }
     }
+/*  Help Section  */
+.help-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 3rem;
+    color: white;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+}
+.help-container h2 { color: white !important; }
+.help-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+.help-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    text-decoration: none;
+    color: white;
+    flex: 1;
+    min-width: 250px;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: transform 0.3s;
+}
+.help-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.15); }
+.help-card h3 { color: #ffd700 !important; margin-bottom: 0.5rem; font-size: 1.5rem; }
+.help-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.help-disclaimer {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.95rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
