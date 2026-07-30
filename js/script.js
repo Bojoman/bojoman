@@ -134,38 +134,81 @@ $$('.project-hero-section .project-stat-number, .blog-hero .blog-stat-number')
 })();
 
 /* ───────────────────────────────────────────────────────────
-   Reveal-on-scroll animations
+   Reveal-on-scroll animations (enter + exit)
    ─────────────────────────────────────────────────────────── */
 (() => {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealElements = '.reveal, .blog-featured-post, .blog-post, .blog-sidebar-section, .blog-newsletter, .project-card, .timeline-item, .device-card, .testimonial-card, .help-card';
 
-  const revealObserver = new IntersectionObserver((entries, obs) => {
+  $$(revealElements).forEach((el, i) => {
+    el.classList.add('reveal');
+    if (i % 3 === 1) el.classList.add('reveal-delay-1');
+    if (i % 3 === 2) el.classList.add('reveal-delay-2');
+    if (reduceMotion) el.classList.add('is-visible');
+  });
+
+  if (reduceMotion) return;
+
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
+      const el = entry.target;
       if (entry.isIntersecting) {
-        // @ts-ignore
-        Object.assign(entry.target.style, {
-          opacity: '1',
-          transform: 'translateY(0)'
-        });
-        obs.unobserve(entry.target);
+        el.classList.add('is-visible');
+        el.classList.remove('is-leaving');
+      } else {
+        // Exit transition when scrolling away
+        if (el.classList.contains('is-visible')) {
+          el.classList.add('is-leaving');
+          el.classList.remove('is-visible');
+        }
       }
     });
-  }, observerOptions);
-
-  // Initialize and observe elements
-  const revealElements = '.project-card, .stat-item, .blog-featured-post, .blog-post, .blog-sidebar-section, .blog-newsletter';
-
-  $$(revealElements).forEach(el => {
-    Object.assign(el.style, {
-      opacity: '0',
-      transform: 'translateY(20px)',
-      transition: 'opacity 0.6s ease, transform 0.6s ease'
-    });
-    revealObserver.observe(el);
+  }, {
+    threshold: 0.18,
+    rootMargin: '0px 0px -8% 0px'
   });
+
+  $$('.reveal').forEach(el => revealObserver.observe(el));
+})();
+
+/* ───────────────────────────────────────────────────────────
+   Parallax scroll effects
+   ─────────────────────────────────────────────────────────── */
+(() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  const heroes = $$('[data-parallax]');
+  const slowLayers = $$('.parallax-slow');
+  if (!heroes.length && !slowLayers.length) return;
+
+  let ticking = false;
+
+  const update = () => {
+    const y = window.scrollY || window.pageYOffset;
+
+    heroes.forEach(hero => {
+      const content = hero.querySelector('.hero-content, .project-hero-content, .blog-hero-content');
+      const image = hero.querySelector('.hero-image');
+      if (content) content.style.transform = `translate3d(0, ${y * 0.28}px, 0)`;
+      if (image) image.style.transform = `translate3d(0, ${y * 0.14}px, 0)`;
+    });
+
+    slowLayers.forEach(layer => {
+      const rect = layer.getBoundingClientRect();
+      const offset = (rect.top + rect.height / 2 - window.innerHeight / 2) * -0.12;
+      layer.style.transform = `translate3d(0, ${offset}px, 0)`;
+    });
+    ticking = false;
+  };
+
+  on(window, 'scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+
+  update();
 })();
 
 /* ───────────────────────────────────────────────────────────
@@ -313,6 +356,9 @@ $$('#bookCallBtn, [onclick="bookCall()"]').forEach(btn => {
     if (spinner) spinner.classList.add('spinning');
 
     const formData = new FormData(form);
+    // FormSubmit helpers
+    formData.set('_captcha', 'false');
+    formData.set('_template', 'table');
     Object.entries(extraData).forEach(([key, value]) =>
       formData.set(key, value));
 
@@ -391,13 +437,13 @@ $$('#bookCallBtn, [onclick="bookCall()"]').forEach(btn => {
    ─────────────────────────────────────────────────────────── */
 const fullPosts = {
   "kaggwa-lab": {
-    title: "🔬 Kaggwa in the Lab: Building Our First Digital Hub",
+    title: "Kaggwa in the Lab: Building Our First Digital Hub",
     image: "images/uploaded-15.jpeg",
     date: "February 20, 2025",
     readTime: "3 min read",
     tag: "In the Lab",
     content: `
-      <p>What started as an empty room with a dirt floor and bare shelves has become a <strong>fully functioning digital computer lab</strong> serving over 200 students every week. This is the story of how we built it — with our own hands.</p>
+      <p>What started as an empty room with a dirt floor and bare shelves has become a <strong>fully functioning digital computer lab</strong> serving over 200 students every week. This is the story of how we built it - with our own hands.</p>
       <h3>From Vision to Reality</h3>
       <p>When I first walked into the space that would become the Tech4Village Digital Hub, there was nothing but dust and a single wooden table. No electricity. No internet. No computers. Just a vision.</p>
       <p>Over three months, with the help of our community and generous donors, we transformed it step by step:</p>
@@ -409,18 +455,18 @@ const fullPosts = {
         <li>Stocked bookshelves with textbooks and reference materials</li>
       </ul>
       <h3>The First Day</h3>
-      <p>When students walked in and saw the glowing screens, you could hear the gasps. Some had never seen a computer up close before. I stood there, arms crossed, watching their faces light up — and I knew every sleepless night of planning had been worth it.</p>
+      <p>When students walked in and saw the glowing screens, you could hear the gasps. Some had never seen a computer up close before. I stood there, arms crossed, watching their faces light up - and I knew every sleepless night of planning had been worth it.</p>
       <p>This lab isn't just a room with computers. It's a <strong>portal to possibility</strong> for kids who were told the digital world wasn't for them.</p>
     `
   },
   "lab-setup": {
-    title: "🛠️ Hands-On: Setting Up 10 Desktops From Scratch",
+    title: "Hands-On: Setting Up 10 Desktops From Scratch",
     image: "images/uploaded-14.jpeg",
     date: "February 12, 2025",
     readTime: "4 min read",
     tag: "In the Lab",
     content: `
-      <p>Setting up a computer lab in a rural village isn't like plugging in a few machines at a school in the city. Every cable, every connection, every configuration has to be thought through carefully — because there's no IT department to call when something goes wrong.</p>
+      <p>Setting up a computer lab in a rural village isn't like plugging in a few machines at a school in the city. Every cable, every connection, every configuration has to be thought through carefully - because there's no IT department to call when something goes wrong.</p>
       <h3>The Setup Process</h3>
       <p>I spent three intense days in the lab, personally handling every step:</p>
       <ul>
@@ -430,17 +476,17 @@ const fullPosts = {
       </ul>
       <h3>Challenges We Faced</h3>
       <p>The biggest challenge? <strong>Power management.</strong> With unreliable grid electricity, we had to configure aggressive power-saving modes and set up our solar backup to kick in automatically. I wrote a simple script that monitors battery levels and gracefully shuts down non-essential machines during low power.</p>
-      <p>Every machine is now named after a famous African scientist — from Wangari Maathai to Philip Emeagwali. The students love it.</p>
+      <p>Every machine is now named after a famous African scientist - from Wangari Maathai to Philip Emeagwali. The students love it.</p>
     `
   },
   "first-session": {
-    title: "👨‍🏫 First Lab Session: Teaching Typing & Internet Safety",
+    title: "First Lab Session: Teaching Typing & Internet Safety",
     image: "images/uploaded-13.jpeg",
     date: "February 8, 2025",
     readTime: "3 min read",
     tag: "In the Lab",
     content: `
-      <p>The electricity was buzzing, the screens were glowing, and <strong>15 eager students</strong> sat in front of keyboards for the very first time. This was it — our inaugural lab session.</p>
+      <p>The electricity was buzzing, the screens were glowing, and <strong>15 eager students</strong> sat in front of keyboards for the very first time. This was it - our inaugural lab session.</p>
       <h3>The Curriculum</h3>
       <p>I designed the first session around two core skills:</p>
       <ul>
@@ -453,7 +499,7 @@ const fullPosts = {
     `
   },
   "school-donation": {
-    title: "🎓 10 More Devices to Village School #3 — Thanks to Our Donors",
+    title: "10 More Devices to Village School #3 - Thanks to Our Donors",
     image: "images/uploaded-02.jpeg",
     date: "February 5, 2025",
     readTime: "2 min read",
@@ -471,7 +517,7 @@ const fullPosts = {
     `
   },
   "world-bank": {
-    title: "🌍 Supporting a World Bank–Led Digital Lab Design in South Sudan",
+    title: "Supporting a World Bank-Led Digital Lab Design in South Sudan",
     image: "images/uploaded-03.jpeg",
     date: "January 28, 2025",
     readTime: "3 min read",
@@ -488,7 +534,7 @@ const fullPosts = {
     `
   },
   "solar-chargers": {
-    title: "☀️ Solar Chargers Deployed With Laptops — First Off-Grid Computer Session",
+    title: "Solar Chargers Deployed With Laptops - First Off-Grid Computer Session",
     image: "images/uploaded-04.jpeg",
     date: "January 15, 2025",
     readTime: "3 min read",
@@ -506,7 +552,7 @@ const fullPosts = {
     `
   },
   "bishop-recognition": {
-    title: "🙏 Recognized During Advent Mass by Bishop Burbidge for Youth Service",
+    title: "Recognized During Advent Mass by Bishop Burbidge for Youth Service",
     image: "images/uploaded-05.jpeg",
     date: "December 24, 2024",
     readTime: "2 min read",
@@ -514,11 +560,11 @@ const fullPosts = {
     content: `
       <p>It was a profound honor to be recognized by <strong>Bishop Burbidge</strong> during the Advent Mass for the work we are doing with Tech4Village.</p>
       <p>Service is at the core of my faith and my leadership. This recognition isn't just for me, but for every volunteer and donor who has believed in this vision.</p>
-      <p>The Bishop spoke about the power of youth using their talents to serve the marginalized. It was a reminder that our technical skills—coding, engineering, logistics—can be instruments of grace when used to lift others up.</p>
+      <p>The Bishop spoke about the power of youth using their talents to serve the marginalized. It was a reminder that our technical skills-coding, engineering, logistics-can be instruments of grace when used to lift others up.</p>
     `
   },
   "tech-post": {
-    title: "⚙️ Engineering Connectedness: Lazy Static Site Gen",
+    title: "Engineering Connectedness: Lazy Static Site Gen",
     image: "images/uploaded-06.jpeg",
     date: "February 1, 2025",
     readTime: "5 min read",
@@ -585,7 +631,7 @@ window.openFullPost = key => {
       </div>
       ${post.content}
       <hr style="margin:2rem 0;border:none;border-top:1px solid var(--border);" />
-      <p><em>— Kaggwa Karenge<br>Founder – Tech4Village<br>📧 tech4village@gmail.com<br>💸 Donate: CashApp $karenge | M‑Pesa 0722961906</em></p>
+      <p><em>- Kaggwa Karenge<br>Founder - Tech4Village<br>Email: tech4village@gmail.com<br>Donate: CashApp $karenge | M-Pesa 0722961906</em></p>
     </article>
   `;
 
@@ -649,27 +695,8 @@ function typeWriter(element, text, speed = 30) {
   type();
 }
 
-// Floating particles for hero sections
-function createFloatingParticles() {
-  const hero = $('.blog-hero');
-  if (!hero) return;
-
-  for (let i = 0; i < 50; i++) {
-    const particle = document.createElement('div');
-    Object.assign(particle.style, {
-      position: 'absolute',
-      width: '2px',
-      height: '2px',
-      background: 'rgba(255,255,255,0.3)',
-      borderRadius: '50%',
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
-      animationDelay: `${Math.random() * 2}s`
-    });
-    hero.appendChild(particle);
-  }
-}
+// Floating particles removed - keep motion purposeful
+function createFloatingParticles() {}
 
 /* ───────────────────────────────────────────────────────────
    CSS animations and styles injection
@@ -707,15 +734,7 @@ function createFloatingParticles() {
    DOM ready initialization
    ─────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize typewriter effect for hero quotes
-  const heroQuote = $('.blog-hero p');
-  if (heroQuote) {
-    const originalText = heroQuote.textContent;
-    setTimeout(() => typeWriter(heroQuote, originalText), 500);
-  }
-
-  // Initialize floating particles
-  setTimeout(createFloatingParticles, 100);
+  // Intentionally light - scroll reveal & parallax init above
 });
 
 /* ───────────────────────────────────────────────────────────

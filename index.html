@@ -1,18 +1,18 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/script.js" defer></script>
-  <title>Tech4Village – Home</title>
+  <title>Tech4Village -" Home</title>
   <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
   <!-- Navigation -->
   <nav>
     <div class="container nav-container">
-      <a href="index.html" class="logo"><span style="font-size:1.3em;vertical-align:middle;">🌍</span> Tech4Village</a>
+      <a href="index.html" class="logo">Tech4Village</a>
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
@@ -21,12 +21,12 @@
         <li><a href="donate.html">Donate</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
-      <div class="mobile-menu" id="mobileMenuBtn">☰</div>
+      <div class="mobile-menu" id="mobileMenuBtn">-°</div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero" data-parallax>
     <div class="container">
       <div class="hero-container">
         <div class="hero-content">
@@ -35,16 +35,16 @@
           <div class="cta-buttons">
             <a href="donate.html" class="btn btn-primary">Donate a Device</a>
             <a href="javascript:void(0)" id="bookCallBtn" class="btn btn-secondary">Book a 15-Min Call</a>
-            <a href="#impact" class="btn btn-secondary" style="border-color:#ffd700;color:#ffd700;">See Our Impact</a>
+            <a href="#impact" class="btn btn-secondary">See Our Impact</a>
           </div>
         </div>
         <div class="hero-image">
           <img src="images/hero.jpeg" alt="Kaggwa addressing peers in rural Kenya">
         </div>
-        <div class="impact-counter" id="impact" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/uploaded-01.jpeg') center/cover fixed;">
+        <div class="impact-counter reveal" id="impact" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/uploaded-01.jpeg') center/cover fixed;">
           <div style="text-align:center;color:white;margin-bottom:2rem;">
             <h2 style="font-size:2.5rem;margin-bottom:1rem;color:#fff;">Digital Access. Rural Impact. Youth Led.</h2>
-            <p style="font-size:1.2rem;max-width:800px;margin:0 auto;">From candlelit study to coding workshops — we’re helping rural students cross the digital divide.</p>
+            <p style="font-size:1.2rem;max-width:800px;margin:0 auto;">From candlelit study to coding workshops -" we're helping rural students cross the digital divide.</p>
           </div>
           <div class="counter-grid">
             <div class="counter-item">
@@ -76,53 +76,53 @@
   <!-- Main Content -->
   <div class="main-content">
     <div class="container">
-      <section class="section story-section" style="padding-bottom:2rem;">
-        <div class="story-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:4rem;align-items:center;">
-            <div class="story-images" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-              <img src="images/crawling-through-the-mud.jpeg" alt="Rite of Passage" style="width:100%;height:200px;object-fit:cover;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-              <img src="images/uploaded-13.jpeg" alt="Village Community" style="width:100%;height:200px;object-fit:cover;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-              <img src="images/uploaded-14.jpeg" alt="Teaching Students" style="width:100%;height:200px;object-fit:cover;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-              <img src="images/uploaded-15.jpeg" alt="Kaggwa with Family" style="width:100%;height:200px;object-fit:cover;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-            </div>
-            <div class="story-content">
-            <h2 style="text-align:left;margin-bottom:1.5rem;font-size:2.2rem;">From Forest to Future: How a Rite of Passage Sparked a Tech Mission</h2>
-            <p style="font-size:1.1rem;margin-bottom:1rem;color:#4a5568;line-height:1.8;">
-                "At 14, I led my Kikuyu rite of passage — two weeks of physical and mental discipline in the forest. That experience shaped my view of leadership as service."
+      <section class="section story-section reveal">
+        <div class="story-grid">
+          <div class="story-images reveal">
+            <img src="images/crawling-through-the-mud.jpeg" alt="Kaggwa during mud crawl challenge in his rite of passage" class="story-img story-img-1">
+            <img src="images/kaggwa-potrait.jpeg" alt="Kaggwa in face paint wearing The Moran Project Rites of Passage shirt" class="story-img story-img-2">
+            <img src="images/young-leader-speaking.jpeg" alt="Kaggwa speaking at his rite of passage ceremony" class="story-img story-img-3">
+            <img src="images/kaggwa-team.jpeg" alt="Kaggwa with peers at his rite of passage celebration" class="story-img story-img-4">
+          </div>
+          <div class="story-content">
+            <h2>From Forest to Future: How a Rite of Passage Sparked a Tech Mission</h2>
+            <p>
+              "At 14, I led my Kikuyu rite of passage - two weeks of physical and mental discipline in the forest. That experience shaped my view of leadership as service."
             </p>
-            <p style="font-size:1.1rem;margin-bottom:1rem;color:#4a5568;line-height:1.8;">
-                When I returned to my family’s village and saw students struggling without access to tech, I knew I had to act. That’s when Tech4Village was born. What started with a few devices from friends has now grown into a regional network connecting underserved youth to opportunity.
+            <p>
+              When I returned to my family's village and saw students struggling without access to tech, I knew I had to act. That's when Tech4Village was born. What started with a few devices from friends has now grown into a regional network connecting underserved youth to opportunity.
             </p>
-            </div>
+          </div>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section reveal">
         <h2 style="text-align:center;margin-bottom:3rem;">Our Mission & Projects</h2>
         <div class="section-content">
           <p style="text-align:center;font-size:1.2rem;margin-bottom:2rem;">
-            A youth‑led initiative providing recycled laptops, routers, and smartphones to underserved youth in rural Kenya.
+            A youth-led initiative providing recycled laptops, routers, and smartphones to underserved youth in rural Kenya.
           </p>
           <div class="project-grid">
-            <div class="project-card">
-              <div class="project-icon">💻</div>
+            <div class="project-card reveal">
+              <div class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/><path d="M8 20h8"/></svg></div>
               <h3>Recycled Devices</h3>
               <p>Giving laptops, smartphones, and tablets a second life by refurbishing and distributing them to students who need them most.</p>
               <ul class="project-features">
                 <li>Professional device refurbishment</li>
                 <li>Quality assurance testing</li>
-                <li>Pre‑loaded educational software</li>
+                <li>Pre-loaded educational software</li>
                 <li>Basic maintenance training</li>
               </ul>
               <div class="project-stats">
                 <strong>247 devices</strong> refurbished and distributed
               </div>
             </div>
-            <div class="project-card">
-              <div class="project-icon">🌐</div>
+            <div class="project-card reveal">
+              <div class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg></div>
               <h3>Internet Access</h3>
-              <p>Establishing Wi‑Fi hotspots and internet connectivity solutions to bring the digital world to remote schools and communities.</p>
+              <p>Establishing Wi-Fi hotspots and internet connectivity solutions to bring the digital world to remote schools and communities.</p>
               <ul class="project-features">
-                <li>Solar‑powered Wi‑Fi hotspots</li>
+                <li>Solar-powered Wi-Fi hotspots</li>
                 <li>Satellite internet connections</li>
                 <li>Network maintenance support</li>
                 <li>Digital literacy training</li>
@@ -131,15 +131,15 @@
                 <strong>18 schools</strong> connected to the internet
               </div>
             </div>
-            <div class="project-card">
-              <div class="project-icon">👥</div>
+            <div class="project-card reveal">
+              <div class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M14 19a4.5 4.5 0 0 1 6.5-4"/></svg></div>
               <h3>Mentorship</h3>
-              <p>Providing one‑on‑one guidance, coding workshops, and career counseling to empower the next generation of African tech leaders.</p>
+              <p>Providing one-on-one guidance, coding workshops, and career counseling to empower the next generation of African tech leaders.</p>
               <ul class="project-features">
                 <li>Weekly coding workshops</li>
                 <li>Career guidance sessions</li>
                 <li>Scholarship application support</li>
-                <li>Peer‑to‑peer learning groups</li>
+                <li>Peer-to-peer learning groups</li>
               </ul>
               <div class="project-stats">
                 <strong>150 students</strong> actively mentored
@@ -150,61 +150,61 @@
       </section>
 
       <!-- Testimonials -->
-      <section class="section testimonials-section" style="background:#f8f9fa;border-radius:20px;padding:4rem 2rem;margin-bottom:4rem;">
+      <section class="section testimonials-section reveal" style="background:#f8f9fa;border-radius:20px;padding:4rem 2rem;margin-bottom:4rem;">
         <h2 style="text-align:center;margin-bottom:3rem;">Voices of Impact</h2>
         <div class="testimonial-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2rem;">
             <!-- Quote 1 -->
-            <div class="testimonial-card" style="background:white;padding:2rem;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-            <div style="font-size:2rem;color:#667eea;margin-bottom:1rem;">“</div>
-            <p style="font-style:italic;font-size:1.1rem;color:#4a5568;">“Before Tech4Village, we had no computer classes. Now students can research, code, and dream bigger.”</p>
-            <div style="margin-top:1.5rem;font-weight:bold;color:#2d3748;">— Teacher, Kabete Primary School</div>
+            <div class="testimonial-card reveal" style="background:white;padding:2rem;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
+            <div style="font-size:2rem;color:#667eea;margin-bottom:1rem;">"</div>
+            <p style="font-style:italic;font-size:1.1rem;color:#4a5568;">"Before Tech4Village, we had no computer classes. Now students can research, code, and dream bigger."</p>
+            <div style="margin-top:1.5rem;font-weight:bold;color:#2d3748;">-" Teacher, Kabete Primary School</div>
             </div>
             <!-- Quote 2 -->
-            <div class="testimonial-card" style="background:white;padding:2rem;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-            <div style="font-size:2rem;color:#667eea;margin-bottom:1rem;">“</div>
-            <p style="font-style:italic;font-size:1.1rem;color:#4a5568;">“Kaggwa gave us more than laptops — he gave us hope.”</p>
-            <div style="margin-top:1.5rem;font-weight:bold;color:#2d3748;">— Youth Leader, Nyeri Parish Center</div>
+            <div class="testimonial-card reveal" style="background:white;padding:2rem;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
+            <div style="font-size:2rem;color:#667eea;margin-bottom:1rem;">"</div>
+            <p style="font-style:italic;font-size:1.1rem;color:#4a5568;">"Kaggwa gave us more than laptops -" he gave us hope."</p>
+            <div style="margin-top:1.5rem;font-weight:bold;color:#2d3748;">-" Youth Leader, Nyeri Parish Center</div>
             </div>
             <!-- Quote 3 -->
-            <div class="testimonial-card" style="background:white;padding:2rem;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-            <div style="font-size:2rem;color:#667eea;margin-bottom:1rem;">“</div>
-            <p style="font-style:italic;font-size:1.1rem;color:#4a5568;">“Working on the World Bank school design project made me believe engineering can create real change.”</p>
-            <div style="margin-top:1.5rem;font-weight:bold;color:#2d3748;">— Kaggwa Karenge</div>
+            <div class="testimonial-card reveal" style="background:white;padding:2rem;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
+            <div style="font-size:2rem;color:#667eea;margin-bottom:1rem;">"</div>
+            <p style="font-style:italic;font-size:1.1rem;color:#4a5568;">"Working on the World Bank school design project made me believe engineering can create real change."</p>
+            <div style="margin-top:1.5rem;font-weight:bold;color:#2d3748;">-" Kaggwa Karenge</div>
             </div>
         </div>
       </section>
 
       <!-- How You Can Help -->
-      <section class="section help-section" style="padding-top:0;">
+      <section class="section help-section reveal" style="padding-top:0;">
         <div class="help-container">
             <h2>How You Can Help</h2>
             <p style="margin-bottom:2rem;font-size:1.1rem;opacity:0.9;">Join us in bridging the digital divide.</p>
             
             <div class="help-grid">
             <!-- Donate Device -->
-            <a href="donate.html" class="help-card">
-                <div class="help-icon">💻</div>
+            <a href="donate.html" class="help-card reveal">
+                <div class="help-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/><path d="M8 20h8"/></svg></div>
                 <h3>Donate a Device</h3>
                 <p>Laptops, Routers, Tablets</p>
             </a>
 
             <!-- Book Zoom -->
-            <a href="javascript:void(0)" onclick="bookCall()" class="help-card">
-                <div class="help-icon">💬</div>
+            <a href="javascript:void(0)" onclick="bookCall()" class="help-card reveal">
+                <div class="help-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-4 3v-3H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg></div>
                 <h3>Book a 15-Min Chat</h3>
                 <p>Learn more via Zoom</p>
             </a>
 
             <!-- Contribute -->
-            <a href="donate.html#money-donation" class="help-card">
-                <div class="help-icon">💳</div>
+            <a href="donate.html#money-donation" class="help-card reveal">
+                <div class="help-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19"/><path d="M7 15h4"/></svg></div>
                 <h3>Contribute</h3>
                 <p>Zelle: $karenge | M-Pesa</p>
             </a>
             </div>
 
             <div class="help-disclaimer">
-            ✅ Tech4Village is a registered youth initiative. All donations go directly to logistics, refurbishing, and delivery.
+            Tech4Village is a registered youth initiative. All donations go directly to logistics, refurbishing, and delivery.
             </div>
         </div>
       </section>
@@ -218,9 +218,9 @@
         <h3>Tech4Village</h3>
         <p>Bridging the digital divide in rural Kenya through technology, education, and community empowerment.</p>
         <div class="social-links">
-          <a href="#" title="Facebook">📘</a>
-          <a href="#" title="Instagram">📷</a>
-          <a href="#" title="X">X</a>
+          <a href="#" aria-label="Facebook">Fb</a>
+          <a href="#" aria-label="Instagram">Ig</a>
+          <a href="#" aria-label="X">X</a>
         </div>
       </div>
       <div class="footer-section">
@@ -243,3 +243,4 @@
   </footer>
 </body>
 </html>
+
