@@ -249,7 +249,7 @@ $$('a[href^="#"]').forEach(anchor => {
    Calendly booking integration
    ─────────────────────────────────────────────────────────── */
 // @ts-ignore
-window.bookCall = () => openNew('https://calendly.com/denomath4/30min');
+window.bookCall = () => openNew('https://calendly.com/kaggwakarenge/30min');
 
 $$('#bookCallBtn, [onclick="bookCall()"]').forEach(btn => {
   on(btn, 'click', e => {
@@ -298,7 +298,7 @@ $$('#bookCallBtn, [onclick="bookCall()"]').forEach(btn => {
    FormSubmit AJAX integration
    ─────────────────────────────────────────────────────────── */
 (() => {
-  const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/bojoman05@gmail.com';
+  const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/Kaggwakarenge@gmail.com';
 
   async function submitForm(form, extraData = {}) {
     const successMsg = form.querySelector('.success-message');
@@ -390,6 +390,68 @@ $$('#bookCallBtn, [onclick="bookCall()"]').forEach(btn => {
    Blog modal system with full post data
    ─────────────────────────────────────────────────────────── */
 const fullPosts = {
+  "kaggwa-lab": {
+    title: "🔬 Kaggwa in the Lab: Building Our First Digital Hub",
+    image: "images/uploaded-15.jpeg",
+    date: "February 20, 2025",
+    readTime: "3 min read",
+    tag: "In the Lab",
+    content: `
+      <p>What started as an empty room with a dirt floor and bare shelves has become a <strong>fully functioning digital computer lab</strong> serving over 200 students every week. This is the story of how we built it — with our own hands.</p>
+      <h3>From Vision to Reality</h3>
+      <p>When I first walked into the space that would become the Tech4Village Digital Hub, there was nothing but dust and a single wooden table. No electricity. No internet. No computers. Just a vision.</p>
+      <p>Over three months, with the help of our community and generous donors, we transformed it step by step:</p>
+      <ul>
+        <li>Installed custom-built wooden desks to hold multiple workstations</li>
+        <li>Set up solar-backed power infrastructure for reliable electricity</li>
+        <li>Configured 10 refurbished desktop computers with educational software</li>
+        <li>Mounted a shared display screen for group teaching sessions</li>
+        <li>Stocked bookshelves with textbooks and reference materials</li>
+      </ul>
+      <h3>The First Day</h3>
+      <p>When students walked in and saw the glowing screens, you could hear the gasps. Some had never seen a computer up close before. I stood there, arms crossed, watching their faces light up — and I knew every sleepless night of planning had been worth it.</p>
+      <p>This lab isn't just a room with computers. It's a <strong>portal to possibility</strong> for kids who were told the digital world wasn't for them.</p>
+    `
+  },
+  "lab-setup": {
+    title: "🛠️ Hands-On: Setting Up 10 Desktops From Scratch",
+    image: "images/uploaded-14.jpeg",
+    date: "February 12, 2025",
+    readTime: "4 min read",
+    tag: "In the Lab",
+    content: `
+      <p>Setting up a computer lab in a rural village isn't like plugging in a few machines at a school in the city. Every cable, every connection, every configuration has to be thought through carefully — because there's no IT department to call when something goes wrong.</p>
+      <h3>The Setup Process</h3>
+      <p>I spent three intense days in the lab, personally handling every step:</p>
+      <ul>
+        <li><strong>Day 1:</strong> Unpacking, cleaning, and testing all 10 refurbished desktop units. Three had bad RAM sticks that needed swapping.</li>
+        <li><strong>Day 2:</strong> Installing Ubuntu Linux on every machine, pre-loading educational software (KA Lite for offline Khan Academy, LibreOffice, Scratch for coding).</li>
+        <li><strong>Day 3:</strong> Wiring the network, configuring the local mesh, and stress-testing every machine with simultaneous use.</li>
+      </ul>
+      <h3>Challenges We Faced</h3>
+      <p>The biggest challenge? <strong>Power management.</strong> With unreliable grid electricity, we had to configure aggressive power-saving modes and set up our solar backup to kick in automatically. I wrote a simple script that monitors battery levels and gracefully shuts down non-essential machines during low power.</p>
+      <p>Every machine is now named after a famous African scientist — from Wangari Maathai to Philip Emeagwali. The students love it.</p>
+    `
+  },
+  "first-session": {
+    title: "👨‍🏫 First Lab Session: Teaching Typing & Internet Safety",
+    image: "images/uploaded-13.jpeg",
+    date: "February 8, 2025",
+    readTime: "3 min read",
+    tag: "In the Lab",
+    content: `
+      <p>The electricity was buzzing, the screens were glowing, and <strong>15 eager students</strong> sat in front of keyboards for the very first time. This was it — our inaugural lab session.</p>
+      <h3>The Curriculum</h3>
+      <p>I designed the first session around two core skills:</p>
+      <ul>
+        <li><strong>Typing basics:</strong> Using a fun typing game to teach keyboard familiarity. Within an hour, most students could type their own name!</li>
+        <li><strong>Internet safety:</strong> Before anyone browses the web, they need to understand passwords, personal information, and how to spot scams.</li>
+      </ul>
+      <h3>Moments That Mattered</h3>
+      <p>One student, 12-year-old Amina, typed her name and then burst into tears. "I made the computer say my name!" she said. Her classmates cheered. That single moment justified every hour of fundraising, every late night of configuration, every mile of travel.</p>
+      <p>We now run three sessions per week: <strong>Monday</strong> for beginners, <strong>Wednesday</strong> for intermediate learners, and <strong>Friday</strong> for our advanced coding club. The lab is always full.</p>
+    `
+  },
   "school-donation": {
     title: "🎓 10 More Devices to Village School #3 — Thanks to Our Donors",
     image: "images/uploaded-02.jpeg",
